@@ -202,8 +202,9 @@ function reshapeHTML(text) {
   if (Array.isArray(text)) {
     text = text.join(" ");
   }
-  return text;
-  text = text.replaceAll(/\[/gi, "[");
+  text = text.replaceAll(/<[^>]*>/gi, "");
+  text = text.replaceAll(/\[/gi, "\[");
+  return text
   text = text.replaceAll(/\]/gi, "]");
   text = text.replaceAll(/\<br\s*\/?\>/gi, "\n\n");
   text = text.replaceAll(/\<\/?p\>/gi, "\n\n");
@@ -256,9 +257,9 @@ function membersToMarkdown(
   }
   let doc = `## ${title}\n\n`;
   entries.forEach(([key, member]) => {
-    // let description = member.description.join(" ");
     doc += `### ${member.name}\n\n`;
-    // doc += `${asCode(member.code)}\n\n`;
+    doc += `${asCode(member.code)}\n\n`;
+    let description = member.description.join(" ");
     // description = reshapeHTML(member.description);
     // doc += description;
     // doc += "\n\n";
