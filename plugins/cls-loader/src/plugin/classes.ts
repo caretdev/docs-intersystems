@@ -257,15 +257,16 @@ function membersToMarkdown(
   entries.forEach(([key, member]) => {
     let description = member.description.join(" ");
     doc += `### ${member.name}\n\n${asCode(member.code)}\n\n`;
-    description = reshapeHTML(member.description);
-    doc += description;
-    doc += "\n\n";
+    // description = reshapeHTML(member.description);
+    // doc += description;
+    // doc += "\n\n";
   });
 
   return doc;
 }
 
 export async function generateDoc(classFile, noCode: boolean = true) {
+  console.log('generateDoc', classFile);
   const classContent = (await readFile(classFile)).toString();
   const classDef: ClassDefinition = parseClassFile(classContent);
 
