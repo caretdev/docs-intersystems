@@ -202,6 +202,7 @@ function reshapeHTML(text) {
   if (Array.isArray(text)) {
     text = text.join(" ");
   }
+  return text;
   text = text.replaceAll(/\[/gi, "\[");
   text = text.replaceAll(/\]/gi, "\]");
   text = text.replaceAll(/\<br\s*\/?\>/gi, "\n\n");
@@ -285,8 +286,6 @@ ${asCode(classContent)}
 
 ${asCode(classDef.Class.code)}
 
-${reshapeHTML(classDef.Class.description)}
-
 ${noCode ? "" : originalCode}
 `;
   documentation += membersToMarkdown(
@@ -309,7 +308,7 @@ ${noCode ? "" : originalCode}
 export async function generateDocFile(classFile, folder, mdFile) {
   await mkdir(folder, { recursive: true });
   const mdFileFull = path.join(folder, mdFile);
-  await writeFile(mdFileFull, await generateDoc(classFile, true));
+  await writeFile(mdFileFull, await generateDoc(classFile, false));
   return mdFileFull;
 }
 

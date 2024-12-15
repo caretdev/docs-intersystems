@@ -22,5 +22,4 @@ yarn-error.log*
 lerna-debug.log
 
 /data
-/ref
 /classes
