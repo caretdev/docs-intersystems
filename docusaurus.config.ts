@@ -43,6 +43,7 @@ const config: Config = {
 			{
 				docs: {
 					sidebarPath: require.resolve('./sidebars.js'),
+          exclude: ['ref/**'],
 				},
 				theme: {
 					customCss: require.resolve('./src/css/custom.css'),

@@ -137,8 +137,7 @@ export default function clsLoaderPlugin(
       const rootRoutes = await Promise.all(
         content.loadedVersions.map(async (loadedVersion) => {
           const version = loadedVersion.versionName;
-          // console.log(context.generatedFilesDir)
-          generateClassDocs(actions, path.join(context.generatedFilesDir, version), loadedVersion.classes);
+          generateClassDocs(actions, path.join(context.siteDir, "docs", version), loadedVersion.classes);
 
           // Define version metadata for all pages. We need to use the same structure as
           // "docs" so that we can utilize the same React components.

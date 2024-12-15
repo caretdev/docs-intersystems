@@ -203,8 +203,8 @@ function reshapeHTML(text) {
     text = text.join(" ");
   }
   text = text.replaceAll(/<[^>]*>/gi, "");
-  text = text.replaceAll(/\[/gi, "\[");
-  return text
+  text = text.replaceAll(/\[/gi, "[");
+  return text;
   text = text.replaceAll(/\]/gi, "]");
   text = text.replaceAll(/\<br\s*\/?\>/gi, "\n\n");
   text = text.replaceAll(/\<\/?p\>/gi, "\n\n");
@@ -269,7 +269,6 @@ function membersToMarkdown(
 }
 
 export async function generateDoc(classFile, noCode: boolean = true) {
-  console.log("generateDoc", classFile);
   const classContent = (await readFile(classFile)).toString();
   const classDef: ClassDefinition = parseClassFile(classContent);
 
@@ -290,6 +289,7 @@ ${asCode(classDef.Class.code)}
 
 ${noCode ? "" : originalCode}
 `;
+  return documentation;
   documentation += membersToMarkdown(
     classFile,
     "Parameters",

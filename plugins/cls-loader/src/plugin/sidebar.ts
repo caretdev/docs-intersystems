@@ -40,14 +40,14 @@ export function extractSidebar(
       items: subItems,
       label: item.name,
       type: "category",
-      link: {
-        type: 'link',
-        href: 'test',
-      },
+      // link: {
+      //   type: 'link',
+      //   href: 'test',
+      // },
     } as const;
   });
 
-  const sidebar = items.filter((item) => "items" in item && items.length > 0);
+  // const sidebar = items.filter((item) => "items" in item && items.length > 0);
 
   // console.log("sidebar", JSON.stringify(sidebar, null, 2));
 
