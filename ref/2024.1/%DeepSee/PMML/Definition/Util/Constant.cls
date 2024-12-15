@@ -1,0 +1,12 @@
+Class %DeepSee.PMML.Definition.Util.Constant Extends AbstractExpression [ System = 3 ]
+{
+
+Property value As %DeepSee.PMML.Datatype.String(MAXLEN = 2000, XMLPROJECTION = "CONTENT");
+
+Property dataType As %DeepSee.PMML.Datatype.DataType(XMLPROJECTION = "ATTRIBUTE");
+
+Method %GetComputeCode(Output pInline As %Boolean = 0, pOverrideSource As %String = "", pThis As %String = ".", pArrayFormat As %Boolean = 0) As %String
+{
+}
+
+}

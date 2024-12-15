@@ -1,0 +1,4662 @@
+/// <p>The InterSystems IRIS NLP iKnow technology is now deprecated. Please see the
+/// <a href="https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=GIKNOW">product
+/// documentation</a> for more detail.</p>
+/// <p>This class offers endpoints for accessing iKnow functionalities over REST.</p>
+/// <p>The API is fully documented using the <a href="https://github.com/OAI/OpenAPI-Specification">OpenAPI Specification</a>
+/// (also known as <a href="http://www.swagger.io">Swagger</a>). The description in YAML is
+/// available from the "/swagger" endpoint and can be loaded directly into <a href="https://github.com/swagger-api/swagger-ui/blob/master/README.md">swagger-ui</a> for
+/// convenient GUI capabilities on top of this API.</p>
+///
+/// <example language="swagger">
+/// swagger: '2.0'
+///
+/// info:
+///   version: "1.1.0"
+///   title: iKnow REST APIs
+///   description: |
+///     The InterSystems IRIS NLP iKnow technology is now deprecated. Please see the [product
+///     documentation|https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=GIKNOW]
+///     for more detail.
+///     This is the [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification)
+///     of the iKnow REST APIs, giving you RESTful access to iKnow domain contents in your system
+///     Use [swagger-ui](https://github.com/swagger-api/swagger-ui/blob/master/README.md)
+///     or a similar tool to conveniently browse and test these APIs.
+///     For more information on iKnow, visit [intersystems.com](http://www.intersystems.com)
+///
+///   contact:
+///     name: InterSystems
+///     url: http://wrc.intersystems.com
+///     email: support@intersystems.com
+///
+///   license:
+///     name: Copyright InterSystems Corporation, all rights reserved.
+///     url: https://www.intersystems.com/noticesterms-conditions/
+///
+/// consumes:
+///   - application/json
+/// produces:
+///   - application/json
+///
+///
+/// parameters:
+///   domainParam:
+///     name: domain
+///     type: integer
+///     in: path
+///     description: the ID of the domain to query
+///     required: true
+///   sourceParam:
+///     name: source
+///     type: integer
+///     in: path
+///     description: the source ID to query for
+///     required: true
+///   tableParam:
+///     name: table
+///     type: string
+///     in: path
+///     description: the table containing iFind index
+///     required: true
+///
+///
+/// definitions:
+///   PageNumber:
+///     type: integer
+///     description: |
+///       which "page" of the results to retrieve
+///     default: 1
+///
+///   PageSize:
+///     type: integer
+///     description: |
+///       how many results to retrieve per "page"
+///     default: {{{PAGESIZE}}}
+///
+///   FilterMode:
+///     description: filter mode to use for optionally recalculating certain metrics. Defaults to recalculating all and re-sorting the results (15).
+///     type: integer
+///     default: 15
+///     example: 15
+///     enum: [1, 3, 5, 7, 11, 13, 15]
+///
+///   IncludeCount:
+///     description: whether or not to include a count of all results (ignoring page and pageSize)
+///     type: boolean
+///     default: 0
+///     format: integer
+///
+///   CountOnly:
+///     description: whether or not to retrieve just the count and no result list
+///     type: boolean
+///     default: 0
+///     format: integer
+///
+///   Skiplists:
+///     description: array of skiplist IDs or names to use for limiting query results, OR a valid SELECT clause retrieving entity values outright
+///     type: array
+///     default: []
+///     items:
+///       type: string
+///
+///   Filter:
+///     # TODO: move into proper hierarchy once swagger-ui supports it
+///     description: filter object restricting the sources to be considered in this query
+///     type: object
+///     example:
+///       { "operator": "OR",
+///         "filters": [ { "ids": [ 123 ] },
+///                      {"field": "Year", "operator": ">", "value": 2016 } ] }
+///     properties:
+///       ids:
+///         description: for use with source-ID-based filters
+///         type: array
+///         items:
+///           type: integer
+///       extIds:
+///         description: for use with external-ID-based filters
+///         type: array
+///         items:
+///           type: string
+///       operator:
+///         description: for use with group filters ("AND"|"OR") or metadata-based filters (any other value)
+///         type: string
+///         enum: ["AND", "OR", "=", "!=", "<", ">", ">=", "<=", "BETWEEN", "IS NULL", "IS NOT NULL"]
+///       field:
+///         description: for use with metadata-based filters
+///         type: string
+///       value:
+///         description: for use with metadata-based filters
+///         type: string
+///       negate:
+///         description: for use with group filters
+///         type: boolean
+///         default: false
+///       filters:
+///         description: for use with group filters
+///         type: array
+///         items:
+///           $ref: '#/definitions/Filter'
+///       className:
+///         description: use for filters not covered by other shorthands
+///         type: string
+///         example: '%iKnow.Filters.ContainsEntityFilter'
+///       arguments:
+///         description: for use with 'className' property, any arguments to be passed to the filter's %New() method (except domain ID)
+///         type: array
+///         items:
+///           type: string
+///
+///   HighlightingRule:
+///     description: |
+///       "style" property is mandatory, then pick one selector per rule
+///     type: object
+///     required: ["style"]
+///     properties:
+///       style:
+///         type: string
+///         description: |
+///           style specification for this highlighting rule: either a two-character
+///           sequence or a HTML tag to use for wrapping the to-be-highlighted element.
+///           Use one selector per highlighting rule.
+///       entities:
+///         type: array
+///         items:
+///           type: string
+///         description: <i>selector</i> - selects list of entities
+///       role:
+///         type: string
+///         enum: ["concept", "relation", "pathRelevant", "nonRelevant" ]
+///         description: <i>selector</i> - selects all entities with this role
+///       attribute:
+///         type: string
+///         enum: ["negation", "positiveSentiment", "negativeSentiment" ]
+///         description: <i>selector</i> - selects all entities affected by this attribute
+///       attributeWords:
+///         type: string
+///         enum: ["negation", "positiveSentiment", "negativeSentiment" ]
+///         description: <i>selector</i> - selects all marker terms indicating this attribute
+///       anyMatch:
+///         type: boolean
+///         description: <i>selector</i> - selects any dictionary match
+///       dictionaries:
+///         type: array
+///         description: <i>selector</i> - selects any dictionary match of the specified dictionary IDs
+///         items:
+///           type: integer
+///       dictionaryItems:
+///         type: array
+///         description: <i>selector</i> - selects any dictionary match of the specified dictionary item IDs
+///         items:
+///           type: integer
+///       matchType:
+///         type: string
+///         enum: ["full", "partial"]
+///         description: |
+///           refines the "anyMatch", "dictionaries" or "dictionaryItems" selectors to the designated match type
+///
+///   Highlighting:
+///     description: array of highlighting rules
+///     example:
+///       [ { "style": "[]", "role": "concept" },
+///         { "style": "<b>", "entities": [ "airplane", "pilot" ] } ]
+///     type: array
+///     items:
+///       $ref: '#/definitions/HighlightingRule'
+///
+///   DomainList:
+///     type: object
+///     required: ["domains"]
+///     properties:
+///       domains:
+///         type: array
+///         items:
+///           title: Domain
+///           type: object
+///           required: ["id", "name" ]
+///           properties:
+///             id:
+///               type: integer
+///             name:
+///               type: string
+///             definitionClass:
+///               type: string
+///             sourceCount:
+///               type: integer
+///             version:
+///               type: integer
+///
+///   DomainDetails:
+///     type: object
+///     required: ["id", "name"]
+///     properties:
+///       id:
+///         type: integer
+///       name:
+///         type: string
+///       parameters:
+///         type: object
+///       metadata:
+///         type: array
+///         items:
+///           type: object
+///           required: ["id", "name", "operators", "dataType", "storage"]
+///           properties:
+///             id:
+///               type: integer
+///             name:
+///               type: string
+///             operators:
+///               type: array
+///               items:
+///                 $ref: '#/definitions/MetadataOperator'
+///             dataType:
+///               type: string
+///               enum: ["string", "number", "date"]
+///             storage:
+///               type: string
+///
+///
+///   MetadataOperator:
+///     type: string
+///     enum: [ "=", "!=", "<", ">", ">=", "<=", "BETWEEN", "IS NULL", "IS NOT NULL" ]
+///
+///   ConfigurationList:
+///     type: object
+///     required: ["configurations"]
+///     properties:
+///       configurations:
+///         type: array
+///         items:
+///           title: Configuration
+///           type: object
+///           required: ["id", "name", "languages"]
+///           properties:
+///             id:
+///               type: integer
+///             name:
+///               type: string
+///             languages:
+///               type: array
+///               items:
+///                 $ref: '#/definitions/LanguageCode'
+///             userDictionary:
+///                 $ref: '#/definitions/UserDictionary'
+///             maxConceptLength:
+///               type: integer
+///
+///   UserDictionary:
+///     type: object
+///     required: ["entries"]
+///     properties:
+///       name:
+///         type: string
+///       entries:
+///         type: array
+///         items:
+///           title: UserDictionaryEntry
+///           type: object
+///           required: ["string"]
+///           properties:
+///             string:
+///               type: string
+///             rewrite:
+///               type: string
+///             label:
+///               type: string
+///             metadata:
+///               type: string
+///
+///   LanguageCode:
+///     description: 2-letter ISO language code
+///     type: string
+///     enum: [ "en", "fr", "de", "es", "pt", "nl", "ru", "uk", "se", "ja" ]
+///
+///   SourceList:
+///     description: list of sources
+///     type: object
+///     required: ["sources"]
+///     properties:
+///       sources:
+///         type: array
+///         items:
+///           title: Source
+///           type: object
+///           required:
+///             - id
+///             - extId
+///           properties:
+///             id:
+///               type: integer
+///               description: source ID
+///             extId:
+///               type: string
+///               description: external ID
+///             metadata:
+///               type: object
+///               description: map of metadata field values
+///             snippet:
+///               type: string
+///               description: snippet (summary) of the retrieved source
+///       count:
+///         description: number of result sources (ignoring page and pageSize)
+///         type: integer
+///
+///
+///   EntityList:
+///     description: list of entities
+///     type: object
+///     properties:
+///       entities:
+///         type: array
+///         items:
+///           $ref: '#/definitions/Entity'
+///       count:
+///         type: integer
+///         description: number of result entities (ignoring page and pageSize)
+///
+///   Entity:
+///     type: object
+///     required:
+///       - id
+///       - value
+///     properties:
+///       id:
+///         type: integer
+///         description: unique entity ID
+///       value:
+///         type: string
+///         description: entity value
+///       frequency:
+///         type: integer
+///         description: number of times the entity occurs in the result set
+///       spread:
+///         type: integer
+///         description: number of distinct sources the entity occurs in in the result set
+///
+///
+///   CRCList:
+///     type: object
+///     required:
+///       - crcs
+///     properties:
+///       crcs:
+///         type: array
+///         items:
+///           title: CRC
+///           type: object
+///           required:
+///             - id
+///             - relation
+///             - frequency
+///             - spread
+///           properties:
+///             id:
+///               type: integer
+///               description: unique entity ID
+///             head:
+///               type: string
+///               description: entity value of the head concept
+///             relation:
+///               type: string
+///               description: entity value of the relation
+///             tail:
+///               type: string
+///               description: entity value of the tail concept
+///             frequency:
+///               type: integer
+///               description: number of times the CRC occurs in the result set
+///             spread:
+///               type: integer
+///               description: number of distinct sources the CRC occurs in in the result set
+///       count:
+///         type: integer
+///         description: number of result CRCs (ignoring page and pageSize)
+///
+///   CRC:
+///     type: object
+///     required:
+///       - relation
+///     properties:
+///       head:
+///         type: string
+///         description: entity value of the head concept
+///       relation:
+///         type: string
+///         description: entity value of the relation
+///       tail:
+///         type: string
+///         description: entity value of the tail concept
+///
+///   SkiplistList:
+///     type: object
+///     required: ["skiplists"]
+///     properties:
+///       skiplists:
+///         type: array
+///         items:
+///           $ref: '#/definitions/SkiplistDetails'
+///
+///   SkiplistDetails:
+///     type: object
+///     required: ["id", "name"]
+///     properties:
+///       id:
+///         type: integer
+///       name:
+///         type: string
+///       description:
+///         type: string
+///       elements:
+///         type: array
+///         items:
+///           type: string
+///
+///   DictionaryList:
+///     type: object
+///     required: ["dictionaries"]
+///     properties:
+///       dictionaries:
+///         type: array
+///         items:
+///           $ref: '#/definitions/DictionaryDetails'
+///       count:
+///         type: integer
+///         description: total number of dictionaries (ignoring page and pageSize)
+///
+///   DictionaryDetails:
+///     type: object
+///     required: ["id", "name"]
+///     properties:
+///       id:
+///         type: integer
+///       name:
+///         type: string
+///       language:
+///         $ref: '#/definitions/LanguageCode'
+///       description:
+///         type: string
+///       items:
+///         type: array
+///         items:
+///           $ref: '#/definitions/DictionaryItemDetails'
+///
+///   DictionaryItemDetails:
+///     type: object
+///     required: ["id", "name", "uri"]
+///     properties:
+///       id:
+///         type: integer
+///       name:
+///         description: display label
+///         type: string
+///       uri:
+///         description: unique, domain-wide identifier for this Dictionary Item
+///         type: string
+///       language:
+///         $ref: '#/definitions/LanguageCode'
+///       terms:
+///         type: array
+///         items:
+///           $ref: '#/definitions/DictionaryTermDetails'
+///
+///   DictionaryTermDetails:
+///     type: object
+///     required: ["id"]
+///     example: { id: 123, string: "palm tree" }
+///     properties:
+///       id:
+///         type: integer
+///       language:
+///         $ref: '#/definitions/LanguageCode'
+///       string:
+///         description: if this is a regular term, the term string value
+///         type: string
+///       regexp:
+///         description: if this is a regular expression format term, the regular expression
+///         type: string
+///       replace:
+///         description: if this is a regular expression format term, the replacement string
+///         type: string
+///       formatClass:
+///         description: if this is a format term, the name of the format implementation class
+///         type: string
+///       formatParams:
+///         description: if this is a format term, any additional parameters for the format implementation class
+///         type: array
+///         items:
+///           type: string
+///
+///   MatchList:
+///     type: object
+///     required: ["matches"]
+///     properties:
+///       matches:
+///         type: array
+///         items:
+///           $ref: '#/definitions/MatchListItem'
+///
+///   MatchListItem:
+///     type: object
+///     required: [ "id", "score" ]
+///     properties:
+///       id:
+///         type: integer
+///       score:
+///         type: number
+///         description: aggregated score for this match
+///       partialCount:
+///         type: integer
+///         description: number of partially matched entities for this match
+///       ordered:
+///         type: boolean
+///         format: integer
+///         description: whether or not the matched entities appear in the term's order
+///       negatedCount:
+///         type: integer
+///         description: number of entities
+///       term:
+///         type: object
+///         title: MatchedTerm
+///         required: ["id","item"]
+///         properties:
+///           id:
+///             type: integer
+///           string:
+///             type: string
+///           item:
+///             title: MatchedItem
+///             type: object
+///             required: ["id", "uri", "name", "dictionary" ]
+///             properties:
+///               id:
+///                 type: integer
+///               name:
+///                 type: string
+///               uri:
+///                 type: string
+///               dictionary:
+///                 title: MatchedDictionary
+///                 type: object
+///                 required: ["id", "name"]
+///                 properties:
+///                   id:
+///                     type: integer
+///                   name:
+///                     type: string
+///       target:
+///         title: MatchTarget
+///         type: object
+///         description: the matched piece of the source text
+///         properties:
+///           id:
+///             type: integer
+///           type:
+///             type: string
+///             enum: ["entity", "crc", "path", "sentence"]
+///       sentenceId:
+///         type: integer
+///       sentence:
+///         type: string
+///         description: full text of the sentence where the match occurred
+///       elements:
+///         type: array
+///         description: detailed overview of entity-level match results
+///         items:
+///           type: object
+///           title: MatchedElements
+///           required: ["partId", "literal", "score", "role", "matchedWords", "negated"]
+///           properties:
+///             partId:
+///               type: integer
+///               description: entity occurrence / part ID of the matched sentence part
+///             literal:
+///               type: string
+///               description: literal string how this part appeared in the sentence
+///             score:
+///               type: number
+///               description: entity-level score
+///             role:
+///               type: string
+///               enum: ["concept", "relation", "pathRelevant" ]
+///               description: role of this sentence part
+///             matchedWords:
+///               type: string
+///               description: which words within the entity actually matched
+///             negated:
+///               type: boolean
+///               format: integer
+///               description: whether this sentence part is part of a negative context
+///             entityId:
+///               type: integer
+///               description: entity ID, if this part corresponds to an entity
+///             entity:
+///               type: string
+///               description: entity value, if this part corresponds to an entity
+///             output:
+///               type: string
+///               description: format output, if this part corresponds to a matched format providing output
+///
+///
+///   SentenceDetails:
+///     type: object
+///     required:
+///       - id
+///       - sourceId
+///       - text
+///     properties:
+///       id:
+///         description: sentence ID
+///         type: integer
+///       sourceId:
+///         description: containing source ID
+///         type: integer
+///       text:
+///         description: sentence text, optionally highlighted
+///         type: string
+///       parts:
+///         description: entities in this sentence
+///         type: array
+///         items:
+///           title: SentencePart
+///           type: object
+///           required:
+///             - partId
+///             - literal
+///             - role
+///           properties:
+///             partId:
+///               description: entity / part occurrence ID
+///               type: integer
+///             literal:
+///               description: literal value of this part in the sentence
+///               type: string
+///             role:
+///               description: role of this entity in the path
+///               type: string
+///               enum: ["concept", "relation", "pathRelevant"]
+///             entityId:
+///               description: unique entity ID, if this is not a non-relevant
+///               type: integer
+///             entity:
+///               description: entity value, if this is not a non-relevant
+///               type: string
+///             stemId:
+///               description: stem ID for this entity, if the domain is configured for stemming
+///               type: string
+///             stem:
+///               description: stem value of this entity, if the domain is configured for stemming
+///               type: string
+///             attributes:
+///               description: semantic attributes for this entity
+///               type: array
+///               items:
+///                 title: AttributeInfo
+///                 type: object
+///                 required: ["type", "level"]
+///                 properties:
+///                   type:
+///                     description: name of the attribute
+///                     type: string
+///                   level:
+///                     description: level at which the attribute applies
+///                     type: string
+///                     enum: ["path", "word"]
+///                   words:
+///                     description: if level="word", the actual words affected
+///                     type: string
+///                   properties:
+///                     description: attribute properties
+///                     type: object
+///
+///   HighlightSpec:
+///     # TODO: move into proper hierarchy once swagger-ui supports it
+///     description: The parameters needed for %iFind.Utils.Highlight
+///     type: object
+///     example:
+///       { "tag": "<b>", "limit":0, "name": "Highlighted"}
+///     properties:
+///       tag:
+///         description: the tags used to enclose the highlighted segments
+///         type: string
+///         default: "<b>"
+///       limit:
+///         description: limit the segments get highlighted,check %iFind.Utils.Highlight() for details
+///         type: integer
+///         default: 0
+///       name:
+///         description: the alias name for the column containing highlighted text
+///         type: string
+///         default: "Highlighted"
+///   RankSpec:
+///     # TODO: move into proper hierarchy once swagger-ui supports it
+///     description: The parameters needed for %iFind.Utils.Rank
+///     type: object
+///     example:
+///       { "name":"Rank" }
+///     properties:
+///       name:
+///         description: the alias name for the column containing rank info
+///         type: string
+///         default: "Rank"
+///   OptionSpec:
+///     description: The option could be object which includes all the required parameters. However, you could still use "0","1","2","3","4" these simple strings for option for the legacy support
+///     type: object
+///     properties:
+///       mode:
+///         type: string
+///         enum: ["0","1","2","3","4","*","normal","stemmed","decompounded","fuzzy","regex"]
+///         description: the iFind search options. 0/normal search,1/stemmed search,2/decompunded search,3/fuzzy search,4/regex search, "*" indicates use the index setting
+///       stemmer:
+///         type: string
+///         description: the stemming/decompounding class
+///       arguments:
+///         type: array
+///         description: the arguments needed for initialize a stemming/decompounding class
+///         items:
+///           type: string
+///       distance:
+///         type: string
+///         description: the fuzzy search threshold.
+/// </example>
+Class %iKnow.REST.v1dot1 Extends (Base, Utils) [ Deprecated, System = 4 ]
+{
+
+Parameter SNIPPETSIZE = 2;
+
+XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Retrieves all the domains for this namespace, with basic info
+///       tags: ["Miscellaneous"]
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/DomainList'
+/// </example>
+ClassMethod GetDomains(namespace As %String) As %Status
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Retrieve more detailed information about an individual domain
+///       tags: ["Miscellaneous"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/DomainDetails'
+/// </example>
+ClassMethod GetDomainDetails(namespace As %String, pDomainId As %Integer) As %Status
+{
+}
+
+/// Simplified version of <method>GetConfigurations</method> for HTTP GET requests
+/// <example language="swagger">
+///       summary: |
+///         Retrieves all the configurations for this namespace, with basic info
+///       tags: ["Miscellaneous"]
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/ConfigurationList'
+/// </example>
+ClassMethod GetConfigurationsGET(namespace As %String) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Retrieves all the configurations for this namespace, with basic info
+///       tags: ["Miscellaneous"]
+///       parameters:
+///         - name: RequestBody
+///           description: additional parameters to configure this query
+///           in: body
+///           required: false
+///           schema:
+///             type: object
+///             properties:
+///               includeUserDictionaryContents:
+///                 type: boolean
+///                 description: Whether or not to include user dictionary contents
+///                 default: false
+///                 format: integer
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/ConfigurationList'
+/// </example>
+ClassMethod GetConfigurations(namespace As %String) As %Status
+{
+}
+
+/// Simplified version of <method>GetSources</method> for HTTP GET requests
+/// <example language="swagger">
+///       summary: |
+///         Retrieves all sources matching the supplied filter
+///       tags: ["Sources"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/SourceList'
+/// </example>
+ClassMethod GetSourcesGET(namespace As %String, pDomainId As %Integer) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Retrieves all sources matching the supplied filter
+///       tags: ["Sources"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               page:
+///                 $ref: '#/definitions/PageNumber'
+///               pageSize:
+///                 $ref: '#/definitions/PageSize'
+///               filter:
+///                 $ref: '#/definitions/Filter'
+///               highlight:
+///                 $ref: '#/definitions/Highlighting'
+///               includeMetadata:
+///                 description: whether or not to include metadata for each retrieved source
+///                 type: boolean
+///                 default: 1
+///                 format: integer
+///               includeSnippets:
+///                 description: if set to a nonzero value, a snippet of the designated length (in sentences) will be retrieved for each source
+///                 type: integer
+///                 default: {{{SNIPPETSIZE}}}
+///               includeCount:
+///                 $ref: '#/definitions/IncludeCount'
+///               countOnly:
+///                 $ref: '#/definitions/CountOnly'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/SourceList'
+/// </example>
+ClassMethod GetSources(namespace As %String, pDomainId As %Integer) As %Status
+{
+}
+
+/// Simplified version of <method>GetSimilarSources</method> for HTTP GET requests
+/// <example language="swagger">
+///       summary: |
+///         Retrieves all sources similar to a seed source
+///       tags: ["Sources"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - $ref: '#/parameters/sourceParam'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             allOf:
+///               - $ref: '#/definitions/SourceList'
+///               - type: object
+///                 properties:
+///                   score:
+///                     type: number
+///                     description: score expressing the similarity between this record and the seed document
+///                   percentageMatched:
+///                     type: number
+///                   percentageNew:
+///                     type: number
+///                   numberOfEntitiesInRefSource:
+///                     type: integer
+///                   numberOfEntitiesInCommon:
+///                     type: integer
+///                   numberOfEntitiesInThisSource:
+///                     type: integer
+/// </example>
+ClassMethod GetSimilarSourcesGET(namespace As %String, pDomainId As %Integer, pSourceId As %Integer) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Retrieves all sources similar to a seed source
+///       tags: ["Sources"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - $ref: '#/parameters/sourceParam'
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               page:
+///                 $ref: '#/definitions/PageNumber'
+///               pageSize:
+///                 $ref: '#/definitions/PageSize'
+///               filter:
+///                 $ref: '#/definitions/Filter'
+///               highlight:
+///                 $ref: '#/definitions/Highlighting'
+///               algorithm:
+///                 type: string
+///                 enum: ["simple", "dominantEntities"]
+///                 description: algorithm to use for calculating similar entities
+///                 default: "simple"
+///               parameters:
+///                 type: array
+///                 items:
+///                   type: string
+///                 description: additional parameters to tune the algorithm
+///                 default: []
+///               includeMetadata:
+///                 description: whether or not to include metadata for each retrieved source
+///                 type: boolean
+///                 default: 1
+///                 format: integer
+///               includeSnippets:
+///                 description: if set to a nonzero value, a snippet of the designated length (in sentences) will be retrieved for each source
+///                 type: integer
+///                 default: {{{SNIPPETSIZE}}}
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             allOf:
+///               - $ref: '#/definitions/SourceList'
+///               - type: object
+///                 properties:
+///                   score:
+///                     type: number
+///                     description: score expressing the similarity between this record and the seed document
+///                   percentageMatched:
+///                     type: number
+///                   percentageNew:
+///                     type: number
+///                   numberOfEntitiesInRefSource:
+///                     type: integer
+///                   numberOfEntitiesInCommon:
+///                     type: integer
+///                   numberOfEntitiesInThisSource:
+///                     type: integer
+/// </example>
+ClassMethod GetSimilarSources(namespace As %String, pDomainId As %Integer, pSourceId As %Integer) As %Status
+{
+}
+
+/// Simplified version of <method>GetSourcesByEntity</method> for HTTP GET requests
+/// <example language="swagger">
+///       summary: |
+///         Retrieves all sources containing the supplied entity
+///       tags: ["Sources"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: entity
+///           in: path
+///           description: entity to look for.
+///           type: string
+///           required: true
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/SourceList'
+/// </example>
+ClassMethod GetSourcesByEntityGET(namespace As %String, pDomainId As %Integer, pEntity As %String = "") As %Status [ Internal ]
+{
+}
+
+/// Simplified version of <method>GetSourcesByEntityPOST</method> for HTTP POST requests
+/// <example language="swagger">
+///       summary: |
+///         Retrieves all sources containing the supplied entity
+///       tags: ["Sources"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           required: true
+///           schema:
+///             type: object
+///             required: ["entity"]
+///             properties:
+///               entity:
+///                 type: array
+///                 items:
+///                   type: string
+///                 description: |
+///                   the entity or list of entities to query for
+///                 default: "tree house"
+///               page:
+///                 $ref: '#/definitions/PageNumber'
+///               pageSize:
+///                 $ref: '#/definitions/PageSize'
+///               filter:
+///                 $ref: '#/definitions/Filter'
+///               highlight:
+///                 $ref: '#/definitions/Highlighting'
+///               includeMetadata:
+///                 description: whether or not to include metadata for each retrieved source
+///                 type: boolean
+///                 default: 1
+///                 format: integer
+///               includeSnippets:
+///                 description: if set to true, a snippet made up of all sentences containing the designated entities will be retrieved for each source
+///                 type: boolean
+///                 default: 1
+///                 format: integer
+///               actualFormOnly:
+///                 type: boolean
+///                 format: integer
+///                 description: when this domain supports stemming, set to true to restrict to the supplied actual form only
+///                 default: 0
+///               setOperation:
+///                 type: string
+///                 enum: ["union", "intersect"]
+///                 description: when supplying multiple entities, controls how the results for each entity should be combined
+///               includeCount:
+///                 $ref: '#/definitions/IncludeCount'
+///               countOnly:
+///                 $ref: '#/definitions/CountOnly'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/SourceList'
+/// </example>
+ClassMethod GetSourcesByEntityPOST(namespace As %String, pDomainId As %Integer) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Retrieves all sources containing the supplied entity
+///       tags: ["Sources"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: entity
+///           in: path
+///           description: entity to look for. If supplied in the request object, that value will take precedence over the path parameter
+///           type: string
+///           required: true
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               entity:
+///                 type: array
+///                 items:
+///                   type: string
+///                 description: |
+///                   if supplied, overwrites the value of the "entity" path parameter
+///                 default: ""
+///               page:
+///                 $ref: '#/definitions/PageNumber'
+///               pageSize:
+///                 $ref: '#/definitions/PageSize'
+///               filter:
+///                 $ref: '#/definitions/Filter'
+///               highlight:
+///                 $ref: '#/definitions/Highlighting'
+///               includeMetadata:
+///                 description: whether or not to include metadata for each retrieved source
+///                 type: boolean
+///                 default: 1
+///                 format: integer
+///               includeSnippets:
+///                 description: if set to true, a snippet made up of all sentences containing the designated entities will be retrieved for each source
+///                 type: boolean
+///                 default: 1
+///                 format: integer
+///               actualFormOnly:
+///                 type: boolean
+///                 format: integer
+///                 description: when this domain supports stemming, set to true to restrict to the supplied actual form only
+///                 default: 0
+///               setOperation:
+///                 type: string
+///                 enum: ["union", "intersect"]
+///                 description: when supplying multiple entities, controls how the results for each entity should be combined
+///               includeCount:
+///                 $ref: '#/definitions/IncludeCount'
+///               countOnly:
+///                 $ref: '#/definitions/CountOnly'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/SourceList'
+/// </example>
+ClassMethod GetSourcesByEntity(namespace As %String, pDomainId As %Integer, pEntity As %String = "") As %Status
+{
+}
+
+/// Simplified version of <method>GetSourcesByCRC</method> for HTTP GET requests
+/// <example language="swagger">
+///       summary: |
+///         Retrieves all sources containing the supplied CRC
+///       tags: ["Sources"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: crc
+///           in: path
+///           description: CRC to look for, as a colon-separated sequence of head, relation and tail.
+///           type: string
+///           required: true
+///           #example: john:likes:bananas
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/SourceList'
+/// </example>
+ClassMethod GetSourcesByCRCGET(namespace As %String, pDomainId As %Integer, pCRC As %String = "") As %Status [ Internal ]
+{
+}
+
+/// Simplified version of <method>GetSourcesByCRC</method> for HTTP POST requests
+/// <example language="swagger">
+///       summary: |
+///         Retrieves all sources containing the supplied CRC
+///       tags: ["Sources"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           required: true
+///           schema:
+///             type: object
+///             required: ["crc"]
+///             properties:
+///               crc:
+///                 type: array
+///                 items:
+///                   $ref: '#/definitions/CRC'
+///                 description: |
+///                   the CRC to look for
+///               page:
+///                 $ref: '#/definitions/PageNumber'
+///               pageSize:
+///                 $ref: '#/definitions/PageSize'
+///               filter:
+///                 $ref: '#/definitions/Filter'
+///               highlight:
+///                 $ref: '#/definitions/Highlighting'
+///               includeMetadata:
+///                 description: whether or not to include metadata for each retrieved source
+///                 type: boolean
+///                 default: 1
+///                 format: integer
+///               includeSnippets:
+///                 description: if set to true, a snippet made up of all the sentences containing the designated CRCs will be retrieved for each source
+///                 type: boolean
+///                 default: 1
+///                 format: integer
+///               setOperation:
+///                 type: string
+///                 enum: ["union", "intersect"]
+///                 description: when supplying multiple entities, controls how the results for each entity should be combined
+///               includeCount:
+///                 $ref: '#/definitions/IncludeCount'
+///               countOnly:
+///                 $ref: '#/definitions/CountOnly'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/SourceList'
+/// </example>
+ClassMethod GetSourcesByCRCPOST(namespace As %String, pDomainId As %Integer) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Retrieves all sources containing the supplied CRC
+///       tags: ["Sources"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: crc
+///           in: path
+///           description: CRC to look for, as a colon-separated sequence of head, relation and tail. If supplied in the request object, that value will take precedence over the path parameter
+///           type: string
+///           required: true
+///           #example: john:likes:bananas
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               crc:
+///                 type: array
+///                 items:
+///                   $ref: '#/definitions/CRC'
+///                 description: |
+///                   if supplied, overwrites the value of the "crc" path parameter
+///                 default: ""
+///               page:
+///                 $ref: '#/definitions/PageNumber'
+///               pageSize:
+///                 $ref: '#/definitions/PageSize'
+///               filter:
+///                 $ref: '#/definitions/Filter'
+///               highlight:
+///                 $ref: '#/definitions/Highlighting'
+///               includeMetadata:
+///                 description: whether or not to include metadata for each retrieved source
+///                 type: boolean
+///                 default: 1
+///                 format: integer
+///               includeSnippets:
+///                 description: if set to true, a snippet made up of all the sentences containing the designated CRCs will be retrieved for each source
+///                 type: boolean
+///                 default: 1
+///                 format: integer
+///               setOperation:
+///                 type: string
+///                 enum: ["union", "intersect"]
+///                 description: when supplying multiple entities, controls how the results for each entity should be combined
+///               includeCount:
+///                 $ref: '#/definitions/IncludeCount'
+///               countOnly:
+///                 $ref: '#/definitions/CountOnly'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/SourceList'
+/// </example>
+ClassMethod GetSourcesByCRC(namespace As %String, pDomainId As %Integer, pCRC As %String = "") As %Status
+{
+}
+
+/// Simplified version of <method>GetSourceDetails</method> for HTTP GET requests
+/// <example language="swagger">
+///       summary: |
+///         Retrieves the details of a particular source
+///       tags: ["Sources"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - $ref: '#/parameters/sourceParam'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             title: Source
+///             type: object
+///             properties:
+///               text:
+///                 type: string
+///                 description: textual contents (optionally summarized) of this source
+///               metadata:
+///                 type: object
+///                 description: metadata map for this source
+///               virtual:
+///                 type: boolean
+///                 format: integer
+///                 description: whether or not this is a virtual source
+/// </example>
+ClassMethod GetSourceDetailsGET(namespace As %String, pDomainId As %Integer, pSourceId As %Integer) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Retrieves the details of a particular source
+///       tags: ["Sources"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - $ref: '#/parameters/sourceParam'
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               includeMetadata:
+///                 description: whether or not to include metadata for the designated source
+///                 type: boolean
+///                 default: 1
+///                 format: integer
+///               includeText:
+///                 description: whether or not to include the full source text in the result
+///                 type: boolean
+///                 default: 1
+///                 format: integer
+///               summarize:
+///                 description: if set, the text returned will be a summary of the full contents, measuring this many sentences
+///                 type: number
+///               virtual:
+///                 description: if set to true, the source ID will be considered to refer to a virtual source
+///                 type: boolean
+///                 default: 0
+///                 format: integer
+///               highlight:
+///                 $ref: '#/definitions/Highlighting'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             title: Source
+///             type: object
+///             properties:
+///               text:
+///                 type: string
+///                 description: textual contents (optionally summarized) of this source
+///               metadata:
+///                 type: object
+///                 description: metadata map for this source
+///               virtual:
+///                 type: boolean
+///                 format: integer
+///                 description: whether or not this is a virtual source
+/// </example>
+ClassMethod GetSourceDetails(namespace As %String, pDomainId As %Integer, pSourceId As %Integer) As %Status
+{
+}
+
+/// Simplified version of <method>GetEntities</method> for HTTP GET requests.
+/// <example language="swagger">
+///       summary: |
+///         Retrieves the top entities for this domain
+///       tags: ["Entities"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             title: EntityList
+///             type: object
+///             properties:
+///               entities:
+///                 type: array
+///                 items:
+///                   title: Entity
+///                   type: object
+///                   required:
+///                     - id
+///                     - value
+///                   properties:
+///                     id:
+///                       type: integer
+///                       description: unique entity ID
+///                     value:
+///                       type: string
+///                       description: entity value
+///                     frequency:
+///                       type: integer
+///                       description: number of times the entity occurs in the result set
+///                     spread:
+///                       type: integer
+///                       description: number of distinct sources the entity occurs in in the result set
+///                     dominance:
+///                       type: number
+///                       description: relevance of the entity in this result set
+///                     tfidf:
+///                       type: number
+///                       description: TFIDF-based metric expressing relevance of the entity in this result set
+///                     bm25:
+///                       type: number
+///                       description: BM25-based metric expressing relevance of the entity in this result set
+/// </example>
+ClassMethod GetEntitiesGET(namespace As %String, pDomainId As %Integer) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Retrieves the top entities for this domain
+///       tags: ["Entities"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               page:
+///                 $ref: '#/definitions/PageNumber'
+///               pageSize:
+///                 $ref: '#/definitions/PageSize'
+///               filter:
+///                 $ref: '#/definitions/Filter'
+///               filterMode:
+///                 $ref: '#/definitions/FilterMode'
+///               skiplists:
+///                 $ref: '#/definitions/Skiplists'
+///               sortBy:
+///                 description: criterion to use for retrieving the top entities
+///                 type: string
+///                 default: "domainDefault"
+///                 example: "domainDefault"
+///                 enum: ["frequency", "spread", "domainDefault", "dominance", "bm25", "tfidf"]
+///               useStems:
+///                 description: |
+///                   retrieve stems rather than entities. (only available when the domain has stemming enabled and for certain sortBy values)
+///                 type: integer
+///                 default: 0
+///                 format: integer
+///               role:
+///                 description: whether to retrieve top concepts, relationships or both (only available for certain sortBy values)
+///                 type: string
+///                 default: "concept"
+///                 enum: ["concept", "relation", "any"]
+///               includeMetrics:
+///                 description: additional metrics to retrieve, on top of what is automatically retrieved based on the sortBy value
+///                 type: array
+///                 default: []
+///                 items:
+///                   type: string
+///                   enum: ["frequency", "spread", "dominance", "tfidf"]
+///               includeCount:
+///                 $ref: '#/definitions/IncludeCount'
+///               countOnly:
+///                 $ref: '#/definitions/CountOnly'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             title: EntityList
+///             type: object
+///             properties:
+///               entities:
+///                 type: array
+///                 items:
+///                   title: Entity
+///                   type: object
+///                   required:
+///                     - id
+///                     - value
+///                   properties:
+///                     id:
+///                       type: integer
+///                       description: unique entity ID
+///                     value:
+///                       type: string
+///                       description: entity value
+///                     frequency:
+///                       type: integer
+///                       description: number of times the entity occurs in the result set
+///                     spread:
+///                       type: integer
+///                       description: number of distinct sources the entity occurs in in the result set
+///                     dominance:
+///                       type: number
+///                       description: relevance of the entity in this result set
+///                     tfidf:
+///                       type: number
+///                       description: TFIDF-based metric expressing relevance of the entity in this result set
+///                     bm25:
+///                       type: number
+///                       description: BM25-based metric expressing relevance of the entity in this result set
+///               count:
+///                 type: integer
+///                 description: total number of entities in this domain (if RequestBody.includeCount is true, ignoring page and pageSize)
+/// </example>
+ClassMethod GetEntities(namespace As %String, pDomainId As %Integer) As %Status
+{
+}
+
+/// Simplified version of <method>GetSimilarEntities</method> for HTTP GET requests
+/// <example language="swagger">
+///       summary: |
+///         Retrieves entities similar to a seed string
+///       tags: ["Entities"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: string
+///           description: the seed string to find similar entities for
+///           in: path
+///           required: true
+///           type: string
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/EntityList'
+/// </example>
+ClassMethod GetSimilarEntitiesGET(namespace As %String, pDomainId As %Integer, pString As %String = "") As %Status [ Internal ]
+{
+}
+
+/// Simplified version of <method>GetSimilarEntities</method> for HTTP POST requests.
+/// <example language="swagger">
+///       summary: |
+///         Retrieves entities similar to a seed string
+///       tags: ["Entities"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           required: true
+///           schema:
+///             type: object
+///             required: ["string" ]
+///             properties:
+///               string:
+///                 description: the seed string to find similar entities for
+///                 type: string
+///                 example: "tree"
+///               page:
+///                 $ref: '#/definitions/PageNumber'
+///               pageSize:
+///                 $ref: '#/definitions/PageSize'
+///               filter:
+///                 $ref: '#/definitions/Filter'
+///               filterMode:
+///                 $ref: '#/definitions/FilterMode'
+///               skiplists:
+///                 $ref: '#/definitions/Skiplists'
+///               type:
+///                 description: |
+///                   method to calculate / retrieve similar entities. ("ngrams" requires the domain to be configured for it)
+///                 type: string
+///                 default: "domainDefault"
+///                 example: "domainDefault"
+///                 enum: ["domainDefault", "parts", "ngrams", "words"]
+///               useStems:
+///                 description: retrieve stems rather than entities. (only available when the domain has stemming enabled and for certain sortBy values)
+///                 type: boolean
+///                 default: 0
+///                 format: integer
+///               role:
+///                 description: whether to retrieve top concepts, relationships or both (only available for certain sortBy values)
+///                 type: string
+///                 default: "any"
+///                 example: "any"
+///                 enum: ["concept", "relation", "any"]
+///               includeCount:
+///                 $ref: '#/definitions/IncludeCount'
+///               countOnly:
+///                 $ref: '#/definitions/CountOnly'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/EntityList'
+/// </example>
+ClassMethod GetSimilarEntitiesPOST(namespace As %String, pDomainId As %Integer) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Retrieves entities similar to a seed string
+///       tags: ["Entities"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: string
+///           description: the seed string to find similar entities for
+///           in: path
+///           required: true
+///           type: string
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               string:
+///                 description: if set, overrides value of path parameter
+///                 type: string
+///                 default: ""
+///                 example: ""
+///               page:
+///                 $ref: '#/definitions/PageNumber'
+///               pageSize:
+///                 $ref: '#/definitions/PageSize'
+///               filter:
+///                 $ref: '#/definitions/Filter'
+///               filterMode:
+///                 $ref: '#/definitions/FilterMode'
+///               skiplists:
+///                 $ref: '#/definitions/Skiplists'
+///               type:
+///                 description: |
+///                   method to calculate / retrieve similar entities. ("ngrams" requires the domain to be configured for it)
+///                 type: string
+///                 default: "domainDefault"
+///                 example: "domainDefault"
+///                 enum: ["domainDefault", "parts", "ngrams", "words"]
+///               useStems:
+///                 description: retrieve stems rather than entities. (only available when the domain has stemming enabled and for certain sortBy values)
+///                 type: boolean
+///                 default: 0
+///                 format: integer
+///               role:
+///                 description: whether to retrieve top concepts, relationships or both (only available for certain sortBy values)
+///                 type: string
+///                 default: "any"
+///                 example: "any"
+///                 enum: ["concept", "relation", "any"]
+///               includeCount:
+///                 $ref: '#/definitions/IncludeCount'
+///               countOnly:
+///                 $ref: '#/definitions/CountOnly'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/EntityList'
+/// </example>
+ClassMethod GetSimilarEntities(namespace As %String, pDomainId As %Integer, pString As %String = "") As %Status
+{
+}
+
+/// Simplified version of <method>GetRelatedEntities</method> for HTTP GET requests
+/// <example language="swagger">
+///       summary: |
+///         Retrieves entities related to a seed entity based on proximity or direct relationships
+///       tags: ["Entities"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: entity
+///           description: the seed entity to find related entities for
+///           in: path
+///           required: true
+///           type: string
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/EntityList'
+/// </example>
+ClassMethod GetRelatedEntitiesGET(namespace As %String, pDomainId As %Integer, pEntity As %String = "") As %Status [ Internal ]
+{
+}
+
+/// Simplified version of <method>GetRelatedEntities</method> for HTTP POST requests
+/// <example language="swagger">
+///       summary: |
+///         Retrieves entities related to a seed entity based on proximity or direct relationships
+///       tags: ["Entities"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           required: true
+///           schema:
+///             type: object
+///             properties:
+///               entity:
+///                 description: the seed entity to find related ones for
+///                 type: string
+///                 default: ""
+///                 example: "tree"
+///               page:
+///                 $ref: '#/definitions/PageNumber'
+///               pageSize:
+///                 $ref: '#/definitions/PageSize'
+///               filter:
+///                 $ref: '#/definitions/Filter'
+///               filterMode:
+///                 $ref: '#/definitions/FilterMode'
+///               skiplists:
+///                 $ref: '#/definitions/Skiplists'
+///               sortBy:
+///                 description: criterion to use for retrieving the related entities
+///                 type: string
+///                 default: "proximity"
+///                 example: "proximity"
+///                 enum: ["proximity", "frequency", "spread"]
+///               includeCount:
+///                 $ref: '#/definitions/IncludeCount'
+///               countOnly:
+///                 $ref: '#/definitions/CountOnly'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/EntityList'
+/// </example>
+ClassMethod GetRelatedEntitiesPOST(namespace As %String, pDomainId As %Integer) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Retrieves entities related to a seed entity based on proximity or direct relationships
+///       tags: ["Entities"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: entity
+///           description: the seed entity to find related entities for
+///           in: path
+///           required: true
+///           type: string
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               entity:
+///                 description: if set, overrides value of path parameter
+///                 type: string
+///                 default: ""
+///                 example: ""
+///               page:
+///                 $ref: '#/definitions/PageNumber'
+///               pageSize:
+///                 $ref: '#/definitions/PageSize'
+///               filter:
+///                 $ref: '#/definitions/Filter'
+///               filterMode:
+///                 $ref: '#/definitions/FilterMode'
+///               skiplists:
+///                 $ref: '#/definitions/Skiplists'
+///               sortBy:
+///                 description: criterion to use for retrieving the related entities
+///                 type: string
+///                 default: "proximity"
+///                 example: "proximity"
+///                 enum: ["proximity", "frequency", "spread"]
+///               includeCount:
+///                 $ref: '#/definitions/IncludeCount'
+///               countOnly:
+///                 $ref: '#/definitions/CountOnly'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/EntityList'
+/// </example>
+ClassMethod GetRelatedEntities(namespace As %String, pDomainId As %Integer, pEntity As %String = "") As %Status
+{
+}
+
+/// Simplified version of <method>GetEntityDetails</method> for HTTP GET requests
+/// <example language="swagger">
+///       summary: |
+///         Retrieves details for the supplied entity
+///       tags: ["Entities"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: entity
+///           description: the entity whose details need to be returned
+///           in: path
+///           required: true
+///           type: string
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             title: EntityDetails
+///             type: object
+///             required:
+///               - id
+///               - value
+///             properties:
+///               id:
+///                 type: integer
+///                 description: unique entity ID
+///               value:
+///                 type: string
+///                 description: entity value
+///               metricsAsConcept:
+///                 type: object
+///                 properties:
+///                   frequency:
+///                     type: integer
+///                     description: number of times the entity occurs in the result set
+///                   spread:
+///                     type: integer
+///                     description: number of distinct sources the entity occurs in in the result set
+///                   tfidf:
+///                     type: number
+///                     description: TFIDF-based metric expressing relevance of the entity in this result set
+///               metricsAsRelation:
+///                 type: object
+///                 properties:
+///                   frequency:
+///                     type: integer
+///                     description: number of times the entity occurs in the result set
+///                   spread:
+///                     type: integer
+///                     description: number of distinct sources the entity occurs in in the result set
+///                   tfidf:
+///                     type: number
+///                     description: TFIDF-based metric expressing relevance of the entity in this result set
+///               metricsAsAny:
+///                 type: object
+///                 properties:
+///                   frequency:
+///                     type: integer
+///                     description: number of times the entity occurs in the result set
+///                   spread:
+///                     type: integer
+///                     description: number of distinct sources the entity occurs in in the result set
+///                   tfidf:
+///                     type: number
+///                     description: TFIDF-based metric expressing relevance of the entity in this result set
+/// </example>
+ClassMethod GetEntityDetailsGET(namespace As %String, pDomainId As %Integer, pEntity As %String) As %Status [ Internal ]
+{
+}
+
+/// Simplified version of <method>GetEntityDetails</method> for HTTP POST requests
+/// <example language="swagger">
+///       summary: |
+///         Retrieves details for the supplied entity
+///       tags: ["Entities"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           required: true
+///           schema:
+///             type: object
+///             required: ["entity"]
+///             properties:
+///               entity:
+///                 description: if set, overrides the value of the path parameter
+///                 type: string
+///                 default: ""
+///               filter:
+///                 description: if set, restricts the dataset on which metrics should be based
+///                 $ref: '#/definitions/Filter'
+///               useStems:
+///                 description: only available when the domain has stemming enabled
+///                 type: boolean
+///                 default: 0
+///                 format: integer
+///               roles:
+///                 description: roles for which the metrics need to be retrieved
+///                 type: array
+///                 default: ["concept", "relation", "any"]
+///                 example: ["concept", "relation", "any"]
+///                 items:
+///                   type: string
+///                   enum: ["concept", "relation", "any"]
+///               includeMetrics:
+///                 description: metrics to retrieve
+///                 type: array
+///                 default: ["frequency", "spread", "tfidf"]
+///                 example: ["frequency", "spread", "tfidf"]
+///                 items:
+///                   type: string
+///                   enum: ["frequency", "spread", "tfidf"]
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             title: EntityDetails
+///             type: object
+///             required:
+///               - id
+///               - value
+///             properties:
+///               id:
+///                 type: integer
+///                 description: unique entity ID
+///               value:
+///                 type: string
+///                 description: entity value
+///               metricsAsConcept:
+///                 type: object
+///                 properties:
+///                   frequency:
+///                     type: integer
+///                     description: number of times the entity occurs in the result set
+///                   spread:
+///                     type: integer
+///                     description: number of distinct sources the entity occurs in in the result set
+///                   tfidf:
+///                     type: number
+///                     description: TFIDF-based metric expressing relevance of the entity in this result set
+///               metricsAsRelation:
+///                 type: object
+///                 properties:
+///                   frequency:
+///                     type: integer
+///                     description: number of times the entity occurs in the result set
+///                   spread:
+///                     type: integer
+///                     description: number of distinct sources the entity occurs in in the result set
+///                   tfidf:
+///                     type: number
+///                     description: TFIDF-based metric expressing relevance of the entity in this result set
+///               metricsAsAny:
+///                 type: object
+///                 properties:
+///                   frequency:
+///                     type: integer
+///                     description: number of times the entity occurs in the result set
+///                   spread:
+///                     type: integer
+///                     description: number of distinct sources the entity occurs in in the result set
+///                   tfidf:
+///                     type: number
+///                     description: TFIDF-based metric expressing relevance of the entity in this result set
+/// </example>
+ClassMethod GetEntityDetailsPOST(namespace As %String, pDomainId As %Integer) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Retrieves details for the supplied entity
+///       tags: ["Entities"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: entity
+///           description: the entity whose details need to be returned
+///           in: path
+///           required: true
+///           type: string
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               entity:
+///                 description: if set, overrides the value of the path parameter
+///                 type: string
+///                 default: ""
+///               filter:
+///                 description: if set, restricts the dataset on which metrics should be based
+///                 $ref: '#/definitions/Filter'
+///               useStems:
+///                 description: only available when the domain has stemming enabled
+///                 type: boolean
+///                 default: 0
+///                 format: integer
+///               roles:
+///                 description: roles for which the metrics need to be retrieved
+///                 type: array
+///                 default: ["concept", "relation", "any"]
+///                 example: ["concept", "relation", "any"]
+///                 items:
+///                   type: string
+///                   enum: ["concept", "relation", "any"]
+///               includeMetrics:
+///                 description: metrics to retrieve
+///                 type: array
+///                 default: ["frequency", "spread", "tfidf"]
+///                 example: ["frequency", "spread", "tfidf"]
+///                 items:
+///                   type: string
+///                   enum: ["frequency", "spread", "tfidf"]
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             title: EntityDetails
+///             type: object
+///             required:
+///               - id
+///               - value
+///             properties:
+///               id:
+///                 type: integer
+///                 description: unique entity ID
+///               value:
+///                 type: string
+///                 description: entity value
+///               metricsAsConcept:
+///                 type: object
+///                 properties:
+///                   frequency:
+///                     type: integer
+///                     description: number of times the entity occurs in the result set
+///                   spread:
+///                     type: integer
+///                     description: number of distinct sources the entity occurs in in the result set
+///                   tfidf:
+///                     type: number
+///                     description: TFIDF-based metric expressing relevance of the entity in this result set
+///               metricsAsRelation:
+///                 type: object
+///                 properties:
+///                   frequency:
+///                     type: integer
+///                     description: number of times the entity occurs in the result set
+///                   spread:
+///                     type: integer
+///                     description: number of distinct sources the entity occurs in in the result set
+///                   tfidf:
+///                     type: number
+///                     description: TFIDF-based metric expressing relevance of the entity in this result set
+///               metricsAsAny:
+///                 type: object
+///                 properties:
+///                   frequency:
+///                     type: integer
+///                     description: number of times the entity occurs in the result set
+///                   spread:
+///                     type: integer
+///                     description: number of distinct sources the entity occurs in in the result set
+///                   tfidf:
+///                     type: number
+///                     description: TFIDF-based metric expressing relevance of the entity in this result set
+/// </example>
+ClassMethod GetEntityDetails(namespace As %String, pDomainId As %Integer, pEntity As %String = "") As %Status
+{
+}
+
+/// Simplified version of <method>GetCRCs</method> for HTTP GET requests
+/// <example language="swagger">
+///       summary: |
+///         Retrieves the top CRCs for this domain
+///       tags: ["Paths and CRCs"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/CRCList'
+/// </example>
+ClassMethod GetCRCsGET(namespace As %String, pDomainId As %Integer) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Retrieves the top CRCs for this domain
+///       tags: ["Paths and CRCs"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               page:
+///                 $ref: '#/definitions/PageNumber'
+///               pageSize:
+///                 $ref: '#/definitions/PageSize'
+///               filter:
+///                 $ref: '#/definitions/Filter'
+///               filterMode:
+///                 $ref: '#/definitions/FilterMode'
+///               sortBy:
+///                 description: criterion to use for retrieving the top entities
+///                 type: string
+///                 default: "domainDefault"
+///                 example: "domainDefault"
+///                 enum: ["frequency", "spread", "domainDefault"]
+///               includeCount:
+///                 $ref: '#/definitions/IncludeCount'
+///               countOnly:
+///                 $ref: '#/definitions/CountOnly'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/CRCList'
+/// </example>
+ClassMethod GetCRCs(namespace As %String, pDomainId As %Integer) As %Status
+{
+}
+
+/// Simplified version of <method>GetCRCsByEntity</method> for HTTP GET requests
+/// <example language="swagger">
+///       summary: |
+///         Retrieves the CRCs containing a designated entity
+///       tags: ["Paths and CRCs"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: entity
+///           description: the entity to query for
+///           in: path
+///           required: true
+///           type: string
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/CRCList'
+/// </example>
+ClassMethod GetCRCsByEntityGET(namespace As %String, pDomainId As %Integer, pEntity As %String = "") As %Status [ Internal ]
+{
+}
+
+/// Simplified version of <method>GetCRCsByEntity</method> for HTTP POST requests
+/// <example language="swagger">
+///       summary: |
+///         Retrieves the CRCs containing a designated entity
+///       tags: ["Paths and CRCs"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           required: true
+///           schema:
+///             type: object
+///             required: ["entity"]
+///             properties:
+///               entity:
+///                 description: seed entity or list of entities to query for
+///                 type: array
+///                 items:
+///                   type: string
+///                 default: ""
+///                 example: "tree"
+///               page:
+///                 $ref: '#/definitions/PageNumber'
+///               pageSize:
+///                 $ref: '#/definitions/PageSize'
+///               filter:
+///                 $ref: '#/definitions/Filter'
+///               filterMode:
+///                 $ref: '#/definitions/FilterMode'
+///               positions:
+///                 description: CRC positions to query
+///                 type: array
+///                 default: ["head", "relation", "tail"]
+///                 example: ["head", "relation", "tail"]
+///                 items:
+///                   type: string
+///                   enum: ["head", "relation", "tail"]
+///               actualFormOnly:
+///                 type: boolean
+///                 format: integer
+///                 description: when this domain supports stemming, set to true to restrict to the supplied actual form only
+///                 default: 0
+///               includeCount:
+///                 $ref: '#/definitions/IncludeCount'
+///               countOnly:
+///                 $ref: '#/definitions/CountOnly'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/CRCList'
+/// </example>
+ClassMethod GetCRCsByEntityPOST(namespace As %String, pDomainId As %Integer) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Retrieves the CRCs containing a designated entity
+///       tags: ["Paths and CRCs"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: entity
+///           description: the entity to query for
+///           in: path
+///           required: true
+///           type: string
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               entity:
+///                 description: if set, takes precedence over the path parameter
+///                 type: array
+///                 items:
+///                   type: string
+///                 default: ""
+///               page:
+///                 $ref: '#/definitions/PageNumber'
+///               pageSize:
+///                 $ref: '#/definitions/PageSize'
+///               filter:
+///                 $ref: '#/definitions/Filter'
+///               filterMode:
+///                 $ref: '#/definitions/FilterMode'
+///               positions:
+///                 description: CRC positions to query
+///                 type: array
+///                 default: ["head", "relation", "tail"]
+///                 example: ["head", "relation", "tail"]
+///                 items:
+///                   type: string
+///                   enum: ["head", "relation", "tail"]
+///               actualFormOnly:
+///                 type: boolean
+///                 format: integer
+///                 description: when this domain supports stemming, set to true to restrict to the supplied actual form only
+///                 default: 0
+///               includeCount:
+///                 $ref: '#/definitions/IncludeCount'
+///               countOnly:
+///                 $ref: '#/definitions/CountOnly'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/CRCList'
+/// </example>
+ClassMethod GetCRCsByEntity(namespace As %String, pDomainId As %Integer, pEntity As %String = "") As %Status
+{
+}
+
+/// Simplified version of <method>GetPathsByEntity</method> for HTTP GET requests
+/// <example language="swagger">
+///       summary: |
+///         Retrieves the paths containing a designated entity
+///       tags: ["Paths and CRCs"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: entity
+///           description: the entity to query for
+///           in: path
+///           required: true
+///           type: string
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             title: PathList
+///             type: object
+///             properties:
+///               paths:
+///                 type: array
+///                 items:
+///                   title: Path
+///                   properties:
+///                     id:
+///                       description: path ID
+///                       type: integer
+///                     entities:
+///                       description: entities in this path
+///                       type: array
+///                       items:
+///                         title: PathEntity
+///                         type: object
+///                         required:
+///                           - id
+///                           - entity
+///                         properties:
+///                           id:
+///                             description: unique entity ID
+///                             type: integer
+///                           entity:
+///                             description: entity value
+///                             type: string
+///                           partId:
+///                             description: entity occurrence ID
+///                             type: integer
+///                           role:
+///                             description: role of this entity in the path
+///                             type: string
+///                             enum: ["concept", "relation", "pathRelevant"]
+///                           stemId:
+///                             description: stem ID for this entity, if the domain is configured for stemming
+///                             type: integer
+///                           stem:
+///                             description: stem value of this entity, if the domain is configured for stemming
+///                             type: string
+///                           attributes:
+///                             description: semantic attributes for this entity
+///                             type: array
+///                             items:
+///                               title: AttributeInfo
+///                               type: object
+///                               required: ["type", "level"]
+///                               properties:
+///                                 type:
+///                                   description: name of the attribute
+///                                   type: string
+///                                 level:
+///                                   description: level at which the attribute applies
+///                                   type: string
+///                                   enum: ["path", "word"]
+///                                 words:
+///                                   description: if level="word", the actual words affected
+///                                   type: string
+///                                 properties:
+///                                   description: attribute properties
+///                                   type: object
+/// </example>
+ClassMethod GetPathsByEntityGET(namespace As %String, pDomainId As %Integer, pEntity As %String = "") As %Status [ Internal ]
+{
+}
+
+/// Simplified version of <method>GetPathsByEntity</method> for HTTP POST requests
+/// <example language="swagger">
+///       summary: |
+///         Retrieves the paths containing a designated entity
+///       tags: ["Paths and CRCs"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           required: true
+///           schema:
+///             type: object
+///             required: ["entity"]
+///             properties:
+///               entity:
+///                 description: seed entity or list of entities to query paths for
+///                 type: array
+///                 items:
+///                   type: string
+///                 default: ""
+///                 example: "tree"
+///               page:
+///                 $ref: '#/definitions/PageNumber'
+///               pageSize:
+///                 $ref: '#/definitions/PageSize'
+///               filter:
+///                 $ref: '#/definitions/Filter'
+///               includeDetails:
+///                 description: whether or not to include details on the entities for each path
+///                 type: boolean
+///                 default: 1
+///                 format: integer
+///               actualFormOnly:
+///                 type: boolean
+///                 format: integer
+///                 description: when this domain supports stemming, set to true to restrict to the supplied actual form only
+///                 default: 0
+///               setOperation:
+///                 type: string
+///                 enum: ["union", "intersect"]
+///                 description: when supplying multiple entities, controls how the results for each entity should be combined
+///               includeCount:
+///                 $ref: '#/definitions/IncludeCount'
+///               countOnly:
+///                 $ref: '#/definitions/CountOnly'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             title: PathList
+///             type: object
+///             properties:
+///               paths:
+///                 type: array
+///                 items:
+///                   title: Path
+///                   properties:
+///                     id:
+///                       description: path ID
+///                       type: integer
+///                     entities:
+///                       description: entities in this path
+///                       type: array
+///                       items:
+///                         title: PathEntity
+///                         type: object
+///                         required:
+///                           - id
+///                           - entity
+///                         properties:
+///                           id:
+///                             description: unique entity ID
+///                             type: integer
+///                           entity:
+///                             description: entity value
+///                             type: string
+///                           partId:
+///                             description: entity occurrence ID
+///                             type: integer
+///                           role:
+///                             description: role of this entity in the path
+///                             type: string
+///                             enum: ["concept", "relation", "pathRelevant"]
+///                           stemId:
+///                             description: stem ID for this entity, if the domain is configured for stemming
+///                             type: integer
+///                           stem:
+///                             description: stem value of this entity, if the domain is configured for stemming
+///                             type: string
+///                           attributes:
+///                             description: semantic attributes for this entity
+///                             type: array
+///                             items:
+///                               title: AttributeInfo
+///                               type: object
+///                               required: ["type", "level"]
+///                               properties:
+///                                 type:
+///                                   description: name of the attribute
+///                                   type: string
+///                                 level:
+///                                   description: level at which the attribute applies
+///                                   type: string
+///                                   enum: ["path", "word"]
+///                                 words:
+///                                   description: if level="word", the actual words affected
+///                                   type: string
+///                                 properties:
+///                                   description: attribute properties
+///                                   type: object
+///               count:
+///                 description: total number of paths, ignoring page and pageSize
+///                 type: integer
+/// </example>
+ClassMethod GetPathsByEntityPOST(namespace As %String, pDomainId As %Integer) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Retrieves the paths containing a designated entity
+///       tags: ["Paths and CRCs"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: entity
+///           description: the entity to query for
+///           in: path
+///           required: true
+///           type: string
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               entity:
+///                 description: if set, takes precedence over the path parameter
+///                 type: array
+///                 items:
+///                   type: string
+///                 default: ""
+///               page:
+///                 $ref: '#/definitions/PageNumber'
+///               pageSize:
+///                 $ref: '#/definitions/PageSize'
+///               filter:
+///                 $ref: '#/definitions/Filter'
+///               includeDetails:
+///                 description: whether or not to include details on the entities for each path
+///                 type: boolean
+///                 default: 1
+///                 format: integer
+///               actualFormOnly:
+///                 type: boolean
+///                 format: integer
+///                 description: when this domain supports stemming, set to true to restrict to the supplied actual form only
+///                 default: 0
+///               setOperation:
+///                 type: string
+///                 enum: ["union", "intersect"]
+///                 description: when supplying multiple entities, controls how the results for each entity should be combined
+///               includeCount:
+///                 $ref: '#/definitions/IncludeCount'
+///               countOnly:
+///                 $ref: '#/definitions/CountOnly'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             title: PathList
+///             type: object
+///             properties:
+///               paths:
+///                 type: array
+///                 items:
+///                   title: Path
+///                   properties:
+///                     id:
+///                       description: path ID
+///                       type: integer
+///                     entities:
+///                       description: entities in this path
+///                       type: array
+///                       items:
+///                         title: PathEntity
+///                         type: object
+///                         required:
+///                           - id
+///                           - entity
+///                         properties:
+///                           id:
+///                             description: unique entity ID
+///                             type: integer
+///                           entity:
+///                             description: entity value
+///                             type: string
+///                           partId:
+///                             description: entity occurrence ID
+///                             type: integer
+///                           role:
+///                             description: role of this entity in the path
+///                             type: string
+///                             enum: ["concept", "relation", "pathRelevant"]
+///                           stemId:
+///                             description: stem ID for this entity, if the domain is configured for stemming
+///                             type: integer
+///                           stem:
+///                             description: stem value of this entity, if the domain is configured for stemming
+///                             type: string
+///                           attributes:
+///                             description: semantic attributes for this entity
+///                             type: array
+///                             items:
+///                               title: AttributeInfo
+///                               type: object
+///                               required: ["type", "level"]
+///                               properties:
+///                                 type:
+///                                   description: name of the attribute
+///                                   type: string
+///                                 level:
+///                                   description: level at which the attribute applies
+///                                   type: string
+///                                   enum: ["path", "word"]
+///                                 words:
+///                                   description: if level="word", the actual words affected
+///                                   type: string
+///                                 properties:
+///                                   description: attribute properties
+///                                   type: object
+///               count:
+///                 description: total number of paths, ignoring page and pageSize
+///                 type: integer
+/// </example>
+ClassMethod GetPathsByEntity(namespace As %String, pDomainId As %Integer, pEntity As %String = "") As %Status
+{
+}
+
+/// Simplified version of <method>GetSentenceDetails</method> for HTTP GET requests
+/// <example language="swagger">
+///       summary: |
+///         Retrieves the details for a particular sentence
+///       tags: ["Sentences"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: id
+///           description: the sentence ID to query for
+///           in: path
+///           required: true
+///           type: integer
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/SentenceDetails'
+/// </example>
+ClassMethod GetSentenceDetailsGET(namespace As %String, pDomainId As %Integer, pSentenceId As %Integer) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Retrieves the details for a particular sentence
+///       tags: ["Sentences"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: id
+///           description: the sentence ID to query for
+///           in: path
+///           required: true
+///           type: integer
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               highlight:
+///                 $ref: '#/definitions/Highlighting'
+///               virtualSourceId:
+///                 description: if set, the sentence will be looked up in the context of this virtual source
+///                 type: integer
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/SentenceDetails'
+/// </example>
+ClassMethod GetSentenceDetails(namespace As %String, pDomainId As %Integer, pSentenceId As %Integer) As %Status
+{
+}
+
+/// Simplified version of <method>GetSentencesbyEntity</method> for HTTP GET requests
+/// <example language="swagger">
+///       summary: |
+///         Retrieves the sentences containing a given entity
+///       tags: ["Sentences"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: entity
+///           description: the entity to query for
+///           in: path
+///           required: true
+///           type: string
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             title: SentenceList
+///             type: object
+///             required: ["sentences"]
+///             properties:
+///               sentences:
+///                 type: array
+///                 items:
+///                   $ref: '#/definitions/SentenceDetails'
+/// </example>
+ClassMethod GetSentencesByEntityGET(namespace As %String, pDomainId As %Integer, pEntity As %String = "") As %Status [ Internal ]
+{
+}
+
+/// Simplified version of <method>GetSentencesbyEntity</method> for HTTP POST requests
+/// <example language="swagger">
+///       summary: |
+///         Retrieves the sentences containing a given entity
+///       tags: ["Sentences"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           required: true
+///           schema:
+///             type: object
+///             required: ["entity"]
+///             properties:
+///               entity:
+///                 description: if set, takes precedence over the corresponding path parameter
+///                 type: array
+///                 items:
+///                   type: string
+///                 default: ""
+///                 example: "palm tree"
+///               page:
+///                 $ref: '#/definitions/PageNumber'
+///               pageSize:
+///                 $ref: '#/definitions/PageSize'
+///               filter:
+///                 $ref: '#/definitions/Filter'
+///               highlight:
+///                 $ref: '#/definitions/Highlighting'
+///               includeDetails:
+///                 description: whether or not to include details on the entities for each sentence
+///                 type: boolean
+///                 default: 1
+///                 format: integer
+///               actualFormOnly:
+///                 type: boolean
+///                 format: integer
+///                 description: when this domain supports stemming, set to true to restrict to the supplied actual form only
+///                 default: 0
+///               setOperation:
+///                 type: string
+///                 enum: ["union", "intersect"]
+///                 description: when supplying multiple entities, controls how the results for each entity should be combined
+///               includeCount:
+///                 $ref: '#/definitions/IncludeCount'
+///               countOnly:
+///                 $ref: '#/definitions/CountOnly'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             title: SentenceList
+///             type: object
+///             required: ["sentences"]
+///             properties:
+///               sentences:
+///                 type: array
+///                 items:
+///                   $ref: '#/definitions/SentenceDetails'
+///               count:
+///                 description: total number of paths, ignoring page and pageSize (if RequestBody.includeCount is set)
+///                 type: integer
+/// </example>
+ClassMethod GetSentencesByEntityPOST(namespace As %String, pDomainId As %Integer) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Retrieves the sentences containing a given entity
+///       tags: ["Sentences"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: entity
+///           description: the entity to query for
+///           in: path
+///           required: true
+///           type: string
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               entity:
+///                 description: if set, takes precedence over the corresponding path parameter
+///                 type: array
+///                 items:
+///                   type: string
+///                 default: ""
+///               page:
+///                 $ref: '#/definitions/PageNumber'
+///               pageSize:
+///                 $ref: '#/definitions/PageSize'
+///               filter:
+///                 $ref: '#/definitions/Filter'
+///               highlight:
+///                 $ref: '#/definitions/Highlighting'
+///               includeDetails:
+///                 description: whether or not to include details on the entities for each sentence
+///                 type: boolean
+///                 default: 1
+///                 format: integer
+///               actualFormOnly:
+///                 type: boolean
+///                 format: integer
+///                 description: when this domain supports stemming, set to true to restrict to the supplied actual form only
+///                 default: 0
+///               setOperation:
+///                 type: string
+///                 enum: ["union", "intersect"]
+///                 description: when supplying multiple entities, controls how the results for each entity should be combined
+///               includeCount:
+///                 $ref: '#/definitions/IncludeCount'
+///               countOnly:
+///                 $ref: '#/definitions/CountOnly'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             title: SentenceList
+///             type: object
+///             required: ["sentences"]
+///             properties:
+///               sentences:
+///                 type: array
+///                 items:
+///                   $ref: '#/definitions/SentenceDetails'
+///               count:
+///                 description: total number of paths, ignoring page and pageSize (if RequestBody.includeCount is set)
+///                 type: integer
+/// </example>
+ClassMethod GetSentencesByEntity(namespace As %String, pDomainId As %Integer, pEntity As %String = "") As %Status
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Adds a source to the domain
+///       tags: ["Sources"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             required: ["reference", "text"]
+///             properties:
+///               reference:
+///                 description: a string to be used for building the new record's external ID
+///                 type: string
+///               text:
+///                 description: the text to index
+///                 type: string
+///               configuration:
+///                 description: name of a valid configuration object to use or the two-letter ISO code for the language to use (if no such configuration exists)
+///                 type: string
+///                 example: en
+///               virtual:
+///                 description: if true, the source will be added as a virtual one
+///                 type: boolean
+///                 default: 0
+///                 format: integer
+///               metadata:
+///                 description: map of metadata field values to set for the document
+///                 type: object
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             type: object
+///             required: ["id"]
+///             properties:
+///               id:
+///                 description: source ID of the newly created record
+///                 type: integer
+/// </example>
+ClassMethod AddSource(namespace As %String, pDomainId As %Integer) As %Status
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Highlights the supplied text
+///       tags: ["Miscellaneous"]
+///       parameters:
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             required: ["highlight", "text"]
+///             properties:
+///               text:
+///                 description: the text to highlight
+///                 example: "This text is in urgent need of fancy markup!"
+///                 type: string
+///               configuration:
+///                 description: name of a valid configuration object to use or the two-letter ISO code for the language to use (if no such configuration exists)
+///                 type: string
+///                 example: en
+///               highlight:
+///                 description: highlighting specification
+///                 $ref: '#/definitions/Highlighting'
+///                 example: [ { role: "concept", style: "[]" }, { role: "relation", style: "{}" }]
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             type: object
+///             required: ["text"]
+///             properties:
+///               text:
+///                 description: the highlighted text
+///                 type: string
+/// </example>
+ClassMethod HighlightSYS(namespace As %String) As %Status
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Highlights the supplied text
+///       tags: ["Miscellaneous"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             required: ["highlight", "text"]
+///             properties:
+///               text:
+///                 description: the text to highlight
+///                 example: "This text is in urgent need of fancy markup!"
+///                 type: string
+///               configuration:
+///                 description: name of a valid configuration object to use or the two-letter ISO code for the language to use (if no such configuration exists)
+///                 type: string
+///                 example: en
+///               highlight:
+///                 description: highlighting specification
+///                 $ref: '#/definitions/Highlighting'
+///                 example: [ { role: "concept", style: "[]" }, { role: "relation", style: "{}" }]
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             type: object
+///             required: ["text"]
+///             properties:
+///               text:
+///                 description: the highlighted text
+///                 type: string
+/// </example>
+ClassMethod Highlight(namespace As %String, pDomainId As %Integer = 0) As %Status
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Indexes the supplied text and returns concepts, relations and CRCs
+///       tags: ["Miscellaneous"]
+///       parameters:
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             required: ["highlight", "text"]
+///             properties:
+///               text:
+///                 description: the text to index
+///                 example: "This text is in urgent need of fancy markup!"
+///                 type: string
+///               configuration:
+///                 description: name of a valid configuration object to use or the two-letter ISO code for the language to use (if no such configuration exists)
+///                 type: string
+///                 example: en
+///               summarize:
+///                 description: if set to a nonzero value, the text returned will be a summary of the full contents, measuring this many sentences
+///                 type: number
+///                 default: 0
+///               highlight:
+///                 description: highlighting specification
+///                 $ref: '#/definitions/Highlighting'
+///                 example: [ { role: "concept", style: "[]" }, { role: "relation", style: "{}" }]
+///               includeMatches:
+///                 description: whether or not to retrieve dictionary matches for the indexed record
+///                 type: boolean
+///                 format: integer
+///                 default: 0
+///               dictionaries:
+///                 description: if set, limits results to these dictionary IDs
+///                 default: []
+///                 type: array
+///                 items:
+///                   type: integer
+///               includeDictionaryDetails:
+///                 description: whether or not to retrieve dictionary details as well
+///                 type: boolean
+///                 format: integer
+///                 default: 1
+///               includeMatchDetails:
+///                 description: whether or not to entity-level match details as well
+///                 type: boolean
+///                 format: integer
+///                 default: 0
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             type: object
+///             required: ["text"]
+///             properties:
+///               text:
+///                 description: the highlighted text
+///                 type: string
+///               concepts:
+///                 description: list of concepts for this text
+///                 type: array
+///                 items:
+///                   type: object
+///                   properties:
+///                     value:
+///                       type: string
+///                     frequency:
+///                       type: integer
+///                     dominance:
+///                       type: integer
+///               relations:
+///                 description: list of relations for this text
+///                 type: array
+///                 items:
+///                   type: object
+///                   properties:
+///                     value:
+///                       type: string
+///                     frequency:
+///                       type: integer
+///                     dominance:
+///                       type: integer
+///               matches:
+///                 description: list of dictionary matches for this text
+///                 type: array
+///                 items:
+///                   $ref: '#/definitions/MatchListItem'
+/// </example>
+ClassMethod IndexSYS(namespace As %String) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Indexes the supplied text and returns concepts, relations and CRCs
+///       tags: ["Miscellaneous"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             required: ["highlight", "text"]
+///             properties:
+///               text:
+///                 description: the text to index
+///                 example: "This text is in urgent need of fancy markup!"
+///                 type: string
+///               configuration:
+///                 description: name of a valid configuration object to use or the two-letter ISO code for the language to use (if no such configuration exists)
+///                 type: string
+///                 example: en
+///               summarize:
+///                 description: if set to a nonzero value, the text returned will be a summary of the full contents, measuring this many sentences
+///                 type: number
+///                 default: 0
+///               highlight:
+///                 description: highlighting specification
+///                 $ref: '#/definitions/Highlighting'
+///                 example: [ { role: "concept", style: "[]" }, { role: "relation", style: "{}" }]
+///               includeMatches:
+///                 description: whether or not to retrieve dictionary matches for the indexed record
+///                 type: boolean
+///                 format: integer
+///                 default: 0
+///               dictionaries:
+///                 description: if set, limits results to these dictionary IDs
+///                 default: []
+///                 type: array
+///                 items:
+///                   type: integer
+///               includeDictionaryDetails:
+///                 description: whether or not to retrieve dictionary details as well
+///                 type: boolean
+///                 format: integer
+///                 default: 1
+///               includeMatchDetails:
+///                 description: whether or not to entity-level match details as well
+///                 type: boolean
+///                 format: integer
+///                 default: 0
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             type: object
+///             required: ["text"]
+///             properties:
+///               text:
+///                 description: the highlighted text
+///                 type: string
+///               concepts:
+///                 description: list of concepts for this text
+///                 type: array
+///                 items:
+///                   type: object
+///                   properties:
+///                     value:
+///                       type: string
+///                     frequency:
+///                       type: integer
+///                     dominance:
+///                       type: integer
+///               relations:
+///                 description: list of relations for this text
+///                 type: array
+///                 items:
+///                   type: object
+///                   properties:
+///                     value:
+///                       type: string
+///                     frequency:
+///                       type: integer
+///                     dominance:
+///                       type: integer
+///               matches:
+///                 description: list of dictionary matches for this text
+///                 type: array
+///                 items:
+///                   $ref: '#/definitions/MatchListItem'
+/// </example>
+ClassMethod Index(namespace As %String, pDomainId As %Integer = 0) As %Status
+{
+}
+
+/// Simplified version of <method>DropSource</method> for HTTP GET requests.
+/// <example language="swagger">
+///       summary: |
+///         Deletes a source from the domain
+///       tags: ["Sources"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: source
+///           description: the source ID to drop
+///           in: path
+///           required: true
+///           type: integer
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             type: object
+///             required:
+///               - deleted
+///             properties:
+///               deleted:
+///                 type: boolean
+///                 format: integer
+/// </example>
+ClassMethod DropSourceGET(namespace As %String, pDomainId As %Integer, pSourceId As %Integer) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Deletes a source from the domain
+///       tags: ["Sources"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: source
+///           description: the source ID to drop
+///           in: path
+///           required: true
+///           type: integer
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               virtual:
+///                 description: if set, the supplied source ID will be used to look up a virtual source
+///                 type: boolean
+///                 format: integer
+///                 default: 0
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             type: object
+///             required:
+///               - deleted
+///             properties:
+///               deleted:
+///                 type: boolean
+///                 format: integer
+/// </example>
+ClassMethod DropSource(namespace As %String, pDomainId As %Integer, pSourceId As %Integer) As %Status
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Registers metadata values for a given source
+///       tags: ["Sources"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: source
+///           description: the source ID whose metadata needs updating
+///           in: path
+///           required: true
+///           type: integer
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               metadata:
+///                 description: map of metadata field values to set for this source
+///                 type: object
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             type: object
+///             required:
+///               - updated
+///             properties:
+///               updated:
+///                 type: boolean
+///                 format: integer
+/// </example>
+ClassMethod SetMetadata(namespace As %String, pDomainId As %Integer, pSourceId As %Integer) As %Status
+{
+}
+
+/// Simplified version of <method>GetSkiplists</method> for HTTP GET requests
+/// <example language="swagger">
+///       summary: |
+///         Retrieves a list of available skiplists
+///       tags: ["Skiplists"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/SkiplistList'
+/// </example>
+ClassMethod GetSkiplistsGET(namespace As %String, pDomainId As %Integer) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Retrieves a list of available skiplists
+///       tags: ["Skiplists"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               includeDetails:
+///                 description: whether or not to retrieve skiplists' contents as well
+///                 type: boolean
+///                 format: integer
+///               includeCrossDomain:
+///                 description: whether or not to include cross-domain skiplists
+///                 type: boolean
+///                 format: integer
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/SkiplistList'
+/// </example>
+ClassMethod GetSkiplists(namespace As %String, pDomainId As %Integer) As %Status
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Retrieves a particular skiplist's contents
+///       tags: ["Skiplists"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: id
+///           in: path
+///           type: integer
+///           description: ID of the skiplist being queried
+///           required: true
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/SkiplistDetails'
+/// </example>
+ClassMethod GetSkiplistDetails(namespace As %String, pDomainId As %Integer, pSkiplistId As %Integer) As %Status
+{
+}
+
+/// Simplified version of <method>CreateSkiplist</method> for HTTP GET requests
+/// <example language="swagger">
+///       summary: |
+///         Creates a new skiplist
+///       tags: ["Skiplists"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: name
+///           in: path
+///           description: name of the new skiplist
+///           required: true
+///           type: string
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/SkiplistDetails'
+/// </example>
+ClassMethod CreateSkiplistGET(namespace As %String, pDomainId As %Integer, pName As %String = "") As %Status [ Internal ]
+{
+}
+
+/// Simplified version of <method>CreateSkiplist</method> for HTTP POST requests
+/// <example language="swagger">
+///       summary: |
+///         Creates a new skiplist
+///       tags: ["Skiplists"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           required: true
+///           schema:
+///             type: object
+///             required: ["name"]
+///             properties:
+///               name:
+///                 description: name for the new skiplist
+///                 type: string
+///               description:
+///                 type: string
+///               elements:
+///                 type: array
+///                 example: []
+///                 items:
+///                   type: string
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/SkiplistDetails'
+/// </example>
+ClassMethod CreateSkiplistPOST(namespace As %String, pDomainId As %Integer) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Creates a new skiplist
+///       tags: ["Skiplists"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: name
+///           in: path
+///           description: name of the new skiplist
+///           required: true
+///           type: string
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               name:
+///                 description: overrides what's passed in through the path parameter if set
+///                 type: string
+///               description:
+///                 type: string
+///               elements:
+///                 type: array
+///                 example: []
+///                 items:
+///                   type: string
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/SkiplistDetails'
+/// </example>
+ClassMethod CreateSkiplist(namespace As %String, pDomainId As %Integer, pName As %String = "") As %Status
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Clears all entries for a given skiplist
+///       tags: ["Skiplists"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: id
+///           in: path
+///           type: string
+///           description: ID of the skiplist to clear
+///           required: true
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             type: object
+///             properties:
+///               cleared:
+///                 type: boolean
+///                 format: integer
+/// </example>
+ClassMethod ClearSkiplist(namespace As %String, pDomainId As %Integer, pSkiplistId As %Integer) As %Status
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Drops a given skiplist
+///       tags: ["Skiplists"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: id
+///           in: path
+///           type: string
+///           description: ID of the skiplist to drop
+///           required: true
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             type: object
+///             properties:
+///               dropped:
+///                 type: boolean
+///                 format: integer
+/// </example>
+ClassMethod DropSkiplist(namespace As %String, pDomainId As %Integer, pSkiplistId As %Integer) As %Status
+{
+}
+
+/// Simplified version of <method>AddStringToSkiplist</method> for HTTP GET requests
+/// <example language="swagger">
+///       summary: |
+///         Adds new elements to a given skiplist
+///       tags: ["Skiplists"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: id
+///           in: path
+///           type: string
+///           description: ID of the skiplist to extend
+///           required: true
+///         - name: string
+///           in: path
+///           type: string
+///           description: element to add to the skiplist
+///           required: true
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             type: object
+///             properties:
+///               added:
+///                 description: number of elements added
+///                 type: integer
+/// </example>
+ClassMethod AddStringToSkiplistGET(namespace As %String, pDomainId As %Integer, pSkiplistId As %Integer, pElements As %String = "") As %Status [ Internal ]
+{
+}
+
+/// Simplified version of <method>AddStringToSkiplist</method> for HTTP POST requests.
+/// <example language="swagger">
+///       summary: |
+///         Adds new elements to a given skiplist
+///       tags: ["Skiplists"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: id
+///           in: path
+///           type: string
+///           description: ID of the skiplist to extend
+///           required: true
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           required: true
+///           schema:
+///             type: object
+///             required: ["elements"]
+///             properties:
+///               elements:
+///                 description: array of entries to add to the skiplist
+///                 type: array
+///                 example: []
+///                 items:
+///                   type: string
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             type: object
+///             properties:
+///               added:
+///                 description: number of elements added
+///                 type: integer
+/// </example>
+ClassMethod AddStringToSkiplistPOST(namespace As %String, pDomainId As %Integer, pSkiplistId As %Integer) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Adds new elements to a given skiplist
+///       tags: ["Skiplists"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: id
+///           in: path
+///           type: string
+///           description: ID of the skiplist to extend
+///           required: true
+///         - name: string
+///           in: path
+///           type: string
+///           description: element to add to the skiplist
+///           required: true
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               elements:
+///                 description: if set, overrides what's passed in through the path parameter
+///                 type: array
+///                 example: []
+///                 items:
+///                   type: string
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             type: object
+///             properties:
+///               added:
+///                 description: number of elements added
+///                 type: integer
+/// </example>
+ClassMethod AddStringToSkiplist(namespace As %String, pDomainId As %Integer, pSkiplistId As %Integer, pElements As %String = "") As %Status
+{
+}
+
+/// Simplified version of <method>RemoveStringFromSkiplist</method> for HTTP GET requests
+/// <example language="swagger">
+///       summary: |
+///         Removes elements from a given skiplist
+///       tags: ["Skiplists"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: id
+///           in: path
+///           type: string
+///           description: ID of the skiplist to modify
+///           required: true
+///         - name: string
+///           in: path
+///           type: string
+///           description: element to remove from the skiplist
+///           required: true
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             type: object
+///             properties:
+///               removed:
+///                 description: number of elements removed
+///                 type: integer
+/// </example>
+ClassMethod RemoveStringFromSkiplistGET(namespace As %String, pDomainId As %Integer, pSkiplistId As %Integer, pElements As %String = "") As %Status [ Internal ]
+{
+}
+
+/// Simplified version of <method>RemoveStringFromSkiplist</method> for HTTP POST requests
+/// <example language="swagger">
+///       summary: |
+///         Removes elements from a given skiplist
+///       tags: ["Skiplists"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: id
+///           in: path
+///           type: string
+///           description: ID of the skiplist to modify
+///           required: true
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           required: true
+///           schema:
+///             type: object
+///             required: ["elements"]
+///             properties:
+///               elements:
+///                 description: element or list of elements to remove from the skiplist
+///                 type: array
+///                 example: ["palm tree"]
+///                 items:
+///                   type: string
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             type: object
+///             properties:
+///               removed:
+///                 description: number of elements removed
+///                 type: integer
+/// </example>
+ClassMethod RemoveStringFromSkiplistPOST(namespace As %String, pDomainId As %Integer, pSkiplistId As %Integer) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Removes elements from a given skiplist
+///       tags: ["Skiplists"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: id
+///           in: path
+///           type: string
+///           description: ID of the skiplist to modify
+///           required: true
+///         - name: string
+///           in: path
+///           type: string
+///           description: element to remove from the skiplist
+///           required: true
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               elements:
+///                 description: if set, overrides what's passed in through the path parameter
+///                 type: array
+///                 example: []
+///                 items:
+///                   type: string
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             type: object
+///             properties:
+///               removed:
+///                 description: number of elements removed
+///                 type: integer
+/// </example>
+ClassMethod RemoveStringFromSkiplist(namespace As %String, pDomainId As %Integer, pSkiplistId As %Integer, pElements As %String = "") As %Status
+{
+}
+
+/// Simplified version of <method>GetDictionaries</method> for HTTP GET methods
+/// <example language="swagger">
+///       summary: |
+///         Retrieves a list of available dictionaries
+///       tags: ["Dictionaries and Matching"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/DictionaryList'
+/// </example>
+ClassMethod GetDictionariesGET(namespace As %String, pDomainId As %Integer) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Retrieves a list of available dictionaries
+///       tags: ["Dictionaries and Matching"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               includeItems:
+///                 description: whether or not to include item and term details as well
+///                 type: boolean
+///                 format: integer
+///               includeCount:
+///                 $ref: '#/definitions/IncludeCount'
+///               countOnly:
+///                 $ref: '#/definitions/CountOnly'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/DictionaryList'
+/// </example>
+ClassMethod GetDictionaries(namespace As %String, pDomainId As %Integer) As %Status
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Retrieves the detailed contents for a given Dictionary
+///       tags: ["Dictionaries and Matching"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: id
+///           description: ID of the dictionary to retrieve
+///           in: path
+///           type: integer
+///           required: true
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/DictionaryDetails'
+/// </example>
+ClassMethod GetDictionaryDetails(namespace As %String, pDomainId As %Integer, pDictionaryId As %Integer) As %Status
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Drops a dictionary
+///       tags: ["Dictionaries and Matching"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: id
+///           description: ID of the dictionary to drop
+///           in: path
+///           type: integer
+///           required: true
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             type: object
+///             properties:
+///               dropped:
+///                 type: boolean
+///                 format: integer
+/// </example>
+ClassMethod DropDictionary(namespace As %String, pDomainId As %Integer, pDictionaryId As %Integer) As %Status
+{
+}
+
+/// Simplified version of <method>CreateDictionary</method> for HTTP GET requests
+/// <example language="swagger">
+///       summary: |
+///         Create a new dictionary
+///       tags: ["Dictionaries and Matching"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: name
+///           description: name for the new dictionary
+///           in: path
+///           type: string
+///           required: true
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             allOf:
+///               - $ref: '#/definitions/DictionaryDetails'
+///               - type: object
+///                 properties:
+///                   created:
+///                     type: boolean
+///                     format: integer
+///                     default: 1
+///                   matched:
+///                     type: boolean
+///                     format: integer
+/// </example>
+ClassMethod CreateDictionaryGET(namespace As %String, pDomainId As %Integer, pName As %String = "") As %Status [ Internal ]
+{
+}
+
+/// Simplified version of <method>CreateDictionary</method> for HTTP POST requests
+/// <example language="swagger">
+///       summary: |
+///         Create a new dictionary
+///       tags: ["Dictionaries and Matching"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           required: true
+///           schema:
+///             type: object
+///             required: ["name"]
+///             properties:
+///               name:
+///                 description: name for the new dictionary
+///                 type: string
+///               description:
+///                 type: string
+///               language:
+///                 description: default language for dictionary entries
+///                 $ref: '#/definitions/LanguageCode'
+///               items:
+///                 description: list of items to add (don't supply id values)
+///                 type: array
+///                 items:
+///                   $ref: '#/definitions/DictionaryItemDetails'
+///               match:
+///                 description: if set to true, the dictionary is immediately matched against the domain's sources
+///                 type: boolean
+///                 format: integer
+///               filter:
+///                 description: if match=1, restricts the sources to be matched
+///                 $ref: '#/definitions/Filter'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             allOf:
+///               - $ref: '#/definitions/DictionaryDetails'
+///               - type: object
+///                 properties:
+///                   created:
+///                     type: boolean
+///                     format: integer
+///                     default: 1
+///                   matched:
+///                     type: boolean
+///                     format: integer
+/// </example>
+ClassMethod CreateDictionaryPOST(namespace As %String, pDomainId As %Integer) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Create a new dictionary
+///       tags: ["Dictionaries and Matching"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: name
+///           description: name for the new dictionary
+///           in: path
+///           type: string
+///           required: true
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               name:
+///                 description: if provided, overrides the path parameter
+///                 type: string
+///               description:
+///                 type: string
+///               language:
+///                 description: default language for dictionary entries
+///                 $ref: '#/definitions/LanguageCode'
+///               items:
+///                 description: list of items to add (don't supply id values)
+///                 type: array
+///                 items:
+///                   $ref: '#/definitions/DictionaryItemDetails'
+///               match:
+///                 description: if set to true, the dictionary is immediately matched against the domain's sources
+///                 type: boolean
+///                 format: integer
+///               filter:
+///                 description: if match=1, restricts the sources to be matched
+///                 $ref: '#/definitions/Filter'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             allOf:
+///               - $ref: '#/definitions/DictionaryDetails'
+///               - type: object
+///                 properties:
+///                   created:
+///                     type: boolean
+///                     format: integer
+///                     default: 1
+///                   matched:
+///                     type: boolean
+///                     format: integer
+/// </example>
+ClassMethod CreateDictionary(namespace As %String, pDomainId As %Integer, pName As %String = "") As %Status
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Retrieves the detailed contents for a given Dictionary Item
+///       tags: ["Dictionaries and Matching"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: id
+///           description: ID or URI of the dictionary item to retrieve
+///           in: path
+///           type: integer
+///           required: true
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             allOf:
+///               - $ref: '#/definitions/DictionaryItemDetails'
+///               - type: object
+///                 properties:
+///                   dictionary:
+///                     type: object
+///                     properties:
+///                       id:
+///                         type: integer
+///                       name:
+///                         type: string
+/// </example>
+ClassMethod GetDictionaryItemDetails(namespace As %String, pDomainId As %Integer, pDictionaryItemId As %Integer) As %Status
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Drops a dictionary item
+///       tags: ["Dictionaries and Matching"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: id
+///           description: ID or URI of the dictionary item to drop
+///           in: path
+///           type: integer
+///           required: true
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             type: object
+///             properties:
+///               dropped:
+///                 type: boolean
+///                 format: integer
+/// </example>
+ClassMethod DropDictionaryItem(namespace As %String, pDomainId As %Integer, pDictionaryItemId As %Integer) As %Status
+{
+}
+
+/// Simplified version of <method>CreateDictionaryItems</method> for HTTP POST requests
+/// <example language="swagger">
+///       summary: |
+///         Create new dictionary items
+///       tags: ["Dictionaries and Matching"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           required: true
+///           schema:
+///             type: object
+///             required: ["dictionaryId", "items"]
+///             properties:
+///               dictionaryId:
+///                 description: if provided, overrides the path parameter
+///                 type: string
+///               items:
+///                 description: list of items to add (don't supply id values)
+///                 type: array
+///                 items:
+///                   $ref: '#/definitions/DictionaryItemDetails'
+///               match:
+///                 description: if set to true, the dictionary is immediately matched against the domain's sources
+///                 type: boolean
+///                 format: integer
+///               filter:
+///                 description: if match=1, restricts the sources to be matched
+///                 $ref: '#/definitions/Filter'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             title: AddItemsResult
+///             type: object
+///             properties:
+///               dictionary:
+///                 type: object
+///                 title: DictionaryDetails
+///                 description: the dictionary these items were added to
+///                 properties:
+///                   id:
+///                     type: integer
+///                   name:
+///                     type: string
+///               items:
+///                 type: array
+///                 items:
+///                   allOf:
+///                     - $ref: '#/definitions/DictionaryItemDetails'
+///                     - type: object
+///                       properties:
+///                         error:
+///                           description: the error message, if this item failed to get created
+///                           type: string
+///               matched:
+///                 type: boolean
+///                 format: integer
+/// </example>
+ClassMethod CreateDictionaryItemsPOST(namespace As %String, pDomainId As %Integer) As %Status
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Create new dictionary items
+///       tags: ["Dictionaries and Matching"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: id
+///           description: ID of the dictionary to which to add the new item
+///           in: path
+///           type: string
+///           required: true
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           required: true
+///           schema:
+///             type: object
+///             properties:
+///               dictionaryId:
+///                 description: if provided, overrides the path parameter
+///                 type: string
+///               items:
+///                 description: list of items to add (don't supply id values)
+///                 type: array
+///                 items:
+///                   $ref: '#/definitions/DictionaryItemDetails'
+///               match:
+///                 description: if set to true, the dictionary is immediately matched against the domain's sources
+///                 type: boolean
+///                 format: integer
+///               filter:
+///                 description: if match=1, restricts the sources to be matched
+///                 $ref: '#/definitions/Filter'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             title: AddItemsResult
+///             type: object
+///             properties:
+///               dictionary:
+///                 type: object
+///                 title: DictionaryDetails
+///                 description: the dictionary these items were added to
+///                 properties:
+///                   id:
+///                     type: integer
+///                   name:
+///                     type: string
+///               items:
+///                 type: array
+///                 items:
+///                   allOf:
+///                     - $ref: '#/definitions/DictionaryItemDetails'
+///                     - type: object
+///                       properties:
+///                         error:
+///                           description: the error message, if this item failed to get created
+///                           type: string
+///               matched:
+///                 type: boolean
+///                 format: integer
+/// </example>
+ClassMethod CreateDictionaryItems(namespace As %String, pDomainId As %Integer, pDictionaryId As %Integer = 0) As %Status
+{
+}
+
+/// Simplified version of <method>CreateDictionaryTerms</method> for HTTP POST requests.
+/// <example language="swagger">
+///       summary: |
+///         Create new dictionary terms
+///       tags: ["Dictionaries and Matching"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           required: true
+///           schema:
+///             type: object
+///             required: ["dictionaryItemId", "terms"]
+///             properties:
+///               dictionaryItemId:
+///                 description: if provided, overrides the corresponding path parameter
+///                 type: string
+///               terms:
+///                 description: list of terms to add (don't supply id values). An array of strings will be interpreted as simple terms.
+///                 type: array
+///                 items:
+///                   $ref: '#/definitions/DictionaryTermDetails'
+///               match:
+///                 description: if set to true, the dictionary is immediately matched against the domain's sources
+///                 type: boolean
+///                 format: integer
+///               filter:
+///                 description: if match=1, restricts the sources to be matched
+///                 $ref: '#/definitions/Filter'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             title: AddTermsResult
+///             type: object
+///             properties:
+///               item:
+///                 type: object
+///                 title: DictionaryItemDetails
+///                 description: the dictionary item these terms were added to
+///                 properties:
+///                   id:
+///                     type: integer
+///                   name:
+///                     type: string
+///                   uri:
+///                     type: string
+///                   dictionary:
+///                     type: object
+///                     title: DictionaryDetails
+///                     description: the dictionary these terms were added to
+///                     properties:
+///                       id:
+///                         type: integer
+///                       name:
+///                         type: string
+///               terms:
+///                 type: array
+///                 items:
+///                   allOf:
+///                     - $ref: '#/definitions/DictionaryTermDetails'
+///                     - type: object
+///                       properties:
+///                         error:
+///                           description: the error message, if this term failed to get created
+///                           type: string
+///               matched:
+///                 type: boolean
+///                 format: integer
+/// </example>
+ClassMethod CreateDictionaryTermsPOST(namespace As %String, pDomainId As %Integer, pDictionaryItemId As %Integer = 0) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Create new dictionary terms
+///       tags: ["Dictionaries and Matching"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: id
+///           description: ID or URI of the dictionary item to which to add the new terms
+///           in: path
+///           type: string
+///           required: true
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           required: true
+///           schema:
+///             type: object
+///             properties:
+///               dictionaryItemId:
+///                 description: if provided, overrides the corresponding path parameter
+///                 type: string
+///               terms:
+///                 description: list of terms to add (don't supply id values). An array of strings will be interpreted as simple terms.
+///                 type: array
+///                 items:
+///                   $ref: '#/definitions/DictionaryTermDetails'
+///               match:
+///                 description: if set to true, the dictionary is immediately matched against the domain's sources
+///                 type: boolean
+///                 format: integer
+///               filter:
+///                 description: if match=1, restricts the sources to be matched
+///                 $ref: '#/definitions/Filter'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             title: AddTermsResult
+///             type: object
+///             properties:
+///               item:
+///                 type: object
+///                 title: DictionaryItemDetails
+///                 description: the dictionary item these terms were added to
+///                 properties:
+///                   id:
+///                     type: integer
+///                   name:
+///                     type: string
+///                   uri:
+///                     type: string
+///                   dictionary:
+///                     type: object
+///                     title: DictionaryDetails
+///                     description: the dictionary these terms were added to
+///                     properties:
+///                       id:
+///                         type: integer
+///                       name:
+///                         type: string
+///               terms:
+///                 type: array
+///                 items:
+///                   allOf:
+///                     - $ref: '#/definitions/DictionaryTermDetails'
+///                     - type: object
+///                       properties:
+///                         error:
+///                           description: the error message, if this term failed to get created
+///                           type: string
+///               matched:
+///                 type: boolean
+///                 format: integer
+/// </example>
+ClassMethod CreateDictionaryTerms(namespace As %String, pDomainId As %Integer, pDictionaryItemId As %Integer = 0) As %Status
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Drops a dictionary term
+///       tags: ["Dictionaries and Matching"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: id
+///           description: ID of the dictionary term to drop
+///           in: path
+///           type: integer
+///           required: true
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             type: object
+///             properties:
+///               dropped:
+///                 type: boolean
+///                 format: integer
+/// </example>
+ClassMethod DropDictionaryTerm(namespace As %String, pDomainId As %Integer, pDictionaryTermId As %Integer) As %Status
+{
+}
+
+/// Simplified version of <method>GetMatchesBySource</method> for HTTP GET requests.
+/// <example language="swagger">
+///       summary: |
+///         Retrieves all dictionary matches for a given source
+///       tags: ["Dictionaries and Matching"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: id
+///           description: the source ID to query for
+///           in: path
+///           required: true
+///           type: integer
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/MatchList'
+/// </example>
+ClassMethod GetMatchesBySourceGET(namespace As %String, pDomainId As %Integer, pSourceId As %Integer) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Retrieves all dictionary matches for a given source
+///       tags: ["Dictionaries and Matching"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: id
+///           description: the source ID to query for
+///           in: path
+///           required: true
+///           type: integer
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               page:
+///                 $ref: '#/definitions/PageNumber'
+///               pageSize:
+///                 $ref: '#/definitions/PageSize'
+///               matchFirst:
+///                 description: ensures this source is matched against the latest dictionaries before retrieving results
+///                 type: boolean
+///                 format: integer
+///                 default: 1
+///               dictionaries:
+///                 description: if set, limits results to these dictionary IDs
+///                 default: []
+///                 type: array
+///                 items:
+///                   type: integer
+///               includeDictionaryDetails:
+///                 description: whether or not to retrieve dictionary details as well
+///                 type: boolean
+///                 format: integer
+///                 default: 1
+///               includeMatchDetails:
+///                 description: whether or not to retrieve entity-level match details as well
+///                 type: boolean
+///                 format: integer
+///                 default: 0
+///               includeSnippets:
+///                 description: whether or not to include the text of the matched sentence
+///                 type: boolean
+///                 format: integer
+///                 default: 1
+///               highlight:
+///                 $ref: '#/definitions/Highlighting'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/MatchList'
+/// </example>
+ClassMethod GetMatchesBySource(namespace As %String, pDomainId As %Integer, pSourceId As %Integer) As %Status
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Retrieves all dictionary matches for a dictionary item
+///       tags: ["Dictionaries and Matching"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: id
+///           description: the dictionary item ID or URI to query for
+///           in: path
+///           required: true
+///           type: integer
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/MatchList'
+/// </example>
+ClassMethod GetMatchesByItemGET(namespace As %String, pDomainId As %Integer, pDictionaryItemId As %Integer) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Retrieves all dictionary matches for a dictionary item
+///       tags: ["Dictionaries and Matching"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: id
+///           description: the dictionary item ID or URI to query for
+///           in: path
+///           required: true
+///           type: integer
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               page:
+///                 $ref: '#/definitions/PageNumber'
+///               pageSize:
+///                 $ref: '#/definitions/PageSize'
+///               filter:
+///                 $ref: '#/definitions/Filter'
+///                 description: optionally filters the results to those matches in sources selected by this filter
+///               matchFirst:
+///                 description: ensures the domain is matched against the latest dictionaries before retrieving results
+///                 type: boolean
+///                 format: integer
+///                 default: 1
+///               includeDictionaryDetails:
+///                 description: whether or not to dictionary details as well
+///                 type: boolean
+///                 format: integer
+///                 default: 1
+///               includeMatchDetails:
+///                 description: whether or not to entity-level match details as well
+///                 type: boolean
+///                 format: integer
+///                 default: 0
+///               includeSnippets:
+///                 description: whether or not to include the text of the matched sentence
+///                 type: boolean
+///                 format: integer
+///                 default: 1
+///               highlight:
+///                 $ref: '#/definitions/Highlighting'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             $ref: '#/definitions/MatchList'
+/// </example>
+ClassMethod GetMatchesByItem(namespace As %String, pDomainId As %Integer, pDictionaryItemId As %Integer) As %Status
+{
+}
+
+/// Simplified version of <method>MatchAll</method> for HTTP GET requests
+/// <example language="swagger">
+///       summary: |
+///         Matches all sources against the current dictionary contents
+///       tags: ["Dictionaries and Matching"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             type: object
+///             properties:
+///               matched:
+///                 type: boolean
+///                 format: integer
+///                 default: 1
+/// </example>
+ClassMethod MatchAllGET(namespace As %String, pDomainId As %Integer) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Matches all sources against the current dictionary contents
+///       tags: ["Dictionaries and Matching"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               filter:
+///                 $ref: '#/definitions/Filter'
+///                 description: optionally limits the operation to those sources selected by this filter
+///               dictionaries:
+///                 description: if set, limits the operation to these dictionary IDs
+///                 default: []
+///                 type: array
+///                 items:
+///                   type: integer
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             type: object
+///             properties:
+///               matched:
+///                 type: boolean
+///                 format: integer
+///                 default: 1
+/// </example>
+ClassMethod MatchAll(namespace As %String, pDomainId As %Integer) As %Status
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Matches a particular source against the current dictionary contents
+///       tags: ["Dictionaries and Matching"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - $ref: '#/parameters/sourceParam'
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             type: object
+///             properties:
+///               matched:
+///                 type: boolean
+///                 format: integer
+///                 default: 1
+/// </example>
+ClassMethod MatchSourceGET(namespace As %String, pDomainId As %Integer, pSourceId As %Integer) As %Status [ Internal ]
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Matches a particular source against the current dictionary contents
+///       tags: ["Dictionaries and Matching"]
+///       parameters:
+///         - $ref: '#/parameters/domainParam'
+///         - $ref: '#/parameters/sourceParam'
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               dictionaries:
+///                 description: if set, limits the operation to these dictionary IDs
+///                 default: []
+///                 type: array
+///                 items:
+///                   type: integer
+///
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             type: object
+///             properties:
+///               matched:
+///                 type: boolean
+///                 format: integer
+///                 default: 1
+/// </example>
+ClassMethod MatchSource(namespace As %String, pDomainId As %Integer, pSourceId As %Integer) As %Status
+{
+}
+
+/// <example language="swagger">
+///       summary: |
+///         Search the given iFind index in the given table
+///       tags: ["iFind"]
+///       parameters:
+///         - $ref: '#/parameters/tableParam'
+///         - name: RequestBody
+///           description: JSON object with a list of query-specific arguments
+///           in: body
+///           schema:
+///             type: object
+///             properties:
+///               query:
+///                 description: This is the only necessary parameter with no default value. The search terms to query against the iFind index.
+///                 type: string
+///               index:
+///                 description: the iFind index would be searched against, if you don't specify it, the first found iFind index would be used .
+///                 type: string
+///               option:
+///                 $ref: '#/definitions/OptionSpec'
+///               distance:
+///                 description: only valid when option is fuzzy search (when option is 3)
+///                 type: string
+///                 example: "3"
+///               language:
+///                 description: iKnow-supported language model to apply, for example "en"
+///                 type: string
+///               includeText:
+///                 description: whether the returned columns should include the column beging indexed by 'index'
+///                 type: integer
+///                 default: 0
+///                 enum: [0, 1]
+///               columns:
+///                 description: specify the columns which also needed to be returned. For example, ["column1","column2"]
+///                 type: array
+///                 example: []
+///                 items:
+///                   type: string
+///               highlightSpec:
+///                 $ref: '#/definitions/HighlightSpec'
+///                 description: the parameters needed for Highlight
+///               rankSpec:
+///                 $ref: '#/definitions/RankSpec'
+///                 description: the parameters needed for Rank
+///               where:
+///                 description: the valid SQL logical condition statement. For example, "column1 = ? AND column2 = ?"
+///                 type: string
+///       responses:
+///         200:
+///           description: Successful response
+///           schema:
+///             type: object
+///             properties:
+///               rows:
+///                 type: array
+///                 default: []
+///                 items:
+///                   type: object
+/// </example>
+ClassMethod SearchIndex(namespace As %String, table As %String) As %Status
+{
+}
+
+}

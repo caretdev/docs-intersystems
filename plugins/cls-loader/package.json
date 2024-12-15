@@ -1,0 +1,51 @@
+{
+  "name": "cls-loader",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "files": [
+    "assets/**/*",
+    "lib/**/*",
+    "src/**/*",
+    "styles.css"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "packemon": {
+    "format": "lib",
+    "platform": "node",
+    "externals": [
+      "@theme/*",
+      "@docusaurus/*",
+      "@vscode/*",
+      "css$"
+    ]
+  },
+  "peerDependencies": {
+    "@docusaurus/core": "^3.5.0",
+    "@docusaurus/mdx-loader": "^3.5.0",
+    "react": ">=18.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@docusaurus/plugin-content-docs": "^3.5.0",
+    "@docusaurus/types": "^3.5.0",
+    "@docusaurus/utils": "^3.5.0",
+    "@vscode/codicons": "^0.0.36",
+    "html-validate": "^8.27.0",
+    "marked": "^9.1.6",
+    "marked-smartypants": "^1.1.5"
+  },
+  "devDependencies": {
+    "@docusaurus/module-type-aliases": "^3.5.0",
+    "@docusaurus/tsconfig": "^3.5.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "engines": {
+    "node": ">=18.12.0"
+  }
+}

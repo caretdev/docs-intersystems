@@ -1,0 +1,23 @@
+/// Represents an error in OAuth 2.0
+Class %OAuth2.Error Extends %SerialObject [ System = 4 ]
+{
+
+/// The error type.
+Property Error As %String(MAXLEN = 1024);
+
+/// The optional long error description.
+Property ErrorDescription As %String(MAXLEN = 2048);
+
+/// The optional URI for more error detail.
+Property ErrorUri As %String(MAXLEN = 1024);
+
+Method %OnNew(error As %String, desc As %String, uri As %String) As %Status [ Internal, Private ]
+{
+}
+
+/// Return a string representing this object
+Method AsString() As %String
+{
+}
+
+}
