@@ -203,8 +203,8 @@ function reshapeHTML(text) {
     text = text.join(" ");
   }
   return text;
-  text = text.replaceAll(/\[/gi, "\[");
-  text = text.replaceAll(/\]/gi, "\]");
+  text = text.replaceAll(/\[/gi, "[");
+  text = text.replaceAll(/\]/gi, "]");
   text = text.replaceAll(/\<br\s*\/?\>/gi, "\n\n");
   text = text.replaceAll(/\<\/?p\>/gi, "\n\n");
   text = text.replaceAll(/\<\/?pre\>/gi, "\n```\n");
@@ -233,14 +233,14 @@ function reshapeHTML(text) {
 
   let result = `${text}\n\n`;
   const htmlValidate = new HtmlValidate();
-    let report = htmlValidate.validateStringSync(text);
-    if (!report.valid) {
-      result = `
+  let report = htmlValidate.validateStringSync(text);
+  if (!report.valid) {
+    result = `
   :::danger
   Error while rendering HTML
   :::
       `;
-    }
+  }
 
   return result;
 }
@@ -256,8 +256,9 @@ function membersToMarkdown(
   }
   let doc = `## ${title}\n\n`;
   entries.forEach(([key, member]) => {
-    let description = member.description.join(" ");
-    doc += `### ${member.name}\n\n${asCode(member.code)}\n\n`;
+    // let description = member.description.join(" ");
+    doc += `### ${member.name}\n\n`;
+    // doc += `${asCode(member.code)}\n\n`;
     // description = reshapeHTML(member.description);
     // doc += description;
     // doc += "\n\n";
@@ -267,7 +268,7 @@ function membersToMarkdown(
 }
 
 export async function generateDoc(classFile, noCode: boolean = true) {
-  console.log('generateDoc', classFile);
+  console.log("generateDoc", classFile);
   const classContent = (await readFile(classFile)).toString();
   const classDef: ClassDefinition = parseClassFile(classContent);
 
