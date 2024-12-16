@@ -82,7 +82,7 @@ export default function RefIndex({ options, classes, history }: RefIndexProps) {
 								<Heading as="h1">Welcome to the Class Reference</Heading>
 							</header>
 
-							<section className="tsd-panel">
+							{/* <section className="tsd-panel">
 								<h3 className="tsd-panel-header">Packages</h3>
 								<div className="tsd-panel-content">
 									<ul className="tsd-index-list">
@@ -98,7 +98,7 @@ export default function RefIndex({ options, classes, history }: RefIndexProps) {
 										))}
 									</ul>
 								</div>
-							</section>
+							</section> */}
 						</div>
 
 						<Footer />

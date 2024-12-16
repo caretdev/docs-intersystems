@@ -7,7 +7,12 @@ import type {
   PropVersionMetadata,
 } from "@docusaurus/plugin-content-docs";
 import { CURRENT_VERSION_NAME } from "@docusaurus/plugin-content-docs/server";
-import type { LoadContext, Plugin, PluginContentLoadedActions, RouteConfig } from "@docusaurus/types";
+import type {
+  LoadContext,
+  Plugin,
+  PluginContentLoadedActions,
+  RouteConfig,
+} from "@docusaurus/types";
 import { DEFAULT_PLUGIN_ID, normalizeUrl } from "@docusaurus/utils";
 import { generateJson } from "./plugin/data";
 import { extractSidebar } from "./plugin/sidebar";
@@ -80,14 +85,11 @@ export default function clsLoaderPlugin(
             const classes = await getClassesFromFolder(
               path.join(options.projectRoot, metadata.versionLabel),
               metadata.versionPath + "/",
-              context.generatedFilesDir,
+              context.generatedFilesDir
             );
 
             // Generate sidebars (this runs before the main sidebar is loaded)
-            const sidebars = extractSidebar(
-              classes,
-              options.sortSidebar
-            );
+            const sidebars = extractSidebar(classes, options.sortSidebar);
 
             // await fs.promises.writeFile(
             //   path.join(
@@ -104,6 +106,10 @@ export default function clsLoaderPlugin(
             //   ),
             //   `import type { SidebarConfig } from '@docusaurus/plugin-content-docs';\nexport = Array<SidebarConfig>;`
             // );
+            generateClassDocs(
+              path.join(context.generatedFilesDir, "cls-loader-docs", metadata.versionLabel),
+              classes
+            );
 
             return {
               ...metadata,
@@ -137,7 +143,8 @@ export default function clsLoaderPlugin(
       const rootRoutes = await Promise.all(
         content.loadedVersions.map(async (loadedVersion) => {
           const version = loadedVersion.versionName;
-          generateClassDocs(actions, path.join(context.siteDir, "docs", version), loadedVersion.classes);
+          // generateClassDocs(actions, path.join(context.siteDir, "versioned_docs", `version-${loadedVersion.versionLabel}`), loadedVersion.classes);
+          // generateClassDocs(actions, path.join(context.generatedFilesDir, "cls-loader", version), loadedVersion.classes);
 
           // Define version metadata for all pages. We need to use the same structure as
           // "docs" so that we can utilize the same React components.
@@ -203,21 +210,17 @@ export default function clsLoaderPlugin(
 
           const indexPermalink = normalizeUrl([loadedVersion.versionPath]);
 
-          if (loadedVersion.classes.length > 1) {
-            // Only write out the ApiIndex only when we have multiple packages
-            // otherwise we will have 2 top-level entries in the route entries
-            routes.push({
-              path: indexPermalink,
-              exact: true,
-              component: path.join(__dirname, "./components/RefIndex.js"),
-              modules: {
-                options: optionsData,
-                classes: classesData,
-                versionMetadata,
-              },
-              sidebar: "ref",
-            });
-          }
+          routes.push({
+            path: indexPermalink,
+            exact: true,
+            component: path.join(__dirname, "./components/RefIndex.js"),
+            modules: {
+              options: optionsData,
+              classes: classesData,
+              versionMetadata,
+            },
+            sidebar: "ref",
+          });
 
           // console.log("indexPermalink", indexPermalink);
           // Wrap in the `DocVersionRoot` component:

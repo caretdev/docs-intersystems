@@ -289,7 +289,6 @@ ${asCode(classDef.Class.code)}
 
 ${noCode ? "" : originalCode}
 `;
-  return documentation;
   documentation += membersToMarkdown(
     classFile,
     "Parameters",
@@ -314,10 +313,10 @@ export async function generateDocFile(classFile, folder, mdFile) {
   return mdFileFull;
 }
 
-export async function generateClassDocs(actions, folder, classes) {
+export async function generateClassDocs(folder, classes) {
   classes.forEach(async (item) => {
     if (item.isPackage) {
-      generateClassDocs(actions, `${folder}/${item.name}`, item.items);
+      generateClassDocs(`${folder}/${item.name}`, item.items);
     } else {
       item.fileContent = await generateDocFile(
         item.fullPath,

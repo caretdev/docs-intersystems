@@ -24,3 +24,5 @@ lerna-debug.log
 /data
 /classes
 /docs
+/versioned_docs
+/tmp
