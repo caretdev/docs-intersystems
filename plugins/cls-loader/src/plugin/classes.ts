@@ -231,16 +231,16 @@ function reshapeHTML(text) {
     text = text.replace(found, classLink);
   }
 
-  let result = `${text}\n\n`;
-  const htmlValidate = new HtmlValidate();
-  let report = htmlValidate.validateStringSync(text);
-  if (!report.valid) {
-    result = `
-  :::danger
-  Error while rendering HTML
-  :::
-      `;
-  }
+  let result = "```" + text + "```\n\n";
+  // const htmlValidate = new HtmlValidate();
+  // let report = htmlValidate.validateStringSync(text);
+  // if (!report.valid) {
+  //   result = `
+  // :::danger
+  // Error while rendering HTML
+  // :::
+  //     `;
+  // }
 
   return result;
 }
