@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-cls-loader plugin-id-default api-version-2024.1 docs-doc-page" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.6.3">
+<title data-rh="true">item.name | API | InterSystems Documentation</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://caretdev.github.io/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://caretdev.github.io/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://caretdev.github.io/ref/_SYSTEM.SQL.Util.cls"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="item.name | API | InterSystems Documentation"><meta data-rh="true" name="description" content="testMetadata"><meta data-rh="true" property="og:description" content="testMetadata"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://caretdev.github.io/ref/_SYSTEM.SQL.Util.cls"><link data-rh="true" rel="alternate" href="https://caretdev.github.io/ref/_SYSTEM.SQL.Util.cls" hreflang="en"><link data-rh="true" rel="alternate" href="https://caretdev.github.io/ref/_SYSTEM.SQL.Util.cls" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.577ee559.css">
+<script src="/assets/js/runtime~main.a465d7a9.js" defer="defer"></script>
+<script src="/assets/js/main.aa62ddf8.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/intersystems-docs.svg" alt="InterSystems Docs Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/intersystems-docs.svg" alt="InterSystems Docs Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">InterSystems Documentation</b></a><div class="navbar__item dropdown dropdown--hoverable"><a aria-current="page" class="navbar__link active" aria-haspopup="true" aria-expanded="false" role="button" href="/ref">Class Reference</a><ul class="dropdown__menu"><li><a aria-current="page" class="dropdown__link dropdown__link--active" href="/ref">2024.1</a></li></ul></div></div><div class="navbar__items navbar__items--right"><a href="https://github.com/caretdev/docs-intersystems" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="refPage"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_ASQ.Exception.cls">%ASQ</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Api.Atelier.v1.cls">%Api</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Archive.Content.cls">%Archive</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Atelier.REST.cls">%Atelier</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_CPP.BinList.cls">%CPP</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_CPT.COS.Analysis.Test.cls">%CPT</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_CSP.AbstractAtom.cls">%CSP</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Calendar.Hijri.cls">%Calendar</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Collection.AbstractArray.cls">%Collection</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Compiler.Binding.Java.cls">%Compiler</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_DataModel.Serializer.cls">%DataModel</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Debugger.Stack.cls">%Debugger</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_DeepSee.AbstractKPI.cls">%DeepSee</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Dictionary.ClassDefinition.cls">%Dictionary</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_DocDB.Database.cls">%DocDB</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Document.CollectionDefinition.cls">%Document</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_DotNet.Utils.cls">%DotNet</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Embedding.Config.cls">%Embedding</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Exception.AbstractException.cls">%Exception</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_ExtentMgr.GUID.cls">%ExtentMgr</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_External.Messaging.Client.cls">%External</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_FOI.Server.cls">%FOI</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_FileMan.Field.cls">%FileMan</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Harmony.Bridge.cls">%Harmony</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_IO.DeviceStream.cls">%IO</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Installer.AbstractLogger.cls">%Installer</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Iterator.AbstractIterator.cls">%Iterator</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_JSON.Adaptor.cls">%JSON</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Library.AbstractArray.cls">%Library</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_MFT.API.cls">%MFT</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_ML.AutoML.Provider.cls">%ML</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_MV.Adaptor.cls">%MV</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Monitor.AbstractType.cls">%Monitor</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Net.Authenticator.cls">%Net</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_OAuth2.Error.cls">%OAuth2</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Projection.AbstractProjection.cls">%Projection</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_REST.API.cls">%REST</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Regex.Matcher.cls">%Regex</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Report.AuthExternalUser.cls">%Report</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_ResultSet.Custom.cls">%ResultSet</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_SAML.Action.cls">%SAML</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_SOAP.Addressing.Action.cls">%SOAP</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_SQL.AbstractFind.cls">%SQL</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_SYNC.Adaptor.cls">%SYNC</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_SYS.Audit.cls">%SYS</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/ref/_SYSTEM.AbstractWorkMgr.cls">%SYSTEM</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.AbstractWorkMgr.cls">AbstractWorkMgr.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.Activate.cls">Activate.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.AutoLock.cls">AutoLock.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.Bit.cls">Bit.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.CPU.cls">CPU.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.CSP.cls">CSP.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.Cluster.cls">Cluster.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.CodeScanner.cls">CodeScanner.cls</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/ref/_SYSTEM.Config.SharedMemoryHeap.cls">Config</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.Config.cls">Config.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.Container.cls">Container.cls</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/ref/_SYSTEM.Context.CSP.cls">Context</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.Context.cls">Context.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.DSTIME.cls">DSTIME.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.DeepSee.cls">DeepSee.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.Dictionary.cls">Dictionary.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.DocDB.cls">DocDB.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.ECP.cls">ECP.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.Encryption.cls">Encryption.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.Error.cls">Error.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.Event.cls">Event.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.Help.cls">Help.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.INetInfo.cls">INetInfo.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.IS.cls">IS.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.License.cls">License.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.MV.cls">MV.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.Mirror.cls">Mirror.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.Monitor.cls">Monitor.cls</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/ref/_SYSTEM.OBJ.FM2Class.cls">OBJ</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.OBJ.cls">OBJ.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.OS.cls">OS.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.Process.cls">Process.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.Rtn.cls">Rtn.cls</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/ref/_SYSTEM.SQL.Functions.cls">SQL</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.SQL.Functions.cls">Functions.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.SQL.PTools.cls">PTools.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.SQL.Schema.cls">Schema.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.SQL.Security.cls">Security.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.SQL.Statement.cls">Statement.cls</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/ref/_SYSTEM.SQL.Stats.Table.cls">Stats</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/ref/_SYSTEM.SQL.Util.cls">Util.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.SQL.xDBC.cls">xDBC.cls</a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.SQL.cls">SQL.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.SQLGateway.cls">SQLGateway.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.SYS.cls">SYS.cls</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/ref/_SYSTEM.Security.System.cls">Security</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.Security.cls">Security.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.Semaphore.cls">Semaphore.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.ShardWorkMgr.cls">ShardWorkMgr.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.Sharding.cls">Sharding.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.Socket.cls">Socket.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.Status.cls">Status.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.TCPDevice.cls">TCPDevice.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.TSQL.cls">TSQL.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.Task.cls">Task.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.TaskConfig.cls">TaskConfig.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.TaskHistory.cls">TaskHistory.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.TaskInit.cls">TaskInit.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.Util.cls">Util.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.Version.cls">Version.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.WorkMgr.cls">WorkMgr.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.WorkMgrIPQ.cls">WorkMgrIPQ.cls</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/ref/_SYSTEM.dotnet.SQL.cls">dotnet</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/ref/_SYSTEM.external.SQL.cls">external</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.external.cls">external.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYSTEM.iKnow.cls">iKnow.cls</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/ref/_SYSTEM.java.SQL.cls">java</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/ref/_SYSTEM.python.SQL.cls">python</a></div></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Storage.Persistent.cls">%Storage</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Stream.DynamicBinary.cls">%Stream</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Studio.AbstractDocument.cls">%Studio</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_TSQL.Impl.cls">%TSQL</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Text.English.cls">%Text</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_UnitTest.Manager.cls">%UnitTest</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_WebStress.Calls.cls">%WebStress</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_XDBC.Gateway.DatabaseMetaData.cls">%XDBC</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_XGEN.AbstractDocument.cls">%XGEN</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_XML.Adaptor.cls">%XML</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_XSQL.Catalog.Informix.syscolumns.cls">%XSQL</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_ZEN.Auxiliary.ChartContent.cls">%ZEN</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_iFind.Entity.cls">%iFind</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_iKnow.Classification.Builder.cls">%iKnow</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_xsd.anyURI.cls">%xsd</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/Backup.General.cls">Backup</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/Config.Archives.cls">Config</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/DataMove.API.cls">DataMove</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/DeepSee.FeatureGetter.cls">DeepSee</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/INFORMATION.SCHEMA.CHECKCONSTRAINTS.cls">INFORMATION</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/Interop.Config.Production.cls">Interop</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/Inventory.Component.cls">Inventory</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/Journal.Restore.cls">Journal</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/MonitorTools.SNMP.cls">MonitorTools</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/Net.Provision.Installer.cls">Net</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/OAuth2.AccessToken.cls">OAuth2</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/PKI.CAClient.cls">PKI</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/Report.ExternalUser.cls">Report</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/SYS.Agent.cls">SYS</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/Security.Applications.cls">Security</a></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col refItemCol"><div class="refItemContainer"><article><div class="theme-doc-markdown markdown"><header><h1></h1></header><section class="tsd-readme"><header><h1>%SYSTEM.SQL.Util</h1></header>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Class %SYSTEM.SQL.Util Extends %SYSTEM.Help [ Abstract, Owner = {_PUBLIC}, Not ProcedureBlock, System = 4 ]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="methods">Methods<a href="#methods" class="hash-link" aria-label="Direct link to Methods" title="Direct link to Methods">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="closeallgateways">CloseAllGateways<a href="#closeallgateways" class="hash-link" aria-label="Direct link to CloseAllGateways" title="Direct link to CloseAllGateways">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod CloseAllGateways() As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>This method closes all the open ODBC/JDBC Gateway connections and unloads the SQL Gateway shared library.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="getmapselectability">GetMapSelectability<a href="#getmapselectability" class="hash-link" aria-label="Direct link to GetMapSelectability" title="Direct link to GetMapSelectability">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod GetMapSelectability(pTablename As %Library.String = &quot;&quot;, pMapname As %Library.String = &quot;&quot;) As %Library.String [ ProcedureBlock = 1 ]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>This entrypoint is used to determine if an SQL Map definition is selectable by the SQL Query Optimizer or not</p>
+<p><strong>Parameters:</strong></p>
+<p><em>pTablename</em> Name of the table to check.<br>
+<em>pTablename</em> can be qualified or unqualified. If unqualified, the default schema is applied. <em>pMapname</em> Name of the SQL Map in the table to check the selectable for.</p>
+<p><strong>Returns:</strong> 1 if the map is selectable, 0 if the map is not selectable. If the table or map does not exist, or there is an invalid input paramater, 0,<em>message</em> will be returned as the map is not selectable or the selectability cannot be determined.</p>
+<p><strong>Notes:</strong>
+A return of 1 by this function does not necessarily mean the table and map exist, just that the map&#x27;s selectability has not been set to 0.
+This function checks the selectability for the map in the current namespace only. If this table is mapped to multiple namespaces, and the index needs to be built in each namespace, SetMapSelectability should be called in each namespace the index is to be built in. GetMapSelectability should be checked in each namespace the table is mapped to.</p>
+<p><strong>Example</strong>:</p>
+<ul>
+<li>Write $SYSTEM.SQL.Util.GetMapSelectability(&quot;Sample.Person&quot;,&quot;NameIdx&quot;)</li>
+</ul>
+<p>Sample.Person is part of <a href="https://github.com/intersystems/Samples-Data" target="_blank" rel="noopener noreferrer">https://github.com/intersystems/Samples-Data.</a> See <a href="/csp/docbook/DocBook.UI.Page.cls?FIND=landing+githubsamples">Downloading Samples</a>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="getoption">GetOption<a href="#getoption" class="hash-link" aria-label="Direct link to GetOption" title="Direct link to GetOption">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod GetOption(pOption As %String = &quot;&quot;) As %String [ ProcedureBlock = 1, SqlProc ]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Given one of the following valid, case-insensitive values for <em>pOption</em>, return the current value for that option.</p>
+<p><strong><em>AdaptiveMode</em></strong> - Returns the configuration setting which determines if adaptive mode is applied.</p>
+<ul>
+<li>0 = Do not apply adaptive mode.</li>
+<li>1 = Apply Adaptive Mode (this covers Run Time Plan Choice, automatic parallelized query execution, automatic tuning of untuned tables, Frozen/Upgrade query plans, and more. Please see the product documentation for a complete overview; 1 = Default).
+<strong><em>AllowExtrinsicFunctions</em></strong> - Returns if extrinsic functions are allowed to be used in SQL statements through ODBC, JDBC, and Dynamic SQL.</li>
+<li>0 = Do not allow extrinsic functions in SQL statements through ODBC, JDBC, or Dynamic SQL (Default).</li>
+<li>1 = Allow extrinsic functions in SQL statements through ODBC, JDBC, or Dynamic SQL.
+<strong><em>ANSIPrecedence</em></strong> - Returns if ANSI operator precedence is applied.</li>
+<li>0 = Do not apply ANSI precedence in SQL statements.</li>
+<li>1 = Apply ANSI precedence in SQL statements (Default).
+<strong><em>AutoCommit</em></strong> - Returns the current process&#x27;s Transaction Commit Mode value. Possible values are:</li>
+<li>0 = NO AUTO TRANSACTION</li>
+<li>1 = AUTO COMMIT ON (Default)</li>
+<li>2 = AUTO COMMIT OFF
+<strong><em>AutoParallel</em></strong> - Returns the configuration setting which determines if auto hinting %PARALLEL is applied. The default is use of auto hinting %PARALLEL is applied.</li>
+<li>0 = Do not apply auto hinting for %PARALLEL in SQL statements</li>
+<li>1 = Apply auto hinting for %PARALLEL in SQL (Default)
+<strong><em>AutoParallelThreshold</em></strong> - Returns the configuration setting which determines the threshold of auto hinting %PARALLEL. The default value is 3200. This value could be roughly thought of as how many rows in the visited map <strong><em>BitmapFriendlyCheck</em></strong> - Returns the current system-wide setting of the BitmapFriendlyCheck flag, a boolean value.</li>
+<li>0 = The class compiler will not perform this check and no error will be returned if the class contains a bitmap index and does not have a positive integer ID type (Default).</li>
+<li>1 = The class compiler will check to make sure the type of ID of the class is a positive integer if there is a bitmap index defined for the class and the class uses %Storage.SQL.</li>
+</ul>
+<p><strong><em>CachedQueryLockTimeout</em></strong> - Returns the configuration setting for lock timeout length, in seconds, used for Cached Queries when a lock needs to be acquired on Cached Query metadata.</p>
+<p><strong><em>CachedQuerySaveSource</em></strong> - Returns the configuration setting for cached queries source code retention. The default is no source is saved. The setting is on a per-system basis.</p>
+<ul>
+<li>0 - Source is deleted after the cached query has compiled (Default)</li>
+<li>1 - Source is retained for cached query classes.</li>
+</ul>
+<p><strong><em>ClientMaxIdleTime</em></strong> - The maximum time (in seconds) that a client may stay idly connected to the server before the server will close the connection.</p>
+<p><strong><em>CollectionProjection</em></strong> - Returns the configuration setting for collection projection. Possible values are:</p>
+<ul>
+<li>0 = Do not project collections as columns if also projected as child table (Default).</li>
+<li>1 = Project all collections as columns.
+<strong><em>CompileMode</em></strong> - Returns the current Compile Mode namespace setting, either Deferred or Immediate.</li>
+</ul>
+<p><strong><em>DDLDefineBitmapExtent</em></strong> - Returns the configuration setting flag which determines if a class created by a DDL CREATE TABLE statement defines a bitmap extent index for the class.</p>
+<ul>
+<li>0 = Do not define a Bitmap Extent index for a table created through DDL.</li>
+<li>1 = Automatically define a Bitmap Extent index for tables created through DDL (Default)</li>
+</ul>
+<p><strong><em>DDLDropTabDelData</em></strong> - Returns the configuration setting flag which determines if a DDL DROP TABLE statement deletes the table&#x27;s data.</p>
+<ul>
+<li>0 = DROP TABLE will not delete the table&#x27;s data when the table is dropped</li>
+<li>1 = DROP TABLE will delete the table&#x27;s data when the table is dropped (Default).</li>
+</ul>
+<p><strong><em>DDLFinal</em></strong> - Returns the configuration setting flag which determines if a class created by a DDL CREATE TABLE statement is Final.</p>
+<ul>
+<li>0 = CREATE TABLE will not define a class as Final</li>
+<li>1 = CREATE TABLE will define a class as Final (Default)</li>
+</ul>
+<p><strong><em>DDLPKeyNotIDKey</em></strong> - Returns the configuration setting for PRIMARY KEY in DDL also being the IDKey index.</p>
+<ul>
+<li>0 = Primary Key constraints will also become IDKey indices</li>
+<li>1 = Primary Key constraints will NOT become IDKey indices (Default)</li>
+</ul>
+<p><strong><em>DDLUseExtentSet</em></strong> - Returns the configuration setting flag which determines if a class created by a DDL CREATE TABLE statement defines the USEEXTENTSET class parameter to a value of 1.</p>
+<ul>
+<li>0 = CREATE TABLE will define the USEEXTENTSET class parameter with a value of 0</li>
+<li>1 = CREATE TABLE will define the USEEXTENTSET class parameter with a value of 1 (Default)</li>
+</ul>
+<p><strong><em>DDLUseSequence</em></strong> - Returns the configuration setting flag which determines if a class created by a DDL CREATE TABLE statement uses $Sequence for ID assignment.</p>
+<ul>
+<li>0 = CREATE TABLE uses $Increment for ID assignment</li>
+<li>1 = CREATE TABLE uses $Sequence for ID assignment (Default)</li>
+</ul>
+<p><strong><em>DefaultTimePrecision</em></strong> - Returns the configuration setting for default precision for the Time component of the value returned by the GETDATE(), CURRENT_TIME, and CURRENT_TIMESTAMP SQL Scalar functions.</p>
+<p><strong><em>DelimitedIdentifiers</em></strong> - Returns the configuration setting which determines if double quote (&quot;&quot;) in an SQL statement is used for delimited (quoted) identifiers or string constants.</p>
+<ul>
+<li>0 = In an SQL statement, &quot;...&quot; is treated as a string literal</li>
+<li>1 = In an SQL statement, &quot;...&quot; is treated as an identifier (Default)</li>
+</ul>
+<p><strong><em>ECPSync</em></strong> - Returns whether or not SQL SELECT statements perform a $SYSTEM.ECP.Sync() call in the OPEN code.</p>
+<ul>
+<li>0 = Do not perform ECP Syncs for Select queries (Default)</li>
+<li>1 = Perform ECP Syncs for Select queries</li>
+</ul>
+<p><strong><em>FastDistinct</em></strong> - Returnss whether or not SQL DISTINCT is optimized to use indexes.</p>
+<ul>
+<li>0 = DISTINCT optimization is turned OFF</li>
+<li>1 = DISTINCT optimization is turned ON (Default)</li>
+</ul>
+<p><strong><em>FilerRefIntegrity</em></strong> - Returnss the configuration setting which determines if Foreign Key Referential Integrity checks are performed in the SQL Filer. Turning off SQL Filer Referential Integrity checking will suppress any SQLCODE -121, -122, -123, and -124 errors.</p>
+<ul>
+<li>0 = Foreign Key Referential Integrity checks are not performed</li>
+<li>1 = Foreign Key Referential Integrity checks are performed (Default)</li>
+</ul>
+<p><em><strong>IdentityInsert</strong> - Returns the current IDENTITY_INSERT option value. Possible values are:</em>
+<em>* 0 = IDENTITY cannot be set (Default).</em>
+<em>* 1 = IDENTITY can be set.</em>
+<em><strong>IsolationMode</strong> - Returns current process&#x27;s Transaction Isolation Mode value. Possible values are:</em>
+<em>* 0 = READ UNCOMMITTED (Default).</em>
+<em>* 1 = READ COMMITTED</em>
+<em>* 3 = READ VERIFIED</em>
+<em><strong>LockThreshold</strong> - Returns the current Lock Threshold setting. The value returned is an integer that is the number of row locks to acquire before escalating to a table lock. This is a system wide setting that is in effect for all processes. <strong>LockTimeout</strong> - Return the current system Lock Timeout value as defined in the configuration settings. Note, this may be different than the lock timeout for the current process.</em></p>
+<p><em><strong>ParameterSampling</strong> - Returns the configuration setting which determines if parameter sampling is enabled</em>
+<em>* 0 = Parameter sampling is disabled (Default).</em>
+<em>* 1 = Parameter sampling is enabled.</em></p>
+<p><em><strong>ProcessLockTimeout</strong> - Returns the Lock Timeout value for the current process.</em></p>
+<p><em><strong>RetainSQL</strong> - Gets the configuration setting which determines if embedded SQL statements are retained as comments in the .INT code version of the routine.</em>
+<em>* 0 = SQL text will be not retained as comments in the .INT code.</em>
+<em>* 1 = SQL text will be retained as comments in the INT code (Default).</em></p>
+<p><em><strong>RTPC</strong> - Returns the configuration setting flag that determines if Run Time Plan Choice is applied.</em>
+<em>* 0 = Do not apply Run Time Plan Choice in SQL statements.</em>
+<em>* 1 = Apply Run Time Plan Choice in SQL statements (Default).</em>
+<em><strong>SQLFunctionArgConversion</strong> - Return the current setting of the system wide flag for controlling if SQL Functions perform ODBCToLogical/DisplayToLogical on SQL Function input arguments.</em></p>
+<p><em><strong>SQLSecurity</strong> - Returns the configuration setting which determines if SQL security is enabled.</em>
+<em>* 0 = SQL security is OFF.</em>
+<em>* 1 = SQL security is ON (Default).</em></p>
+<p><em><strong>SelectMode</strong> - Returns the select mode value for the current process. Possible values are:</em>
+<em>* 0 = Logical (Default).</em>
+<em>* 1 = ODBC</em>
+<em>* 2 = Display</em>
+<em>The select mode returned by this API is used when:</em>
+<em>#SQLCompile Select = Runtime</em>
+<em>is specified for the compiled SQL code.</em>
+<em>When the SQL statement is compiled in Runtime mode, the mode returned by GetSelectMode will be used at runtime to determine whether Logical(0), ODBC(1), or Display(2) mode is used for the statement. See the documentation for #SQLCompile Select for more information.</em> <strong>ServerDisconnectCode</strong> - Returns ODBC/JDBC disconnect code. Upon disconnect any ObjectScript code defined in this setting will be executed immediately before the server process Halts. This code will also attempt to be executed anytime the server process encounters an unrecoverable error that causes the server process to Halt. It will not be executed if the server process encounters a Halt in other user defined code, if the process crashes, if the process is stopped, or InterSystems IRIS is stopped or forced down. If no disconnect code is defined for this namespace, &quot;&quot; is returned. The disconnect code is defined on a per-namespace basis. <em><strong>ServerInitCode</strong></em> - Returns ODBC/JDBC/SQL Manager initialization code. This Initialization code is executed at login time when connecting to SQL through ODBC, JDBC, or the SQL Manager. If no initialization code is defined for this namespace, &quot;&quot; is returned. Initialization code is defined on a per-namespace basis.</p>
+<p><strong><em>TCPKeepAlive</em></strong> - Returns the TCP Keep Alive interval (in seconds) for xDBC connections.</p>
+<p><strong><em>ToDateDefaultFormat</em></strong> - Returns the default format for the SQL TO_DATE() function.</p>
+<p><strong>Example</strong>:</p>
+<ul>
+<li>Write $SYSTEM.SQL.Util.GetOption(&quot;AutoCommit&quot;)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="setoption">SetOption<a href="#setoption" class="hash-link" aria-label="Direct link to SetOption" title="Direct link to SetOption">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod SetOption(pOption As %String, pValue As %String = &quot;&quot;, ByRef oldValue As %String) As %Status [ ProcedureBlock = 1, SqlProc ]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Given one of the following valid, case-insensitive values in <em>pOption</em>, update the option to <em>pValue</em>, store the previous value in <em>oldValue</em> if applicable, and return a status object reflecting whether the update was successful.</p>
+<p><strong><em>AdaptiveMode</em></strong> - Set the configuration setting which determines if adaptive mode is applied.</p>
+<ul>
+<li><em>pValue</em> = 0, do not apply adaptive mode.</li>
+<li><em>pValue</em> = 1, apply Adaptive Mode (this covers Run Time Plan Choice, automatic parallelized query execution, automatic tuning of untuned tables, Frozen/Upgrade query plans, and more. Please see the product documentation for a complete overview; 1 = Default).
+<em>Notes</em>
+<em>* You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</em>
+<em>* Changing this configuration setting will only take effect for this process and new processes starting in InterSystems IRIS after this function is called. Any existing processes will still use the old setting.</em>
+<em>* This is a system-wide setting.</em></li>
+</ul>
+<p><strong><em>AllowExtrinsicFunctions</em></strong> - determines if extrinsic functions are allowed to be used in SQL statements through ODBC, JDBC, and Dynamic SQL.</p>
+<ul>
+<li><em>pValue</em> = 0, do not allow extrinsic functions in SQL statements through ODBC, JDBC, or Dynamic SQL (Default).</li>
+<li><em>pValue</em> = 1, allow extrinsic functions in SQL statements through ODBC, JDBC, or Dynamic SQL.</li>
+</ul>
+<p><em>Notes</em>
+<em>* You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</em>
+<em>* Changing this configuration setting will affect all processes immediately.</em>
+<em>* This is a system-wide setting.</em></p>
+<p><strong><em>ANSIPrecedence</em></strong> - determines if ANSI operator precedence is applied.</p>
+<ul>
+<li><em>pValue</em> = 0, do not apply ANSI precedence in SQL statements.</li>
+<li><em>pValue</em> = 1, apply ANSI precedence in SQL statements (Default).</li>
+</ul>
+<p><em>Notes</em>
+<em>* You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</em>
+<em>* Changing this configuration setting will affect all processes immediately.</em>
+<em>* This is a system-wide setting.</em>
+<strong><em>AutoCommit</em></strong> - Sets the AUTO_COMMIT mode for this process.</p>
+<ul>
+<li><em>pValue</em> = 0, No AutoCommit</li>
+<li><em>pValue</em> = 1, AutoCommit ON (Default).</li>
+<li><em>pValue</em> = 2, AutoCommit OFF.</li>
+</ul>
+<p><em>Notes</em>
+<em>* Changing this configuration setting takes effect immediately and lasts for the duration of the process or until $SYSTEM.SQL.Util.SetOption(&quot;AutoCommit&quot;,pValue) is called again.</em>
+<em>* This is a per-process setting.</em>
+<strong><em>AutoParallel</em></strong> - Sets the configuration setting which determines if auto hinting %PARALLEL is applied. The default is use of auto hinting %PARALLEL is applied.</p>
+<ul>
+<li><em>pValue</em> = 0, do not apply auto hinting for %PARALLEL in SQL statements</li>
+<li><em>pValue</em> = 1, apply auto hinting for %PARALLEL in SQL (Default)</li>
+</ul>
+<p><em>Notes</em>
+<em>* You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</em>
+<em>* Changing this configuration setting will affect all processes immediately.</em>
+<em>* This is a system-wide setting.</em>
+<strong><em>AutoParallelThreshold</em></strong> - Sets the configuration setting which determines the threshold of auto hinting %PARALLEL. Once <em>AutoParallel</em> is enabled, use this function to set the threshold for this feature. Increasing the threshold means it would lower the chance for the auto hinting for %PARALLEL to happen The default value is 3200. This value could be roughly thought of as how many rows in the visited map</p>
+<ul>
+<li><em>pValue</em> = Auto parallel threshold value (integer). Default is 3200.</li>
+</ul>
+<p><em>Notes</em>
+<em>* You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</em>
+<em>* Changing this configuration setting will affect all processes immediately.</em>
+<em>* This is a system-wide setting.</em>
+<strong><em>BitmapFriendlyCheck</em></strong> - determine if the compiler should check if the bitmap index is allowed in a %Storage.SQL class.<br>
+This setting only applies to classes using %Storage.SQL.</p>
+<ul>
+<li><em>pValue</em> = 0, If a %Storage.SQL class is defined with an ID that is not a positive integer, it is up to the developer of the class to make sure the index is data is properly stored and retrieved from the global. An INTEGER type means the class must have either no IDKey index, or a single field IDKey index. If the class has a single field IDKey index, the type of the IDKey property must be of SqlCategory=&quot;INTEGER&quot; or SqlCategory=&quot;NUMERIC&quot; with a SCALE=0 and MINVAL=1 or higher. (Default)</li>
+<li><em>pValue</em> = 1, During class compilation the compiler will check to make sure the ID of the table is an INTEGER type if there are any bitmap or bitmap extent indices defined</li>
+</ul>
+<p><em>Notes</em>
+<em>* Changing this configuration setting will affect all processes immediately.</em>
+<em>* This is a system-wide setting.</em>
+<strong><em>CachedQueryLockTimeout</em></strong> - Defines the lock timeout length, in seconds, used for Cached Queries when a lock needs to be acquired on Cached Query metadata. - The setting is on a per system basis.</p>
+<ul>
+<li><em>pValue</em> = the number of seconds to use for the lock timeout of Cached Query metadata. The default is 120 seconds.</li>
+</ul>
+<p><em>Notes</em>
+<em>* Changing this configuration setting will affect new processes, not existing processes.</em>
+<em>* This is a system-wide setting.</em>
+<strong><em>CachedQuerySaveSource</em></strong> - Defines whether or not the source code for cached queries is retained. The default is no source is saved. The setting is on a per-system basis.</p>
+<ul>
+<li><em>pValue</em> = 0, Source is deleted after the cached query has compiled (Default)</li>
+<li><em>pValue</em> = 1, Source is retained for cached query classes. Any new cached queries created by any process will immediately begin saving (or not saving) cached query source. Any existing cached queries will only have source saved if the system was configured to save source at the time the statement was prepared.</li>
+</ul>
+<p><em>Notes</em>
+<em>* You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting..</em>
+<em>* Changing this configuration setting will take effect immediately for all processes in InterSystems IRIS after this function is called.</em>
+<em>* This is a system-wide setting.</em></p>
+<p><strong><em>ClientMaxIdleTime</em></strong> - The maximum time (in seconds) that a client may stay idly connected to the server before the server will close the connection.</p>
+<ul>
+<li><em>pValue</em> = an integer specifying the time, in seconds, that a client connecton may sit idle. 0 indicates no time limit.
+<em>Notes</em>
+<em>* You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</em>
+<em>* Changing this configuration setting will only take effect for new processes starting in InterSystems IRIS after this function is called. Any existing processes will still use the old setting.</em>
+<em>* This is a system-wide setting.</em>
+<strong><em>CollectionProjection</em></strong> - Sets the collection projection option. Setting takes effect when classes are recompiled.</li>
+<li><em>pValue</em> = 0, Do not project collections as a column if the collection is projected as a child table. (Default)</li>
+<li><em>pValue</em> = 1, Project all collections as columns.</li>
+</ul>
+<p><em>Notes</em>
+<em>* Changing this configuration setting will take effect immediately for all future class compilations.</em>
+<em>* This is a system-wide setting.</em>
+<strong><em>CompileModeDeferred</em></strong> - Set the namespace wide flag which turns on Deferred Compilation mode. &#x27;Deferred Compilation Mode&#x27; can be used to improve the performance of &#x27;installation-type&#x27; activities. Deferred Compilation Mode will, in most cases, reduce the number of class compilations that take place during the loading of tables through DDL scripts. When Deferred Compilation Mode is on, classes are not immediately compiled, but put in a compilation queue which will be compiled at a later time when needed. This is very useful during loading of DDL scripts of the following format:<br>
+- CREATE TABLE MyTable ...<br>
+- CREATE INDEX MyIndex1 ON MyTable ...<br>
+- CREATE INDEX MyIndex2 ON MyTable ...<br>
+- CREATE INDEX MyIndex3 ON MyTable ...<br>
+- CREATE INDEX MyIndex4 ON MyTable ...<br>
+- CREATE INDEX MyIndex5 ON MyTable ...<br>
+- CREATE TABLE MyOtherTable ...<br>
+- CREATE INDEX MyOtherIndex1 ON MyOtherTable ...<br>
+- CREATE INDEX MyOtherIndex2 ON MyOtherTable ...<br>
+- CREATE INDEX MyOtherIndex3 ON MyOtherTable ...<br>
+- CREATE INDEX MyOtherIndex4 ON MyOtherTable ...<br>
+- CREATE INDEX MyOtherIndex5 ON MyOtherTable ...<br>
+- ALTER TABLE MyOtherTable ADD FOREIGN KEY MyFKey (MyField) REFERENCES MyTable(MyField)<br>
+- INSERT INTO MyTable ...<br>
+Running with Deferred Compilation Mode off would require 13 class compilations for the sequence above. With Deferred Compilation Mode on, only two class compilations are required. Classes MyTable and MyOtherTable are compiled when the INSERT statement is encountered.<br>
+Changing from Deferred to Immediate Compilation Mode will cause any classes in the Deferred Compile Queue to be compiled immediately. If all class compilations were successful, SQLCODE will return 0. If there were any errors, SQLCODE will equal -400. Class compilation errors are logged in the ^mtemp2($namespace,&quot;Deferred Compile Mode&quot;,&quot;Error&quot;). If SQLCODE=-400 you should view this global structure for more precise error messages.<br>
+When in Deferred Compilation Mode, any of the following actions will trigger the classes in the Deferred Compilation Queue to be immediately compiled:</p>
+<ul>
+<li>Switch back to immediate compile mode.</li>
+<li>An xDBC Catalog query is called.</li>
+<li>A DML statement is issued (INSERT, SELECT, GRANT, etc)</li>
+<li>CREATE INDEX statement is executed.</li>
+<li>DROP INDEX statement is executed.</li>
+<li>ALTER TABLE to add a required field to a table with a default value.</li>
+<li>ALTER TABLE to modify a field to be required.
+Deferred Compilation Mode should only be used in an installation-type setting where only a single process is working on the namespace at the time.</li>
+</ul>
+<p><em>Notes</em>
+<em>* Changing this setting will take effect immediately for all processes in this namespace.</em>
+<em>* This setting is not related to the macro compiler directive #SQLCompile Mode = { deferred | embedded | immediate }</em>
+<strong><em>CompileModeImmediate</em></strong> - Set the namespace wide flag which turns on Immediate Compilation mode. Immediate Compile Mode is the default compilation mode. If there are pending compilations when switching from Deferred/Install Compile Mode, they will be compiled immediately.</p>
+<p><em>Notes</em>
+<em>* Changing this setting will take effect immediately for all processes in this namespace.</em>
+<em>* This setting is not related to the macro compiler directive #SQLCompile Mode = { deferred | embedded | immediate }</em>
+<strong><em>CompileModeInstall</em></strong> - Set the namespace wide flag which turns on Install Compilation mode. This mode should only be used for installation procedures where no data exists for any of the tables being created. If data exists for the tables definitions being manipulated through DDL statement, use Deferred Compile Mode instead. This is very useful during loading of DDL scripts of the following format:<br>
+- CREATE TABLE MyTable ...<br>
+- CREATE INDEX MyIndex1 ON MyTable ...<br>
+- CREATE INDEX MyIndex2 ON MyTable ...<br>
+- CREATE INDEX MyIndex3 ON MyTable ...<br>
+- CREATE INDEX MyIndex4 ON MyTable ...<br>
+- CREATE INDEX MyIndex5 ON MyTable ...<br>
+- CREATE TABLE MyOtherTable ...<br>
+- CREATE INDEX MyOtherIndex1 ON MyOtherTable ...<br>
+- CREATE INDEX MyOtherIndex2 ON MyOtherTable ...<br>
+- CREATE INDEX MyOtherIndex3 ON MyOtherTable ...<br>
+- CREATE INDEX MyOtherIndex4 ON MyOtherTable ...<br>
+- CREATE INDEX MyOtherIndex5 ON MyOtherTable ...<br>
+- ALTER TABLE MyOtherTable ADD FOREIGN KEY MyFKey (MyField) REFERENCES MyTable(MyField)<br>
+- INSERT INTO MyTable ...<br>
+Running with Install Compilation Mode off would require 13 class compilations for the sequence above. With Install Compilation Mode on, only one class compilation is required. Classes MyTable and MyOtherTable are compiled when the INSERT statement is encountered. Changing from Install to Immediate Compilation Mode will cause any classes in the Deferred Compile Queue to be compiled immediately. If all class compilations were successful, SQLCODE will return 0. If there were any errors, SQLCODE will equal -400. Class compilation errors are logged in the ^mtemp2($namespace,&quot;Deferred Compile Mode&quot;,&quot;Error&quot;). If SQLCODE=-400 you should view this global structure for more precise error messages. When in Install Compilation Mode, any of the following actions will trigger the classes in the Deferred Compilation Queue to be immediately compiled:</p>
+<ul>
+<li>Switch back to immediate compile mode.</li>
+<li>An xDBC Catalog query is called.</li>
+<li>A DML statement is issued (INSERT, SELECT, GRANT, etc)
+Install Compilation Mode should only be used in an installation-type setting where only a single process is working on the namespace at the time and there is no data in the tables.</li>
+</ul>
+<p><em>Notes</em>
+<em>* Changing this setting will take effect immediately for all processes in this namespace.</em>
+<em>* This setting is not related to the macro compiler directive #SQLCompile Mode = { deferred | embedded | immediate }</em>
+<strong><em>CompileModeNocheck</em></strong> - Set the namespace wide flag which turns on Nocheck Compilation mode. This mode is the same as immediate mode except that existing data is not validated against new constraints. For example, if you add a unique constraint to a table that already has data, Nocheck mode will not validate that the constraint is valid. This compile mode must be used with extreme caution. You could end up with data integrity problems in your application. In NOCHECK compile mode, the following constraints are not checked when executing DDL statements:</p>
+<ul>
+<li>If a table is dropped, there are no checks to see if any foreign key constraints in other tables reference this table.</li>
+<li>If a foreign key constraint is added, there are no checks to see if any existing data in the table is valid for the foreign key.</li>
+<li>If a NOT NULL constraint is added to a table with existing data, there is no validation that any existing rows are NOT NULL, nor is there an update of existing rows to assign the field&#x27;s default value if there is one.</li>
+<li>If a UNIQUE or Primary key constraint is deleted, there is no check to see if a foreign key in this or another table had referenced the key.
+Otherwise, the mode behaves the same as immediate. There is no deferring of class compilations and indices are built when created. - Changing this setting will take effect immediately for all processes in this namespace. - This setting is not related to the macro compiler directive #SQLCompile Mode = { deferred | embedded | immediate }</li>
+</ul>
+<p><em>Notes</em>
+<em>* Changing this setting will take effect immediately for all processes in this namespace.</em>
+<em>* This setting is not related to the macro compiler directive #SQLCompile Mode = { deferred | embedded | immediate }</em>
+<strong><em>DDLDefineBitmapExtent</em></strong> - Sets the flag which determines if a class created by a DDL CREATE TABLE statement defines a bitmap extent index for the class. This setting only applies to classes created through DDL that do not also define an explicit IDKey index.</p>
+<ul>
+<li><em>pValue</em> = 0, Do not define a Bitmap Extent index for a table created through DDL.</li>
+<li><em>pValue</em> = 1, Automatically define a Bitmap Extent index for tables created through DDL (Default).</li>
+</ul>
+<p><em>Notes</em>
+<em>* You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</em>
+<em>* Changing this configuration setting will affect all processes immediately.</em>
+<em>* This is a system-wide setting.</em>
+<strong><em>DDLDropTabDelData</em></strong> - Sets the flag which determines if a DDL DROP TABLE statement deletes the table&#x27;s data.</p>
+<ul>
+<li><em>pValue</em> = 0, DROP TABLE will not delete the table&#x27;s data when the table is dropped</li>
+<li><em>pValue</em> = 1, DROP TABLE will delete the table&#x27;s data when the table is dropped (Default).</li>
+</ul>
+<p><em>Notes</em>
+<em>* You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</em>
+<em>* Changing this configuration setting will affect all processes immediately.</em>
+<em>* This is a system-wide setting.</em>
+<strong><em>DDLFinal</em></strong> - Sets the flag which determines if a class created by a DDL CREATE TABLE statement is Final.</p>
+<ul>
+<li><em>pValue</em> = 0, CREATE TABLE will not define a class as Final</li>
+<li><em>pValue</em> = 1, CREATE TABLE will define a class as Final (Default)</li>
+</ul>
+<p><em>Notes</em>
+<em>* You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</em>
+<em>* Changing this configuration setting will affect all processes immediately.</em>
+<em>* This is a system-wide setting.</em>
+<em>* Temporary tables are always defined as Final, regardless of this setting.</em>
+<strong><em>DDLPKeyNotIDKey</em></strong> - Set configuration setting for PRIMARY KEY in DDL also being the IDKey index. This configuration setting determines if a primary key constraint, specified through DDL, also becomes the IDKey index in the class definition. Having the primary key index also be an IDKey index generally gives better performance, but it means the Primary key fields cannot be updated.</p>
+<ul>
+<li><em>pValue</em> = 0, Primary Key constraints will also become IDKey indices</li>
+<li><em>pValue</em> = 1, Primary Key constraints will NOT become IDKey indices (Default)</li>
+</ul>
+<p>Notes</p>
+<ul>
+<li>You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</li>
+<li>Changing this configuration setting will affect all processes immediately.</li>
+<li>This is a system-wide setting.
+<strong><em>DDLUseExtentSet</em></strong> - Sets the flag which determines if a class created by a DDL CREATE TABLE statement defines the USEEXTENTSET class parameter to a value of 1. USEEXTENTSET=1 will generally bind the table to global names that allow for better performance when running queries against the table, especially when the index globals are used. It does mean the global names the class is mapped to are not names that attempt to match the classname. See documentation for USEEXTENTSET parameter for more information.</li>
+<li><em>pValue</em> = 0, CREATE TABLE will define the USEEXTENTSET class parameter with a value of 0</li>
+<li><em>pValue</em> = 1, CREATE TABLE will define the USEEXTENTSET class parameter with a value of 1 (Default)</li>
+</ul>
+<p><em>Notes</em>
+<em>* You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</em>
+<em>* Changing this configuration setting will affect all processes immediately.</em>
+<em>* This is a system-wide setting.</em>
+<strong><em>DDLUseSequence</em></strong> - Sets the flag which determines if a class created by a DDL CREATE TABLE statement uses $Sequence for ID assignment. The storage keyword IDFUNCTION can be defined as INCREMENT or SEQUENCE. This keyword value is used by the class compiler to determine which system function - $increment or $sequence - is to be used for assigning new ID values for a persistent class using default storage. The default value for IDFUNCTION is INCREMENT, however, the default behavior for classes defined through DDL is to define IDFUNCTION as SEQUENCE.</p>
+<ul>
+<li><em>pValue</em> = 0, CREATE TABLE uses $Increment for ID assignment</li>
+<li><em>pValue</em> = 1, CREATE TABLE uses $Sequence for ID assignment (Default)</li>
+</ul>
+<p><em>Notes</em>
+<em>* You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</em>
+<em>* Changing this configuration setting will affect all processes immediately.</em>
+<em>* This is a system-wide setting.</em>
+<strong><em>DefaultTimePrecision</em></strong> - Set the Default precision for the Time component of the value returned by the GETDATE(), CURRENT_TIME, and CURRENT_TIMESTAMP SQL Scalar functions. Input precision to <em>pValue</em>, the number of decimal places for the millisecond portion of the time value. The default is 0, milliseconds are not returned in the values returned by the GETDATE(), CURRENT_TIME, and CURRENT_TIMESTAMP functions.</p>
+<p>Notes</p>
+<ul>
+<li>You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</li>
+<li>Changing this configuration setting will affect all processes immediately.</li>
+<li>This is a system-wide setting.
+<strong><em>DelimitedIdentifiers</em></strong> - Set the configuration setting which determines if double quote (&quot;&quot;) in an SQL statement is used for delimited (quoted) identifiers or string constants.</li>
+<li><em>pValue</em> = 0, In an SQL statement, &quot;...&quot; is treated as a string literal</li>
+<li><em>pValue</em> = 1, In an SQL statement, &quot;...&quot; is treated as an identifier (Default)</li>
+</ul>
+<p><em>Notes</em>
+<em>* You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</em>
+<em>* Changing this configuration setting will affect all processes immediately.</em>
+<em>* This is a system-wide setting.</em>
+<strong><em>ECPSync</em></strong> - Defines whether or not SQL SELECT statements perform a $SYSTEM.ECP.Sync() call in the OPEN code.</p>
+<ul>
+<li><em>pValue</em> = 0, Do not perform ECP Syncs for Select queries (Default)</li>
+<li><em>pValue</em> = 1, Perform ECP Syncs for Select queries</li>
+</ul>
+<p><em>Notes</em>
+<em>* You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</em>
+<em>* Changing this configuration setting will only take effect for this process and new processes starting in InterSystems IRIS after this function is called. Any existing processes will still use the old setting.</em>
+<em>* This is a system-wide setting.</em>
+<strong><em>FastDistinct</em></strong> - Defines whether or not SQL DISTINCT is optimized to use indexes. If true (the default) many SQL queries involving DISTINCT (and GROUP BY) will run much more efficiently by making better use of indices (if available). The downside of this is that the values returned by such queries will be collated in the same way they are stored within the index (i.e., results may be in uppercase). Some applications care about the case of values returned by such queries. If &quot;Fast DISTINCT&quot; is set to false (0), the SQL will revert to the use of uncollated values with regards to DISTINCT behavior.</p>
+<ul>
+<li><em>pValue</em> = 0, DISTINCT optimization is turned OFF</li>
+<li><em>pValue</em> = 1, DISTINCT optimization is turned ON (Default)</li>
+</ul>
+<p><em>Notes</em>
+<em>* You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</em>
+<em>* Changing this configuration setting will only take effect for this process and new processes starting in InterSystems IRIS after this function is called. Any existing processes will still use the old setting.</em>
+<em>* This is a system-wide setting.</em>
+<strong><em>FilerRefIntegrity</em></strong> - Set the configuration setting which determines if Foreign Key Referential Integrity checks are performed in the SQL Filer. Turning off SQL Filer Referential Integrity checking will suppress any SQLCODE -121, -122, -123, and -124 errors.</p>
+<ul>
+<li><em>pValue</em> = 0, Foreign Key Referential Integrity checks are not performed</li>
+<li><em>pValue</em> = 1, Foreign Key Referential Integrity checks are performed (Default)</li>
+</ul>
+<p><em>Notes</em>
+<em>* You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</em>
+<em>* Changing this configuration setting will only take effect for this process and new processes starting in InterSystems IRIS after this function is called. Any existing processes will still use the old setting.</em>
+<em>* This is a system-wide setting.</em>
+<strong><em>IdentityInsert</em></strong> - Set the IDENTITY_INSERT option for this process. IDENTITY_INSERT controls the ability of the user to specify a value for the IDENTITY property when saving a new object, a value for the IDENTITY column, or an explicit ROWID value in an SQL INSERT. If IDENTITY_INSERT is false and the user specifies an explicit IDENTITY or ROWID value when saving a new object (ObjectScript) or inserting a new ROW (SQL) then an error condition is reported.</p>
+<ul>
+<li><em>pValue</em> = 0, Insert/%Save of Identity field/property is not permitted (Default)</li>
+<li><em>pValue</em> = 1, Insert/%Save of Identity field/property is permitted</li>
+</ul>
+<p><em>Notes</em>
+<em>* Changing this configuration setting takes effect immediately and lasts for the duration of the process or until $SYSTEM.SQL.Util.SetOption(&quot;IdentityInsert&quot;,pValue) is called again.</em>
+<em>* This is a per-process setting.</em>
+<strong><em>IsolationMode</em></strong> - Set the Transaction Isolation Mode for this process. The ISOLATION MODE options permit you to specify whether or not uncommitted changes to the database should be available for read access by a SELECT query. The READ COMMITTED option states that only those changes that have been committed are available for query access. If requested data has been changed, but the changes have not been committed (or rolled back), the query waits for transaction completion. If a lock timeout occurs while waiting for this data to be available, an SQLCODE error is issued. The READ UNCOMMITTED option states that all changes are immediately available for query access. The READ VERIFIED option states that all changes are immediately available for query access, but with additional checks to skip rows containing changed data that no longer match the conditions specified in the query.</p>
+<ul>
+<li><em>pValue</em> = 0, Read uncommitted (Default)</li>
+<li><em>pValue</em> = 1, Read committed</li>
+<li><em>pValue</em> = 3, Read verified</li>
+</ul>
+<p><em>Notes</em></p>
+<ul>
+<li>Changing this configuration setting takes effect immediately and lasts for the duration of the process or until $SYSTEM.SQL.Util.SetOption(&quot;IsolationMode&quot;,pValue) is called again.</li>
+<li>This is a per-process setting.
+<strong><em>LockThreshold</em></strong> - Set the Lock Threshold for locks acquired during filing of rows within a single transaction.</li>
+<li><em>pValue</em> = the number of row locks to acquire before escalating to a table lock. The default is 1000</li>
+</ul>
+<p><em>Notes</em>
+<em>* You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</em>
+<em>* Changing this configuration setting will only take effect for this process and new processes starting in InterSystems IRIS after this function is called. Any existing processes will still use the old setting.</em>
+<em>* This is a system-wide setting.</em>
+<strong><em>LockTimeout</em></strong> - Set the Lock timeout for locks acquired during the execution of SQL statements.</p>
+<ul>
+<li><em>pValue</em> = the number of seconds to set the lock timeout to. The default is 10 seconds.</li>
+</ul>
+<p><em>Notes</em>
+<em>* You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</em>
+<em>* Changing this configuration setting will only take effect for this process and new processes starting in InterSystems IRIS after this function is called. Any existing processes will still use the old setting.</em>
+<em>* This is a system-wide setting.</em>
+<strong><em>ProcessLockTimeout</em></strong> - Set the Lock Timeout for locks made during the execution of SQL statements for this process.</p>
+<ul>
+<li><em>pValue</em> = the number of seconds to set the lock timeout to. The default is 10 seconds.</li>
+</ul>
+<p><em>Notes</em>
+<em>* Changing this configuration setting takes effect immediately and lasts for the duration of the process or until $SYSTEM.SQL.Util.SetOption(&quot;ProcessLockTimeout&quot;,pValue) is called again.</em>
+<em>* This is a per-process setting.</em>
+<strong><em>ParameterSampling</em></strong> - Set the configuration setting which determines if parameter sampling is enabled</p>
+<ul>
+<li><em>pValue</em> = 0, disable parameter sampling.</li>
+<li><em>pValue</em> = 1, enable parameter sampling.</li>
+</ul>
+<p>Notes
+<em>* You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</em>
+<em>* Changing this configuration setting will affect all processes immediately.</em>
+<em>* This is a system-wide setting.</em>
+<strong><em>QueryProcedures</em></strong> - Defines whether or not all class queries project as SQL Stored Procedures regardless of the query&#x27;s SQLProc value.</p>
+<ul>
+<li><em>pValue</em> = 0, only class queries with SQLProc = TRUE are projected as stored procedures (Default).</li>
+<li><em>pValue</em> = 1, all class queries are projected as stored procedures.</li>
+</ul>
+<p><em>Notes</em>
+<em>* You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</em>
+<em>* Changing this configuration setting will only take effect for this process and new processes starting in InterSystems IRIS after this function is called. Any existing processes will still use the old setting.</em>
+<em>* This is a system-wide setting.</em>
+<strong><em>RetainSQL</em></strong> - Set the configuration setting which determines if embedded SQL statements are retained as comments in the .INT code version of the routine.</p>
+<ul>
+<li><em>pValue</em> = 0, SQL text will be not retained as comments in the .INT code.</li>
+<li><em>pValue</em> = 1, SQL text will be retained as comments in the INT code (Default).</li>
+</ul>
+<p><em>Notes</em>
+<em>* You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</em>
+<em>* Changing this configuration setting will only take effect for this process and new processes starting in InterSystems IRIS after this function is called. Any existing processes will still use the old setting.</em>
+<em>* This is a system-wide setting.</em>
+<strong><em>RTPC</em></strong> - Set the configuration setting which determines if Run Time Plan Choice is applied.</p>
+<ul>
+<li><em>pValue</em> = 0, do not apply Run Time Plan Choice in SQL statements.</li>
+<li><em>pValue</em> = 1, apply Run Time Plan Choice in SQL statements (Default).</li>
+</ul>
+<p><em>Notes</em>
+<em>* You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</em>
+<em>* Changing this configuration setting will affect all processes immediately.</em>
+<em>* This is a system-wide setting.</em>
+<strong><em>SQLFunctionArgConversion</em></strong> - Set the system wide flag for controlling if SQL Functions perform ODBCToLogical/DisplayToLogical on SQL Function input arguments.</p>
+<ul>
+<li><em>pValue</em> = 0, SQL will not convert input arguments for SQL Functions from ODBC/Display to Logical format (Default).</li>
+<li><em>pValue</em> = 1, SQL will convert input arguments for SQL Functions from ODBC/Display to Logical format if needed.</li>
+</ul>
+<p><em>Notes</em>
+<em>* Changing this configuration setting takes effect immediately for all new compilations/prepares of SQL statements.</em>
+<em>* Change does not affect already compiled statements or cached dynamic statements compiled with the previous value.</em>
+<em>* This is a system-wide setting.</em>
+<strong><em>SQLSecurity</em></strong> - Set the configuration setting which determines if SQL security is enabled. If SQL security is ON, all SQL security is active. This means privilege-based table/view security is active. A user may only perform actions on a table or view they have been granted privilege for. If SQL security is OFF, SQL security is inactive. This means privilege-based table/view security is suppressed. A user may perform actions on a table or view even if they have not been granted privileges to do so.</p>
+<ul>
+<li><em>pValue</em> = 0, SQL security is OFF.</li>
+<li><em>pValue</em> = 1, SQL security is ON (Default).</li>
+</ul>
+<p><em>Notes</em>
+<em>* You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</em>
+<em>* Changing this configuration setting will only take effect for this process and new processes starting in InterSystems IRIS after this function is called. Any existing processes will still use the old setting.</em>
+<em>* This is a system-wide setting.</em>
+<strong><em>SelectMode</em></strong> - Set the select mode for this process.<br>
+The select mode set by this API is used when <strong><em>#SQLCompile Select = Runtime</em></strong> is specified for the compiled SQL code. When the SQL statement is compiled in Runtime mode, the mode specified by <em>SetSelectMode</em> will be used at runtime to determine whether Logical(0), ODBC(1), or Display(2) mode is used for the statement. See the documentation for <em>#SQLCompile Select</em> for more information.</p>
+<ul>
+<li><em>pValue</em> = 0, Logical mode.</li>
+<li><em>pValue</em> = 1, ODBC mode.</li>
+<li><em>pValue</em> = 2, Display mode.</li>
+</ul>
+<p><em>Notes</em>
+<em>* Changing this configuration setting takes effect immediately and lasts for the duration of the process or until $SYSTEM.SQL.Util.SetOption(&quot;SelectMode&quot;,pValue) is called again.</em>
+<em>* This is a per-process setting.</em>
+<strong><em>ServerDisconnectCode</em></strong> - Define ODBC/JDBC disconnect code. Upon disconnect, any ObjectScript code defined in this setting will be executed immediately before the server process Halts. This code will also attempt to be executed anytime the server process encounters an unrecoverable error that causes the server process to Halt. It will not be executed if the server process encounters a Halt in other user defined code, if the process crashes, if the process is stopped, or InterSystems IRIS is stopped or forced down.</p>
+<ul>
+<li><em>pValue</em> = a single line of ObjectScript to be executed. Call with <em>pValue</em>=&quot;&quot; or <em>undefined</em> to delete the disconnect code for this namespace</li>
+</ul>
+<p><em>Notes</em>
+<em>* Changing this configuration setting takes effect immediately for all server processes in InterSystems IRIS after this function is called.</em>
+<em>* Any existing processes will execute the server disconnect code disconnection.</em>
+<em>* The disconnect code is defined on a per-namespace basis.</em>
+<strong><em>ServerInitCode</em></strong> - Returns ODBC/JDBC/SQL Manager initialization code. This Initialization code is executed at login time when connecting to SQL through ODBC, JDBC, or the SQL Manager.</p>
+<ul>
+<li><em>pValue</em> = a single line of ObjectScript to be executed when connecting to this namespace. Call with <em>pValue</em>=&quot;&quot; or <em>undefined</em> to delete connect code for this namespace</li>
+</ul>
+<p><em>Notes</em>
+<em>* Changing this configuration setting takes effect immediately for all new connections.</em>
+<em>* The connect code is defined on a per-namespace basis.</em>
+<strong><em>TCPKeepAlive</em></strong> - Set the TCP Keep Alive interval for xDBC connections.</p>
+<ul>
+<li><em>pValue</em> = the number of seconds to set the TCP Keep Alive interval to. The default is 300 seconds (5 minutes).</li>
+</ul>
+<p><em>Notes</em>
+<em>* You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</em>
+<em>* Changing this configuration setting will only take effect for this process and new processes starting in InterSystems IRIS after this function is called. Any existing processes will still use the old setting.</em>
+<em>* This is a system-wide setting.</em>
+<strong><em>ToDateDefaultFormat</em></strong> - Gets the default format for the SQL TO_DATE() function.</p>
+<ul>
+<li><em>pValue</em> = a string value with the default format the TO_DATE function will return.</li>
+</ul>
+<p>Notes
+<em>* You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</em>
+<em>* Changing this configuration setting will only take effect for this process and new processes starting in InterSystems IRIS after this function is called. Any existing processes will still use the old setting.</em>
+<em>* This is a system-wide setting.</em></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="setddlidentifiertranslations">SetDDLIdentifierTranslations<a href="#setddlidentifiertranslations" class="hash-link" aria-label="Direct link to SetDDLIdentifierTranslations" title="Direct link to SetDDLIdentifierTranslations">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod SetDDLIdentifierTranslations(from As %Library.String, to As %Library.String = &quot;&quot;, ByRef oldfrom As %Library.String, ByRef oldto As %Library.String) As %Status</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Sets the DDL Identifier Translation mappings configuration settings.<br>
+This is for filtering/modifying valid SQL identifier characters when translating SQL identifiers into Objects identifiers. When converting an SQL identifier to an Objects Identifier at DDL run time, the characters in the &#x27;from&#x27; list will be converted to the characters in the &#x27;to&#x27; list. This is done through the ObjectScript $Translate function.<br>
+For example:</p>
+<p>SQL Table name = &quot;My Table!&quot;</p>
+<p>from = &#x27;&quot;! &#x27;</p>
+<p>to = &#x27;&#x27;</p>
+<p>Class name = $Translate(&quot;My Table!&quot;,from,to) = MyTable</p>
+<p><strong>Parameter:</strong> <em>from</em> A string of characters to translate from <em>to</em> A string of characters to translate to (by position in the string) Optional. Default is &quot;&quot;. <em>oldfrom</em> Passed By Reference. Contains the previous value of the &#x27;from&#x27; setting <em>oldto</em> Passed By Reference. Contains the previous value of the &#x27;to&#x27; setting <strong>Returns:</strong> %Status <strong>NOTES:</strong> - You must have the &quot;USE&quot; permission on the %Admin_Manage Resource in order to change this configuration setting.</p>
+<p>- Changing this configuration setting will affect all processes immediately.</p>
+<p>- This is a system-wide setting.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="setmapselectability">SetMapSelectability<a href="#setmapselectability" class="hash-link" aria-label="Direct link to SetMapSelectability" title="Direct link to SetMapSelectability">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod SetMapSelectability(pTablename As %Library.String = &quot;&quot;, pMapname As %Library.String = &quot;&quot;, pValue As %Boolean = &quot;&quot;) As %Status [ ProcedureBlock = 1 ]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>This entrypoint is used to make an SQL Map definition [not] selectable to the SQL Query Optimizer</p>
+<p><strong>Parameters:</strong></p>
+<p><em>pTablename</em> Name of the table to check.<br>
+<em>pTablename</em> can be qualified or unqualified. If unqualified, the default schema is applied. <em>pMapname</em> Name of the SQL Map(s) in the table to make selectable or not selectable. This can be a comma delimited string list of maps (e.g. &quot;map1&quot; or &quot;map1,map2,map3&quot; or $listtostring($lb(&quot;map1&quot;,&quot;map2&quot;))) or a list of maps (e.g. $lb(&quot;map1&quot;) or $lb(&quot;map1&quot;,&quot;map2&quot;) or $listfromstring(&quot;map1,map2,map3&quot;)).<br>
+<em>pValue</em> 1/0 flag. 1 means make this map Selectable - the SQL Query Optimizer will be able to choose this map. 0 means make this map Not Selectable - the SQL Query Optimizer will NOT be able to consider this map</p>
+<p><strong>Returns:</strong>
+A %Status indicating whether the operation was successful</p>
+<p><strong>Notes:</strong>
+This feature is not useful for extent indices (non bitmap). When a non-bitmap extent index is defined, the data map projected to SQL will use both the extent index global and the data map global. When a non-bitmap extent index is added to a table with existing data, the index must be populated before any queries are run against the table. If not, any queries plans that loop over the data map will return no data.
+There is no check to see if the table and/or map exists. This is so the selectability of the map can be defined for a table/map that does not yet exist.
+This feature sets the selectability for the map in the current namespace only. If this table is mapped to multiple namespaces, and the index needs to be built in each namespace, SetMapSelectability should be called in each namespace the index is to be built in.
+Also, this feature sets the selectability for the map in the current table only. If there is a subclass that inherits the index map, and the index is being rebuilt for the entire extent, SetMapSelectability should be called for each table/map in the extent.</p>
+<p><strong>Examples</strong>:</p>
+<ul>
+<li>Write $SYSTEM.SQL.Util.SetMapSelectability(&quot;Sample.Person&quot;,&quot;NameIdx&quot;,1) // SQL Query Optimizer WILL consider map NameIdx</li>
+<li>Write $SYSTEM.SQL.Util.SetMapSelectability(&quot;Sample.Person&quot;,&quot;NameIdx&quot;,0) // SQL Query Optimizer WILL NOT consider map NameIdx</li>
+<li>Write $SYSTEM.SQL.Util.SetMapSelectability(&quot;Sample.Person&quot;,$lb(&quot;NameIdx&quot;,&quot;SSNKey&quot;),1) // SQL Query Optimizer WILL consider maps NameIdx or SSNKey</li>
+<li>Write $SYSTEM.SQL.Util.SetMapSelectability(&quot;Sample.Person&quot;,&quot;NameIdx,SSNKey&quot;,0) // SQL Query Optimizer WILL NOT consider maps NameIdx or SSNKey</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="setxdbcconnectionlimit">SetXDBCConnectionLimit<a href="#setxdbcconnectionlimit" class="hash-link" aria-label="Direct link to SetXDBCConnectionLimit" title="Direct link to SetXDBCConnectionLimit">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod SetXDBCConnectionLimit(limit As %Library.Integer = &quot;&quot;) As %Status [ ProcedureBlock = 1 ]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>This entrypoint is used define an xDBC Server process connection limit</p>
+<p><strong>Parameters:</strong></p>
+<p><em>limit</em> An integer value for the number of xDBC connections to allow for this instance.</p>
+<p><strong>Returns:</strong>
+A %Status indicating whether the operation was successful</p>
+<p><strong>Notes:</strong>
+This feature allows a system administrator to limit the number of xDBC connections for this instance. When set to a value greater than -1, the value will determine how many xDBC connections can be made. Setting the value to -1 allows as many collections supported by the license. Connections for users holding the %Admin_Operate:&quot;U&quot; resource are never restricted from connection, but they do count against the limit.
+Users must have the %Admin_Operator:&quot;U&quot; resource in order to call this API</p>
+<p><strong>Examples</strong>:</p>
+<ul>
+<li>Set status=$SYSTEM.SQL.Util.SetXDBCConnectionLimit(50) // Allow 50 simultaneous xDBC connections to instance</li>
+<li>Set status=$SYSTEM.SQL.Util.SetXDBCConnectionLimit(-1) // No restrictions for simultaneous xDBC connections to instance</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="getxdbcconnectionlimit">GetXDBCConnectionLimit<a href="#getxdbcconnectionlimit" class="hash-link" aria-label="Direct link to GetXDBCConnectionLimit" title="Direct link to GetXDBCConnectionLimit">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod GetXDBCConnectionLimit() As %Integer [ ProcedureBlock = 1 ]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>This entrypoint returns the current setting for xDBC Server process connection limit.</p>
+<p><strong>Parameters:</strong></p>
+<p><strong>Returns:</strong>
+An %Integer value of the current xDBC connection limit setting for this instance</p>
+<p>**Notes:**A value of -1 or &quot;&quot; means no connection limit is currently defined for this instance. <strong>Examples</strong>:</p>
+<ul>
+<li>Set limit=$SYSTEM.SQL.Util.GetXDBCConnectionLimit()</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="getdefaultcollation">GetDefaultCollation<a href="#getdefaultcollation" class="hash-link" aria-label="Direct link to GetDefaultCollation" title="Direct link to GetDefaultCollation">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod GetDefaultCollation() As %String [ ProcedureBlock = 1 ]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>This entrypoint returns the current default collation name for %Library.String datatype in current namespace</p>
+<p><strong>Parameters:</strong></p>
+<p><strong>Returns:</strong>
+the current default collation name for %Library.String datatype</p>
+<p><strong>Examples</strong>:</p>
+<ul>
+<li>Set coll=$SYSTEM.SQL.Util.GetDefaultCollation() // get current default collation name for %Library.String datatype in current namespace</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="setdefaultcollation">SetDefaultCollation<a href="#setdefaultcollation" class="hash-link" aria-label="Direct link to SetDefaultCollation" title="Direct link to SetDefaultCollation">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod SetDefaultCollation(newValue As %String = &quot;&quot;, systemWide As %Boolean = 0, Output oldValue As %String = &quot;&quot;) As %Status [ ProcedureBlock = 1 ]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>This entrypoint is used set the default collation for %Library.String datatype</p>
+<p><strong>Parameters:</strong></p>
+<p><em>newValue</em> new default collation name, such as &quot;SQLUPPER&quot;<br>
+<em>systemWide</em> 1/0 flag. 1 means set this default collation for %Library.String datatype system wide. 0 means set this default collation for %Library.String datatype for current namespace.<br>
+<strong>Output:</strong> <em>outValue</em> the current (before change to newValue) default collation name for %Library.String datatype</p>
+<p><strong>Returns:</strong>
+A %Status indicating whether the operation was successful</p>
+<p><strong>Examples</strong>:</p>
+<ul>
+<li>Set status=$SYSTEM.SQL.Util.SetDefaultCollation(&quot;SQLSTRING&quot;,1,.oldValue) // set default collation for %Library.String datatype to SQLSTRING systemwide</li>
+</ul></section></div><footer class="tsd-footer"></footer></article></div></div></div></div></main></div></div></div></div></div>
+</body>
+</html>

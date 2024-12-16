@@ -1,4 +1,0 @@
-Class %Library.AbstractForeignServer [ Abstract ]
-{
-
-}

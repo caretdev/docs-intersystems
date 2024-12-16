@@ -1,0 +1,795 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-cls-loader plugin-id-default api-version-2024.1 docs-doc-page" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.6.3">
+<title data-rh="true">item.name | API | InterSystems Documentation</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://caretdev.github.io/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://caretdev.github.io/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://caretdev.github.io/ref/_SYS.LDAP.cls"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="item.name | API | InterSystems Documentation"><meta data-rh="true" name="description" content="testMetadata"><meta data-rh="true" property="og:description" content="testMetadata"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://caretdev.github.io/ref/_SYS.LDAP.cls"><link data-rh="true" rel="alternate" href="https://caretdev.github.io/ref/_SYS.LDAP.cls" hreflang="en"><link data-rh="true" rel="alternate" href="https://caretdev.github.io/ref/_SYS.LDAP.cls" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.577ee559.css">
+<script src="/assets/js/runtime~main.a465d7a9.js" defer="defer"></script>
+<script src="/assets/js/main.aa62ddf8.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/intersystems-docs.svg" alt="InterSystems Docs Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/intersystems-docs.svg" alt="InterSystems Docs Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">InterSystems Documentation</b></a><div class="navbar__item dropdown dropdown--hoverable"><a aria-current="page" class="navbar__link active" aria-haspopup="true" aria-expanded="false" role="button" href="/ref">Class Reference</a><ul class="dropdown__menu"><li><a aria-current="page" class="dropdown__link dropdown__link--active" href="/ref">2024.1</a></li></ul></div></div><div class="navbar__items navbar__items--right"><a href="https://github.com/caretdev/docs-intersystems" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="refPage"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_ASQ.Exception.cls">%ASQ</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Api.Atelier.v1.cls">%Api</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Archive.Content.cls">%Archive</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Atelier.REST.cls">%Atelier</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_CPP.BinList.cls">%CPP</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_CPT.COS.Analysis.Test.cls">%CPT</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_CSP.AbstractAtom.cls">%CSP</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Calendar.Hijri.cls">%Calendar</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Collection.AbstractArray.cls">%Collection</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Compiler.Binding.Java.cls">%Compiler</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_DataModel.Serializer.cls">%DataModel</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Debugger.Stack.cls">%Debugger</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_DeepSee.AbstractKPI.cls">%DeepSee</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Dictionary.ClassDefinition.cls">%Dictionary</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_DocDB.Database.cls">%DocDB</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Document.CollectionDefinition.cls">%Document</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_DotNet.Utils.cls">%DotNet</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Embedding.Config.cls">%Embedding</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Exception.AbstractException.cls">%Exception</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_ExtentMgr.GUID.cls">%ExtentMgr</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_External.Messaging.Client.cls">%External</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_FOI.Server.cls">%FOI</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_FileMan.Field.cls">%FileMan</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Harmony.Bridge.cls">%Harmony</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_IO.DeviceStream.cls">%IO</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Installer.AbstractLogger.cls">%Installer</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Iterator.AbstractIterator.cls">%Iterator</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_JSON.Adaptor.cls">%JSON</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Library.AbstractArray.cls">%Library</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_MFT.API.cls">%MFT</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_ML.AutoML.Provider.cls">%ML</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_MV.Adaptor.cls">%MV</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Monitor.AbstractType.cls">%Monitor</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Net.Authenticator.cls">%Net</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_OAuth2.Error.cls">%OAuth2</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Projection.AbstractProjection.cls">%Projection</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_REST.API.cls">%REST</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Regex.Matcher.cls">%Regex</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Report.AuthExternalUser.cls">%Report</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_ResultSet.Custom.cls">%ResultSet</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_SAML.Action.cls">%SAML</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_SOAP.Addressing.Action.cls">%SOAP</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_SQL.AbstractFind.cls">%SQL</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_SYNC.Adaptor.cls">%SYNC</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/ref/_SYS.Audit.cls">%SYS</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYS.Audit.cls">Audit.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYS.AuditString.cls">AuditString.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYS.BackgroundTask.cls">BackgroundTask.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYS.ClusterInfo.cls">ClusterInfo.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYS.DBSRV.cls">DBSRV.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYS.DatabaseQuery.cls">DatabaseQuery.cls</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/ref/_SYS.Date.SlidingWindow.cls">Date</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYS.Ensemble.cls">Ensemble.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYS.Execute.cls">Execute.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYS.GlobalQuery.cls">GlobalQuery.cls</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/ref/_SYS.Journal.BitSetRecord.cls">Journal</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/ref/_SYS.LDAP.cls">LDAP.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYS.LockQuery.cls">LockQuery.cls</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/ref/_SYS.MFT.Connection.Base.cls">MFT</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/ref/_SYS.ML.AutoML.Configuration.cls">ML</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYS.MVACTIVELISTS.cls">MVACTIVELISTS.cls</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/ref/_SYS.Maint.Bitmap.cls">Maint</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/ref/_SYS.Monitor.AbstractDashboard.cls">Monitor</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/ref/_SYS.NLS.Device.cls">NLS</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYS.Namespace.cls">Namespace.cls</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/ref/_SYS.OAuth2.AccessToken.cls">OAuth2</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/ref/_SYS.OpenAM.IdentityServices.cls">OpenAM</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/ref/_SYS.PTools.FileCreation.cls">PTools</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYS.PhoneProviders.cls">PhoneProviders.cls</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/ref/_SYS.Portal.Resources.cls">Portal</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYS.ProcessQuery.cls">ProcessQuery.cls</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/ref/_SYS.Python.ArrayTraits.cls">Python</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYS.Python.cls">Python.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYS.QRCode.cls">QRCode.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYS.REST.cls">REST.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYS.RMSession.cls">RMSession.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYS.SecurityContextToken.cls">SecurityContextToken.cls</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/ref/_SYS.Studio.DocumentHistory.cls">Studio</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYS.System.cls">System.cls</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/ref/_SYS.Task.BackupAllDatabases.cls">Task</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYS.Task.cls">Task.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYS.TokenAuth.cls">TokenAuth.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYS.Trace.cls">Trace.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYS.WhitelistUtils.cls">WhitelistUtils.cls</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/ref/_SYS.X509Credentials.cls">X509Credentials.cls</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_SYSTEM.AbstractWorkMgr.cls">%SYSTEM</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Storage.Persistent.cls">%Storage</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Stream.DynamicBinary.cls">%Stream</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Studio.AbstractDocument.cls">%Studio</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_TSQL.Impl.cls">%TSQL</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_Text.English.cls">%Text</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_UnitTest.Manager.cls">%UnitTest</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_WebStress.Calls.cls">%WebStress</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_XDBC.Gateway.DatabaseMetaData.cls">%XDBC</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_XGEN.AbstractDocument.cls">%XGEN</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_XML.Adaptor.cls">%XML</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_XSQL.Catalog.Informix.syscolumns.cls">%XSQL</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_ZEN.Auxiliary.ChartContent.cls">%ZEN</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_iFind.Entity.cls">%iFind</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_iKnow.Classification.Builder.cls">%iKnow</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/_xsd.anyURI.cls">%xsd</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/Backup.General.cls">Backup</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/Config.Archives.cls">Config</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/DataMove.API.cls">DataMove</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/DeepSee.FeatureGetter.cls">DeepSee</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/INFORMATION.SCHEMA.CHECKCONSTRAINTS.cls">INFORMATION</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/Interop.Config.Production.cls">Interop</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/Inventory.Component.cls">Inventory</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/Journal.Restore.cls">Journal</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/MonitorTools.SNMP.cls">MonitorTools</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/Net.Provision.Installer.cls">Net</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/OAuth2.AccessToken.cls">OAuth2</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/PKI.CAClient.cls">PKI</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/Report.ExternalUser.cls">Report</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/SYS.Agent.cls">SYS</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/ref/Security.Applications.cls">Security</a></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col refItemCol"><div class="refItemContainer"><article><div class="theme-doc-markdown markdown"><header><h1></h1></header><section class="tsd-readme"><header><h1>%SYS.LDAP</h1></header>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Class %SYS.LDAP [ Abstract, System = 4 ]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Requires %syLDAP.INC to be included in your COS routine for some macro definitions.<br>
+The class methods described below are built on top of the interfaces OPENLDAP provides. For more information on OPENLDAP, see <a href="http://www.openldap.org" target="_blank" rel="noopener noreferrer">www.openldap.org</a>.</p>
+<p>This class only supports the OPENLDAP version 3 protocols.<br>
+It is based on OPENLDAP&#x27;s source version openldap-2.4.48.<br>
+This class allows the user to interface with an LDAP database. The user can use the methods provided to authenticate themselves, Search, Add, Modify, Rename, and Delete entries in the LDAP database.</p>
+<p>Error Handling:<br>
+Every time an LDAP method is called, a success status or error status is either returned or set into the LDAP session. If the method does not return the error as a result of the call, then the caller needs to retrieve the error with a call to either the GetError method, or the GetLastError method. The caller should test the return values for success or failure after every call.</p>
+<p>Example:<br>
+s Status=##Class(%SYS.LDAP).AddExts(LD,DN,Attributes)<br>
+i Status&#x27;=$$$LDAPSUCCESS {<br>
+w !,&quot;AddExts error: &quot;_Status_&quot; - &quot;_##Class(%SYS.LDAP).Err2String(Status)<br>
+g LDAPError<br>
+}</p>
+<p>See the LDAP.mac routine for extensive LDAP samples. This routine is available on GitHub at <a href="https://github.com/intersystems/Samples-Security" target="_blank" rel="noopener noreferrer">https://github.com/intersystems/Samples-Security</a></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="methods">Methods<a href="#methods" class="hash-link" aria-label="Direct link to Methods" title="Direct link to Methods">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="addexts">AddExts<a href="#addexts" class="hash-link" aria-label="Direct link to AddExts" title="Direct link to AddExts">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod AddExts(LD As %Integer, DN As %String, ATTR As %List, ServerControls As %String = &quot;&quot;, ClientControls As %String = &quot;&quot;) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Add an entry to the LDAP directory tree.</p>
+<p>Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>DN - String that contains the distinguished name of the entry to add.</p>
+<p>ATTR - <a href="/csp/docbook/Doc.View.cls?FIND=OBJECTSCRIPT+$LIST+FUNCTION">$list</a> formatted with attributes to add to the new entry.<br>
+Each element in the list is a separate attribute to be added to the new entry.<br>
+Attribute=$lb(op,type,vals)<br>
+op - For create, set to 0. However, if the vals parameter is to be treated as binary, then pass in 128 for this parameter.<br>
+type - Name of the attribute. Example=&quot;Telephone&quot;.<br>
+vals - <a href="/csp/docbook/Doc.View.cls?FIND=OBJECTSCRIPT+$LIST+FUNCTION">$list</a> of the values to assign to the attribute. If this is a single entry attribute, then $lb(Value), Example=$lb(&quot;617-621-0600&quot;). If a multi-value entry, then $lb(Value1,Value2,...,Valuen). If the data is to be treated as binary (e.g. jpeg file), then make sure that 128 is passed for the op.</p>
+<p>ServerControls - Ignored, pass as &quot;&quot;.</p>
+<p>ClientControls - Ignored, pass as &quot;&quot;.</p>
+<p>Return Values:</p>
+<p>If the function succeeds, $$$LDAPSUCCESS is returned.<br>
+If the function fails, an error code is returned.</p>
+<p>Examples:</p>
+<p>s Attr1=$lb(0,&quot;displayName&quot;,$lb(Jim Nilson))<br>
+s Attr2=$lb(0,&quot;telephoneNumber&quot;,$lb(&quot;617-621-0600&quot;)<br>
+s Attr3=$lb(0,&quot;objectClass&quot;,$lb(&quot;top&quot;,&quot;person&quot;,&quot;organizationalPerson&quot;,&quot;user&quot;)<br>
+s Attr4=$lb(128,&quot;Picture&quot;,$lb(Jpegbitstring))<br>
+s Attributes=$lb(Attr1,Attr2,Attr3,Attr4)<br>
+; Note the special character identifier &quot;\&quot; which is needed before the &quot;,&quot; in the name<br>
+s DN=&quot;CN=Nilson\, Jim,OU=Users,OU=England,DC=iscinternal,DC=com&quot;<br>
+s Status=##Class(%SYS.LDAP).AddExts(LD,DN,Attributes)</p>
+<p>Note: See the ModifyExts method below for how to manipulate passwords on a Windows Active Directory LDAP server.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="binds">Binds<a href="#binds" class="hash-link" aria-label="Direct link to Binds" title="Direct link to Binds">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod Binds(LD As %Integer, DN As %String = &quot;&quot;, Cred As %List, Method As %Integer) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Authenticate a Windows client to a Windows Active Directory LDAP Server.</p>
+<p>Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>DN - Distinguished name of the entry to bind. Currently always &quot;&quot;.</p>
+<p>Cred - A <a href="/csp/docbook/Doc.View.cls?FIND=OBJECTSCRIPT+$LIST+FUNCTION">$list</a> value that contains the credentials with which to authenticate. Currently only supported credentials are $lb(Username,Domain,Password).</p>
+<p>Method - Indicates the authentication method to use. The following are supported:<br>
+$$$LDAPAUTHSICILY<br>
+$$$LDAPAUTHMSN<br>
+$$$LDAPAUTHNTLM<br>
+$$$LDAPAUTHDPA<br>
+$$$LDAPAUTHNEGOTIATE<br>
+$$$LDAPAUTHDIGEST</p>
+<p>Return Values:</p>
+<p>If the function succeeds, $$$LDAPSUCCESS is returned.<br>
+If the function fails, an error code is returned.</p>
+<p>Comments:</p>
+<p>This method is valid only for Windows clients talking to a Windows Active Directory LDAP server. Use SimpleBinds for OPENLDAP servers. If you have retrieved full DN of the Windows user using the LDAP search method, then you may use SimpleBinds on the Windows Active Directory LDAP server also.</p>
+<p>Examples:</p>
+<p>s Status=##Class(%SYS.LDAP).Binds(LD,&quot;&quot;,$lb(Username,Domain,Password),$$$LDAPAUTHNEGOTIATE)</p>
+<p>See the documentation in SimpleBindS which shows how to handle errors and retry the operation.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="checkfilter">CheckFilter<a href="#checkfilter" class="hash-link" aria-label="Direct link to CheckFilter" title="Direct link to CheckFilter">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod CheckFilter(LD As %Integer, SearchFilter As %String) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Verify search filter syntax.</p>
+<p>Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>SearchFilter - String that contains the name of the filter to check.</p>
+<p>Return Values:</p>
+<p>If the function succeeds, $$$LDAPSUCCESS is returned.<br>
+If the function fails, an error code is returned.</p>
+<p>Comments:</p>
+<p>This method is valid only for Windows clients.</p>
+<p>Examples:</p>
+<p>s Status=##Class(%SYS.LDAP).CheckFilter(LD,&quot;(objectclass=*)&quot;)</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="compareexts">CompareExts<a href="#compareexts" class="hash-link" aria-label="Direct link to CompareExts" title="Direct link to CompareExts">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod CompareExts(LD As %Integer, DN As %String, Attr As %String, Data As %String, ServerControls As %String = &quot;&quot;, ClientControls As %String = &quot;&quot;) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Determine if an attribute, for a given entry, holds a known value.</p>
+<p>Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>DN - String that contains the distinguished name of the entry to compare.</p>
+<p>Attr - String that contains the attribute to compare.</p>
+<p>Data - String or list value to be compared to the attribute value. If the data is a string, then simply pass in the string. If the data is binary, then pass in $lb(binaryvalue).</p>
+<p>ServerControls - Ignored, pass as &quot;&quot;.</p>
+<p>ClientControls - Ignored, pass as &quot;&quot;.</p>
+<p>Return Values:</p>
+<p>If the function succeeds, and the attribute and known values match, $$$LDAPCOMPARETRUE is returned.<br>
+If the values do not match, $$$LDAPCOMPAREFALSE is returned.<br>
+If the function fails, an error code is returned.</p>
+<p>Examples:</p>
+<p>s Status=##Class(%SYS.LDAP).CompareExts(LD,&quot;CN=Nilson,OU=Users,DC=iscinternal,DC=com&quot;,&quot;mail&quot;,&quot;<a href="mailto:nilson@intersystems.com" target="_blank" rel="noopener noreferrer">nilson@intersystems.com</a>)</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="connect">Connect<a href="#connect" class="hash-link" aria-label="Direct link to Connect" title="Direct link to Connect">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod Connect(LD As %Integer, Timeout As %Integer = 0) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Establish a connection to an LDAP server.</p>
+<p>Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>Timeout - The number of seconds to spend in an attempt to establish a connection before a timeout. If 0, the function uses a default timeout value.</p>
+<p>Return Values:</p>
+<p>If the function succeeds, $$$LDAPSUCCESS is returned.<br>
+If the function fails, an error code is returned.</p>
+<p>Comments:</p>
+<p>This method is valid only for Windows clients.<br>
+Use this function to force a connection to an LDAP server from a Windows client. This connection would normally be done as part of the LDAP methods (like SimpleBinds). However, when diagnosing problems, performing the connection by itself can help narrow down connection issues versus search issues.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="countentries">CountEntries<a href="#countentries" class="hash-link" aria-label="Direct link to CountEntries" title="Direct link to CountEntries">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod CountEntries(LD As %Integer, SearchResult As %Integer) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Count the number of search entries that an LDAP server returned.</p>
+<p>Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>SearchResult - The search result as returned by SearchExts.</p>
+<p>Return Values:</p>
+<p>If the function succeeds, it returns the number of entries.<br>
+If the function fails, the return value is -1. The actual session error can be returned by a call to the GetError method.</p>
+<p>Comments:</p>
+<p>The CountEntries function returns the number of entries contained, or remaining in a chain of entries. Call the function with the return value from SearchExts.</p>
+<p>Examples:</p>
+<p>s Status=##Class(%SYS.LDAP).SearchExts(LD,BaseDN,$$$LDAPSCOPESUBTREE,Filter,Attributes,0,&quot;&quot;,&quot;&quot;,2,ServerTimeout,.SearchResult)<br>
+i Status&#x27;=$$$LDAPSUCCESS q Status<br>
+s NumEntries=##Class(%SYS.LDAP).CountEntries(LD,SearchResult)<br>
+i NumEntries=-1 s Status=##Class(%SYS.LDAP).GetError(LD) q Status</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="countvalues">CountValues<a href="#countvalues" class="hash-link" aria-label="Direct link to CountValues" title="Direct link to CountValues">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod CountValues(Values As %List) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Count the number of values returned by a GetValue call.</p>
+<p>Parameters:</p>
+<p>Values - Values as returned by GetValues.</p>
+<p>Return Values:</p>
+<p>If the function succeeds, it returns the number of entries in the list.<br>
+The actual session error status can be returned by a call to the GetError method.</p>
+<p>Examples:</p>
+<p>Values=##Class(%SYS.LDAP).GetValues(LD,CurrentEntry,Attr)<br>
+s Len=##Class(%SYS.LDAP).CountValues(Values)</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="countvalueslen">CountValuesLen<a href="#countvalueslen" class="hash-link" aria-label="Direct link to CountValuesLen" title="Direct link to CountValuesLen">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod CountValuesLen(Values As %List) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Count the number of values in a binary list returned by a GetValuesLen call.</p>
+<p>Parameters:</p>
+<p>Values - Values as returned by GetValuesLen.</p>
+<p>Return Values:</p>
+<p>If the function succeeds, it returns the number of entries in the list.<br>
+The actual session error status can be returned by a call to the GetError method.</p>
+<p>Examples:</p>
+<p>Values=##Class(%SYS.LDAP).GetValuesLen(LD,CurrentEntry,Attr)<br>
+s Len=##Class(%SYS.LDAP).CountValuesLen(Values)</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="deleteexts">DeleteExts<a href="#deleteexts" class="hash-link" aria-label="Direct link to DeleteExts" title="Direct link to DeleteExts">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod DeleteExts(LD As %Integer, DN As %String, ServerControls As %String = &quot;&quot;, ClientControls As %String = &quot;&quot;) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Remove a leaf entry from the directory tree.</p>
+<p>Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>DN - String that contains the distinguished name of the entry to delete.</p>
+<p>ServerControls - Ignored, pass as &quot;&quot;.</p>
+<p>ClientControls - Ignored, pass as &quot;&quot;.</p>
+<p>Return Values:</p>
+<p>If the function succeeds, $$$LDAPSUCCESS is returned.<br>
+If the function fails, an error code is returned.</p>
+<p>Examples:</p>
+<p>s Status=##Class(%SYS.LDAP).DeleteExts(LD,&quot;CN=Nilson\, Jim,OU=Users,OU=England,DC=iscinternal,DC=com&quot;)</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="err2string">Err2String<a href="#err2string" class="hash-link" aria-label="Direct link to Err2String" title="Direct link to Err2String">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod Err2String(Error) As %String</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Convert a numeric LDAP error code into a string that describes the error.</p>
+<p>Parameters:</p>
+<p>Error - Error as returned by LDAP methods, or as returned by the method GetError.</p>
+<p>Return Values:</p>
+<p>If the method succeeds, a string that describes the error is returned.<br>
+If the function fails, &quot;&quot; is returned.<br>
+The actual session error status can be returned by a call to the GetError method.</p>
+<p>Examples:</p>
+<p>s NumEntries=##Class(%SYS.LDAP).CountEntries(LD,SearchResult)<br>
+i NumEntries=-1 s Msg=##Class(%SYS.LDAP).Err2String(##Class(%SYS.LDAP).GetError(LD))</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="escapefilter">EscapeFilter<a href="#escapefilter" class="hash-link" aria-label="Direct link to EscapeFilter" title="Direct link to EscapeFilter">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod EscapeFilter(ByRef SearchFilter As %String) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Escape a search filter.</p>
+<p>Parameters:</p>
+<p>SearchFilter (byref) - String that contains the filter to escape.</p>
+<p>Return Values:</p>
+<p>SearchFilter - Returned filter with the characters escaped.<br>
+If the function succeeds, $$$LDAPSUCCESS is returned.<br>
+If the function fails, an error code is returned.</p>
+<p>Comments:</p>
+<p>Search filters need to be escaped according to LDAP rules. See:</p>
+<p><a href="https://msdn.microsoft.com/en-us/library/aa746475(v=vs.85).aspx" target="_blank" rel="noopener noreferrer">https://msdn.microsoft.com/en-us/library/aa746475(v=vs.85).aspx</a></p>
+<p>Here is the character substitution this method provides.</p>
+<p>* - \2a<br>
+( - \28<br>
+) - \29<br>
+\ - \5c<br>
+/ - \2f<br>
+NUL - \00</p>
+<p>Examples:</p>
+<p>s SearchFilter=&quot;Markus\, Paul,OU=People,OU=Havens,DC=thehavenshospital,DC=org<br>
+s Status=##Class(%SYS.LDAP).EscapeFilter(.SearchFilter)<br>
+w !,SearchFilter<br>
+Markus\5c, Paul,OU=People,OU=Havens,DC=thehavenshospital,DC=org</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="firstentry">FirstEntry<a href="#firstentry" class="hash-link" aria-label="Direct link to FirstEntry" title="Direct link to FirstEntry">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod FirstEntry(LD As %Integer, SearchResult As %Integer) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Return a pointer to the first entry of a message.</p>
+<p>Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>SearchResult - The search result as returned by SearchExts.</p>
+<p>Return Values:</p>
+<p>If the method succeeds, it returns the entry.<br>
+If no entry exists in the result set, it returns 0, and a call to GetError returns $$$LDAPSUCCESS.<br>
+If the function fails, it returns 0 and a call to GetError returns the session error.</p>
+<p>Comments:</p>
+<p>Use FirstEntry in conjunction with NextEntry to step through and retrieve the list of entries from a search result chain.</p>
+<p>Examples:</p>
+<p>s Status=##Class(%SYS.LDAP).SearchExts(LD,BaseDN,$$$LDAPSCOPESUBTREE,Filter,Attributes,0,&quot;&quot;,&quot;&quot;,2,ServerTimeout,.SearchResult)<br>
+i Status&#x27;=$$$LDAPSUCCESS q Status<br>
+s Entry=##Class(%SYS.LDAP).FirstEntry(LD,SearchResult)<br>
+s Status=##Class(%SYS.LDAP).GetError(LD)<br>
+i Status&#x27;=$$$LDAPSUCCESS q Status</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="getdn">GetDN<a href="#getdn" class="hash-link" aria-label="Direct link to GetDN" title="Direct link to GetDN">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod GetDN(LD As %Integer, Entry As %Integer) As %String</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Retrieve the distinguished name for a given entry.</p>
+<p>Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>Entry - Entry whose distinguished name is to be retrieved, as returned by the FirstEntry or NextEntry methods.</p>
+<p>Return Values:</p>
+<p>If the function succeeds, it returns the distinguished name.<br>
+If the function fails, it returns &quot;&quot;.<br>
+The actual session error status can be returned by a call to the GetError method.</p>
+<p>Examples:</p>
+<p>s Entry=##Class(%SYS.LDAP).FirstEntry(LD,SearchResult)<br>
+s Status=##Class(%SYS.LDAP).GetError(LD)<br>
+i Status&#x27;=$$$LDAPSUCCESS q Status<br>
+s DN=##Class(%SYS.LDAP).GetDN(LD,Entry)<br>
+i DN=&quot;&quot; s Status=##Class(%SYS.LDAP).GetError(LD)</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="geterror">GetError<a href="#geterror" class="hash-link" aria-label="Direct link to GetError" title="Direct link to GetError">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod GetError(LD) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Retrieve the last error code returned by an LDAP call for a specific session.</p>
+<p>Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>Return Values:</p>
+<p>An LDAP error code.</p>
+<p>Comments:</p>
+<p>Use the GetError method to return the last LDAP error message for a specific session. The value from the GetError method may in turn be passed to the Err2String method to get error text for the error.<br>
+Error numbers &gt;= $zh(&quot;5000&quot;) are ISC internal LDAP errors.</p>
+<p>Examples:</p>
+<p>s Status=##Class(%SYS.LDAP).GetError(LD)<br>
+s Msg=##Class(%SYS.LDAP).Err2String(Status)</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="getlasterror">GetLastError<a href="#getlasterror" class="hash-link" aria-label="Direct link to GetLastError" title="Direct link to GetLastError">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod GetLastError() As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Retrieve the last error code returned by an LDAP call.</p>
+<p>Return Values:</p>
+<p>An LDAP error code.</p>
+<p>Comments:</p>
+<p>Use the GetLastError method to return the last LDAP error message. The value from the GetLastError method may in turn be passed to the Err2String method to get error text for the error.<br>
+Returned errors are only in the LDAP error range and do not include ISC internal errors.</p>
+<p>Examples:</p>
+<p>s Status=##Class(%SYS.LDAP).GetLastError()<br>
+s Msg=##Class(%SYS.LDAP).Err2String(Status)</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="getnextpages">GetNextPages<a href="#getnextpages" class="hash-link" aria-label="Direct link to GetNextPages" title="Direct link to GetNextPages">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod GetNextPages(LD As %Integer, Page As %Integer, Timeout As %Integer, PageSize As %Integer, ByRef TotalPages As %Integer, ByRef SearchResult As %Integer) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Search the LDAP directory using a pages search and return a requested set of attributes for each entry.</p>
+<p>This is a Windows only method.<br>
+Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>Page - Pointer to page of results as returned by SearchInitPage() method. Timeout - Specifies both the local search time-out value in seconds and the operation time limit that is sent to the server within the search request.</p>
+<p>PageSize - Number of records to be returned in each page for each call to GetNextPages().</p>
+<p>TotalPages (byRef) - Estimated number of pages which will be returned by the search. Depending on the type of the LDAP server, this number may always be 0 (unknown).</p>
+<p>SearchResult (byRef) - Contains the results of the search upon completion of the call.</p>
+<p>Return Values:</p>
+<p>If the function succeeds, $$$LDAPSUCCESS is returned.<br>
+If there are more results to retrieve, then If the function fails, an error code is returned.</p>
+<p>Comments:</p>
+<p><strong>When done with the search results you need to free the search results the following way:</strong></p>
+<p><strong>1) First call the MsgFree(SearchResult) method.</strong>
+<strong>2) Then call the the SearchAbandonPage(LD,Page)() method.</strong>
+<strong>Failure to do this before a call to UnBinds may cause your process to core on a future LDAP call.</strong></p>
+<p>Note that the caller can have several different searches &quot;open&quot; at the same time by using a different variable for the SearchResult parameter.</p>
+<p>Examples:</p>
+<p>Search for all users in the LDAP database. Return their display name, e-mail and telephone number. Use a timeout of 10 seconds, and return at most 100 items for each call to the GetNextPages() method.</p>
+<p>s Page=##Class(%SYS.LDAP).SearchExts(LD,&quot;DC=mydomain,DC=com&quot;,<br>
+$$$LDAPSCOPESUBTREE,&quot;sAMAccountname=*&quot;,<br>
+$lb(&quot;displayName&quot;,&quot;mail&quot;,&quot;telephoneNumber&quot;),0,&quot;&quot;,&quot;&quot;,10,100,&quot;&quot;)<br>
+s Status=##Class(%SYS.LDAP).GetNextPages(LD,Page,10,100,.TotalPages,.SearchResult)<br>
+While (Status=$$$LDAPSUCCESS) {<br>
+; Process page of results here</p>
+<p>; Now get the next page of results<br>
+s Status=##Class(%SYS.LDAP).GetNextPages(LD,Page,10,100,.TotalPages,.SearchResult)<br>
+}<br>
+i Status=$$$LDAPNORESULTSRETURNED {w !,&quot;End of search&quot;} else { w !,&quot;Error &quot;_Status}<br>
+s Status=##Class(%SYS.LDAP).MsgFree(SearchResult)<br>
+s Status=##Class(%SYS.LDAP).SearchAbandonPage(LD, Page)</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="getoption">GetOption<a href="#getoption" class="hash-link" aria-label="Direct link to GetOption" title="Direct link to GetOption">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod GetOption(LD As %Integer, Option As %Integer, ByRef OutValue As %String) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Get options for an LDAP session.</p>
+<p>Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>Option - The name of the option to get. See valid options below.</p>
+<p>OutValue - Value of that option.</p>
+<p>Return Values:</p>
+<p>If the function succeeds, the return value is $$$LDAPSUCCESS.<br>
+If the function fails, it returns an error code.</p>
+<p>Valid Options:</p>
+<p>$$$LDAPOPTERRORNUMBER - Returns the last LDAP error.</p>
+<p>$$$LDAPOPTNETWORKTIMEOUT - Returns the network timeout value after which poll/select following a connect returns in case of no activity. Specifying seconds set to 0 results in an infinite timeout, which is the default. Normally there is no need to change the default. This is available on Unix platforms only.</p>
+<p>$$$LDAPOPTTIMEOUT - Returns the timeout value for the synchronous API calls. Specifying seconds set to 0 results in an infinite timeout, which is the default. Normally there is no need to change the default. This is available on Unix platforms only.</p>
+<p>$$$LDAPOPTSSL - Returns 0/1 whether SSL is enabled on the connection. The connection must have already been established before this will acurately return 0/1. This means calling StartTLS(), or SearchExts(), or additionally on Windows Connect().</p>
+<p>$$$LDAPOPTERRORSTRING - When called after a Bind operation, may give additional information about the cause of the bind failure. Additional information is not available on Windows clients or if using an OPENLDAP server.<br>
+Examples:</p>
+<p>Get last LDAP error on the session.<br>
+s Status=##Class(%SYS.LDAP).GetOption(LD,$$$LDAPOPTERRORNUMBER,.ErrorNum)</p>
+<p>Note: Previous versions allowed the option $$$LDAPOPTPROTOCOLVERSION and $$$LDAPOPTREFERRALS to be specified. These options are deprecated. SetOption calls using this option will be ignored and always will return success. Version is now always set to 3, and referrals are always turned off.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="getvalues">GetValues<a href="#getvalues" class="hash-link" aria-label="Direct link to GetValues" title="Direct link to GetValues">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod GetValues(LD As %Integer, Entry As %Integer, ByRef Attr As %String) As %List</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Return string values for a given attribute. Use GetValuesLen for binary data.</p>
+<p>Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>Entry - Pointer to the search entry as returned by the FirstEntry or NextEntry methods.</p>
+<p>Attr - String that contains the attribute whose values are to be retrieved. The passed string can be as returned by FirstAttribute or NextAttribute, or a caller supplied string.</p>
+<p>Return Values:</p>
+<p>If the function succeeds, a <a href="/csp/docbook/Doc.View.cls?FIND=OBJECTSCRIPT+$LIST+FUNCTION">$list</a> element is returned containing the values of the attribute.<br>
+If the function fails, it returns &quot;&quot;.<br>
+The actual session error status can be returned by a call to the GetError method.</p>
+<p>Examples:</p>
+<p>s Status=##Class(%SYS.LDAP).SearchExts(LD,BaseDN,$$$LDAPSCOPESUBTREE,Filter,Attributes,0,&quot;&quot;,&quot;&quot;,2,ServerTimeout,.SearchResult)<br>
+i Status&#x27;=$$$LDAPSUCCESS q Status<br>
+s Entry=##Class(%SYS.LDAP).FirstEntry(LD,SearchResult)<br>
+s Status=##Class(%SYS.LDAP).GetError(LD)<br>
+i Status&#x27;=$$$LDAPSUCCESS q Status<br>
+s ValueList=##Class(%SYS.LDAP).GetValues(LD,Entry,&quot;sAMAccountname&quot;) i ValueList=&quot;&quot; q ##Class(%SYS.LDAP).GetError(LD)<br>
+w !,&quot;sAMAccountname=&quot;_$li(ValueList,1)</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="getvalueslen">GetValuesLen<a href="#getvalueslen" class="hash-link" aria-label="Direct link to GetValuesLen" title="Direct link to GetValuesLen">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod GetValuesLen(LD As %Integer, Entry As %Integer, ByRef Attr As %String) As %List</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Return binary values for a given attribute. Use GetValues to return string values.</p>
+<p>Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>Entry - Pointer to the search entry as returned by the FirstEntry or NextEntry methods.</p>
+<p>Attr - String that contains the attribute whose values are to be retrieved. The passed string can be as returned by FirstAttribute or NextAttribute, or a caller supplied string.</p>
+<p>Return Values:</p>
+<p>If the function succeeds, a <a href="/csp/docbook/Doc.View.cls?FIND=OBJECTSCRIPT+$LIST+FUNCTION">$list</a> element is returned containing the values of the attribute.<br>
+If the function fails, it returns &quot;&quot;.<br>
+The actual session error status can be returned by a call to the GetError method.</p>
+<p>Examples:</p>
+<p>s Status=##Class(%SYS.LDAP).SearchExts(LD,BaseDN,$$$LDAPSCOPESUBTREE,Filter,Attributes,0,&quot;&quot;,&quot;&quot;,2,ServerTimeout,.SearchResult)<br>
+i Status&#x27;=$$$LDAPSUCCESS q Status<br>
+s Entry=##Class(%SYS.LDAP).FirstEntry(LD,SearchResult)<br>
+s Status=##Class(%SYS.LDAP).GetError(LD)<br>
+i Status&#x27;=$$$LDAPSUCCESS q Status<br>
+s ValueList=##Class(%SYS.LDAP).GetValuesLen(LD,Entry,&quot;jpegbinarypicture&quot;)<br>
+i ValueList=&quot;&quot; q ##Class(%SYS.LDAP).GetError(LD)<br>
+d Displayjpeg($li(ValueList,1))</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="init">Init<a href="#init" class="hash-link" aria-label="Direct link to Init" title="Direct link to Init">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod Init(HostName As %String = &quot;&quot;, PortNumber As %Integer = {$$$LDAPPORT}) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Initialize a connection to a LDAP server.</p>
+<p>Parameters:</p>
+<p>HostName - Space-separated list of host names running an LDAP server to which to connect. Each host name in the list can include an optional port number which is separated from the host itself with a colon (:). The host name must be a fully qualified domain name. A fully qualified domain name (FQDN), sometimes referred to as an absolute domain name, is a domain name that specifies its exact location in the tree hierarchy of the Domain Name System (DNS). It specifies all domain levels, including the top-level domain and the root domain. A fully qualified domain name is distinguished by its unambiguity; it can only be interpreted one way. For example, given a device with a local hostname myhost and a parent domain name example.com, the fully qualified domain name is myhost.example.com. The FQDN therefore uniquely identifies the device; while there may be many hosts in the world called myhost, there can only be one myhost.example.com. When using a Windows Active Directory server as an LDAP server, and a Windows client, a null string will find the default LDAP server for the domain.</p>
+<p>PortNumber - Contains the TCP port number to which to connect. This defaults to 389 if not specified. This parameter is ignored if a host name includes a port number.</p>
+<p>Return Values:</p>
+<p>If the function succeeds, it returns a handle to the LDAP session. The session handle must be freed with a call to UnBinds when it is no longer required.<br>
+If the function fails, it returns 0. Use GetLastError to retrieve the error code.</p>
+<p>Note that Init does not make an actual connection to the LDAP server, it simply initializes the connection information. The actual connection will happen during the first request for data from the LDAP server.</p>
+<p>Examples:</p>
+<p>Creates a session to your default LDAP server on port 389.<br>
+s LD = ##Class(%SYS.LDAP).Init()</p>
+<p>Creates a session to the LDAP server called &quot;ldapserver&quot; on default port 389.<br>
+s LD = ##Class(%SYS.LDAP).Init(&quot;ldapserver.example.com&quot;)</p>
+<p>Creates a session to the LDAP server called &quot;ldapserver&quot; on port 389.<br>
+s LD = ##Class(%SYS.LDAP).Init(&quot;ldapserver.example.com&quot;,389)</p>
+<p>Creates a session to either the LDAP server called &quot;ldapserver&quot; or if it is unavailable, to LDAP server &quot;backupldapserver&quot; on port 389.<br>
+s LD = ##Class(%SYS.LDAP).Init(&quot;ldapserver.example.com backupldapserver.example.com&quot;)</p>
+<p>Secure Connections:<br>
+For a Windows client, make sure you have the CA certificates already loaded in the Certificates(local computer)\Trusted Root Certification Authorities certificate store. NOTE: If the certificates are stored in the Certificates(current user)\Trusted Root Certification Authorities certificate store, then the SSL connection may fail with Error code 81 if the process is running in the background. For a Unix client, make sure the protections on the certificate file allow your process to be able to read it, and that any additional certificate or LDAP options are specified in the ldap.conf file.<br>
+It is recommended that on the Active Directory Server that the parameter &quot;LDAP server signing requirements&quot; be set to &quot;Require signature&quot;. This prevents any LDAP bind command on the server on port 389 to be executed unless the channel is encrypted with StartTLS. See</p>
+<p><a href="https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/domain-controller-ldap-server-signing-requirements" target="_blank" rel="noopener noreferrer">https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/domain-controller-ldap-server-signing-requirements</a></p>
+<p>To create a secure SSL connection to an LDAP server, here are the calls you need to make for each platform type.</p>
+<ol>
+<li>Windows Client to Windows Active Directory LDAP server.<br>
+Using the StartTLSs call<br>
+s LD=##Class(%SYS.LDAP).Init(&quot;ldapserver.example.com&quot;,389)<br>
+s Status=##Class(%SYS.LDAP).StartTLSs(LD)</li>
+</ol>
+<p>or</p>
+<p>Using a direct connection to the LDAP SSL port.<br>
+s LD=##Class(%SYS.LDAP).Init(&quot;ldapserver.example.com&quot;,636)</p>
+<ol start="2">
+<li>Windows Client to OpenLDAP server<br>
+Using a direct connection to the LDAP SSL port.<br>
+s LD=##Class(%SYS.LDAP).Init(&quot;ldapserver.example.com&quot;,636)</li>
+</ol>
+<p>Or<br>
+using the StartTLSs call<br>
+s LD=##Class(%SYS.LDAP).Init(&quot;ldapserver.example.com&quot;)<br>
+s Status=##Class(%SYS.LDAP).StartTLSs(LD)</p>
+<ol start="3">
+<li>
+<p>Unix client to Windows Active Directory LDAP server.<br>
+Using the StartTLSs call. If you want to connect directly to port 636 without using StartTLSs, use the ##Class(%SYS.LDAP).Initialize() method.<br>
+Note that there are other options pertaining to certificates which can be specified in the LDAP.CONF file on the Unix client (usually found in /etc/openldap/ldap.conf). The settings in this configuration file will be applied to your LDAP sessions you create. Read the man pages for ldap.conf for more information on the parameters.<br>
+s LD=##Class(%SYS.LDAP).Init(&quot;ldapserver.example.com&quot;)<br>
+s Status=##Class(%SYS.LDAP).SetOption(LD,$$$LDAPOPTXTLSCACERTFILE,CACertFileName)<br>
+s Status=##Class(%SYS.LDAP).StartTLSs(LD)</p>
+</li>
+<li>
+<p>Unix client to OpenLDAPserver.<br>
+Using the StartTLSs call. If you want to connect directly to port 636 without using StartTLSs, use the ##Class(%SYS.LDAP).Initialize() method<br>
+Note that there are other options pertaining to certificates which can be specified in the LDAP.CONF file on the Unix client (usually found in /etc/openldap/ldap.conf). The settings in this configuration file will be applied to your LDAP sessions you create. Read the man pages for ldap.conf for more information on the parameters.<br>
+s LD=##Class(%SYS.LDAP).Init(&quot;ldapserver.example.com&quot;)<br>
+s Status=##Class(%SYS.LDAP).SetOption(LD,$$$LDAPOPTXTLSCACERTFILE,CACertFileName)<br>
+s Status=##Class(%SYS.LDAP).StartTLSs(LD)</p>
+</li>
+</ol>
+<p>Error codes:</p>
+<p>When connecting using SSL, several different error codes could be returned when the connection is formed.<br>
+-11 or -12 - The certificate is not correct for the LDAP server, or the FQDN host name was not specified correctly. Make sure that you have the CA certificate properly installed on the client, in the correct directory. On a Windows client, make sure it is in local computer certificate store. On a Unix client, make sure the process has read access to the certificate, and that the file specification in the setoption call is correct. Make sure that the LDAP server name specified is the FQDN (e.g. ldapserver.example.com) and not just &quot;ldapserver&quot;, or an ip address.<br>
+81 - Most likely the certificate is not in the correct Windows certificate store. Import it into the local computer store.<br>
+When on a Unix client, if you try to form an SSL connection with one certificate, and the certificate is wrong, or the server is incorrect, your connection may fail even after you have corrected the problem. The issue here is that the process caches the certificate and node information at the O/S level. To correct this, simply log your process out of the system, then log back in.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="initialize">Initialize<a href="#initialize" class="hash-link" aria-label="Direct link to Initialize" title="Direct link to Initialize">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod Initialize(ByRef LD As %Integer = &quot;&quot;, URL As %String) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Connect from a Unix system to a LDAP server.</p>
+<p>This sets up a connection from a Unix machine to an LDAP server with or without TLS.</p>
+<ol>
+<li>Connect without using TLS to port 389.<br>
+Set Status=##Class(%SYS.LDAP).Initialize(.ld,&quot;ldap://domain.com&quot;)</li>
+<li>Connect using TLS directly to port 636<br>
+Set Status=##Class(%SYS.LDAP).Initialize(.ld,&quot;ldaps://domain.com&quot;)<br>
+Set Status=##Class(%SYS.LDAP).SetOption(LD,$$$LDAPOPTXTLSCACERTFILE,&quot;/iris/mgr/CACertFile.pem&quot;)</li>
+</ol>
+<p>Note that the actual connection to the LDAP server will be made when the first operation on the channel which returns data is executed, such as a SimpleBinds().</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="firstattribute">FirstAttribute<a href="#firstattribute" class="hash-link" aria-label="Direct link to FirstAttribute" title="Direct link to FirstAttribute">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod FirstAttribute(LD As %Integer, Entry As %Integer, ByRef Ptr As %Integer) As %String</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Return the first attribute of an Entry.</p>
+<p>Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>Entry - The entry whose attributes are to be stepped through, as returned by the FirstEntry or NextEntry methods.</p>
+<p>Ptr (ByRef) - Used internally to track the current attribute.<br>
+Return Values:</p>
+<p>If the function succeeds, a string containing the name of the first attribute is returned.<br>
+If the function fails, it returns &quot;&quot;.<br>
+The actual session error status can be returned by a call to the GetError method.</p>
+<p>Comments:</p>
+<p>Use the FirstAttribute with the NextAttribute method to step through a list of attributes in the entry. Once the Attribute name is returned, you can call the GetValues or GetValuesLen method to return the values for that attribute.<br>
+Pass the Ptr parameter by reference to track the current position in the entry.</p>
+<p>Examples:</p>
+<p>Loop through all attributes of an entry<br>
+s CurrentEntry=##Class(%SYS.LDAP).FirstEntry(LD,SearchResult)<br>
+s AttrName=##Class(%SYS.LDAP).FirstAttribute(LD,CurrentEntry,.Ptr)<br>
+while (AttrName&#x27;=&quot;&quot;) {<br>
+s AttrValues=##Class(%SYS.LDAP).GetValues(LD,CurrentEntry,AttrName)<br>
+s AttrName=##Class(%SYS.LDAP).NextAttribute(LD,CurrentEntry,.Ptr)<br>
+}</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="modifyexts">ModifyExts<a href="#modifyexts" class="hash-link" aria-label="Direct link to ModifyExts" title="Direct link to ModifyExts">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod ModifyExts(LD As %Integer, DN As %String, ATTR As %List, ServerControls As %String = &quot;&quot;, ClientControls As %String = &quot;&quot;) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Modify an entry in the directory tree.</p>
+<p>Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>DN - String that contains the distinguished name of the entry to modify.</p>
+<p>ATTR - <a href="/csp/docbook/Doc.View.cls?FIND=OBJECTSCRIPT+$LIST+FUNCTION">$list</a> formatted with attributes to modify in the new entry.</p>
+<p>Each element in the list is a separate attribute to be modified in the new entry.<br>
+Attribute=$lb(op,type,vals)<br>
+op - Operation to be performed as follows:<br>
+0 - Add - The given values are added to the entry, creating the attribute if necessary.<br>
+1 - Delete - The given values are deleted from the entry, removing the attribute if no values remain. If the entire attribute is to be deleted, the mod_values field should be set to NULL ($lb(&quot;&quot;)).<br>
+2 - Replace - The attribute will have the listed values after the modification, having been created if necessary. If set to null, then the attribute is deleted.<br>
+128 - This value should be combined (ORed) with the Add/Delete/Replace value if the data to be inserted is Binary (e.g. jpeg file.)<br>
+type - Name of the attribute. Example=&quot;Telephone&quot;.<br>
+vals - <a href="/csp/docbook/Doc.View.cls?FIND=OBJECTSCRIPT+$LIST+FUNCTION">$list</a> of the values to assign to the attribute. If this is a single entry attribute, then $lb(Value), Example=$lb(&quot;617-621-0600&quot;). If a multi-value entry, then $lb(Value1,Value2,...,Valuen).</p>
+<p>ServerControls - Ignored, pass as &quot;&quot;.</p>
+<p>ClientControls - Ignored, pass as &quot;&quot;.</p>
+<p>Return Values:</p>
+<p>If the function succeeds, $$$LDAPSUCCESS is returned.<br>
+If the function fails, an error code is returned.</p>
+<p>Examples:</p>
+<p>s Attr1=$lb(0,&quot;displayName&quot;,$lb(Jim Nilson))<br>
+s Attr2=$lb(0,&quot;telephoneNumber&quot;,$lb(&quot;617-621-0600&quot;)<br>
+; Replace the Objectclass attribute<br>
+s Attr3=$lb(2,&quot;objectClass&quot;,$lb(&quot;top&quot;,&quot;person&quot;,&quot;organizationalPerson&quot;,&quot;user&quot;)<br>
+;Replace Binary value for a jpeg photo<br>
+s Attr4=$lb(130,&quot;Photo&quot;,$lb(jpegphoto))<br>
+; Delete Address2 attribute<br>
+a Attr5=$lb(1,&quot;Address2&quot;,&quot;&quot;)<br>
+s Attributes=$lb(Attr1,Attr2,Attr3,Attr4,Attr5)<br>
+s DN=&quot;CN=Nilson\, Jim,OU=Users,OU=England,DC=iscinternal,DC=com&quot;<br>
+s Status=##Class(%SYS.LDAP).ModifyExts(LD,DN,Attributes)</p>
+<p>Note:<br>
+Changing a password on a Windows Active Directory LDAP server.<br>
+The user must first be created before the password change can take place, and the password change must take place over an encrypted channel. The password is contained in the unicodePwd attribute, and must be formatted in a specific way. When initially creating the user, the unicodePwd attribute must not be specified, or the creation of the user will fail.<br>
+To format the password, a leading and trailing double quote must be added to it. Then it must be converted to unicode. Then when passed into the modify function, it must be passed in as a binary value, with the &quot;Replace&quot; operation. It must be the only operation contained in the modify call; No other attribute can be changed at the same time.</p>
+<p>s password=&quot;NewPassword&quot;<br>
+s ChangePassword=$zcvt(&quot;&quot;&quot;&quot;_password_&quot;&quot;&quot;&quot;,&quot;o&quot;,&quot;UnicodeLittle&quot;)<br>
+s Attr1=$lb(130,&quot;unicodePwd&quot;,$lb(ChangePassword))<br>
+s Attributes=$lb(Attr1)<br>
+s Status=##Class(%SYS.LDAP).ModifyExts(LD,DN,Attributes,&quot;&quot;,&quot;&quot;)</p>
+<p>Note: In order to change a password, the user must have binded to the LDAP server with an account which has administrator privilege on the system. The password which is set must also pass any length or pattern requirements imposed by the security system on the LDAP server.</p>
+<p>Changing your own password on a Windows Active Directory LDAP server is similar to above, except that you need to bind to the LDAP server using your own username, and must also pass in the old password with the delete attribute. These must also be the only two attributes passed in the modify method.</p>
+<p>s oldpassword=&quot;OldPassword&quot;<br>
+s password=&quot;NewPassword&quot;<br>
+s ChangeOldPassword=$zcvt(&quot;&quot;&quot;&quot;_oldpassword_&quot;&quot;&quot;&quot;,&quot;o&quot;,&quot;UnicodeLittle&quot;)<br>
+s ChangeNewPassword=$zcvt(&quot;&quot;&quot;&quot;_password_&quot;&quot;&quot;&quot;,&quot;o&quot;,&quot;UnicodeLittle&quot;)<br>
+s Attr1=$lb(128,&quot;unicodePwd&quot;,$lb(ChangeOldPassword))<br>
+s Attr2=$lb(129,&quot;unicodePwd&quot;,$lb(ChangePassword))<br>
+s Attributes=$lb(Attr1,Attr2)<br>
+s Status=##Class(%SYS.LDAP).ModifyExts(LD,DN,Attributes,&quot;&quot;,&quot;&quot;)</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="msgfree">MsgFree<a href="#msgfree" class="hash-link" aria-label="Direct link to MsgFree" title="Direct link to MsgFree">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod MsgFree(SearchResult As %Integer) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Free the results of the last LDAP SearchExts method call.</p>
+<p>Parameter:</p>
+<p>SearchResult - Contains the results of the SearchExts method.</p>
+<p>Return Values:</p>
+<p>If the function succeeds, $$$LDAPSUCCESS is returned.<br>
+If the function fails, an error code is returned.</p>
+<p>Comments:</p>
+<p>When done with the search results you must free the search results by calling this method.</p>
+<p>Failure to do this before a call to UnBinds may cause your process to core on a future LDAP call.</p>
+<p>Examples:</p>
+<p>s Status=##Class(%SYS.LDAP).MsgFree(SearchResult)</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="nextattribute">NextAttribute<a href="#nextattribute" class="hash-link" aria-label="Direct link to NextAttribute" title="Direct link to NextAttribute">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod NextAttribute(LD As %Integer, Entry As %Integer, ByRef Ptr As %Integer) As %String</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Return the next attribute of an Entry.</p>
+<p>Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>Entry - The entry whose attributes are to be stepped through, as returned by the FirstEntry or NextEntry methods.</p>
+<p>Ptr (ByRef)- Used internally to track the current attribute.<br>
+Return Values:</p>
+<p>If the function succeeds, a string containing the name of the next attribute is returned.<br>
+If the function fails, it returns &quot;&quot;.<br>
+The actual session error status can be returned by a call to the GetError method.</p>
+<p>Comments:</p>
+<p>Use the NextAttribute with the FirstAttribute method to step through a list of attributes in the entry. Once the attribute name is returned, you can call the GetValue or GetValuesLen method to return the values for that attribute.<br>
+Pass the Ptr parameter by reference to track the current position in the entry.</p>
+<p>Examples:</p>
+<p>Loop through all attributes of an entry<br>
+s CurrentEntry=##Class(%SYS.LDAP).FirstEntry(LD,SearchResult)<br>
+s AttrName=##Class(%SYS.LDAP).FirstAttribute(LD,CurrentEntry,.Ptr)<br>
+while (AttrName&#x27;=&quot;&quot;) {<br>
+s AttrValues=##Class(%SYS.LDAP).GetValues(LD,CurrentEntry,AttrName)<br>
+s AttrName=##Class(%SYS.LDAP).NextAttribute(LD,CurrentEntry,.Ptr)</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="nextentry">NextEntry<a href="#nextentry" class="hash-link" aria-label="Direct link to NextEntry" title="Direct link to NextEntry">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod NextEntry(LD As %Integer, Entry As %Integer) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Return the next entry of a message.</p>
+<p>Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>Entry - The Entry as previously returned by FirstEntry() or NextEntry().</p>
+<p>Return Values:</p>
+<p>If the method succeeds, it returns the entry.<br>
+If no entry exists in the result set, it returns 0, and a call to GetError returns $$$LDAPSUCCESS.<br>
+If the function fails, it returns 0 and a call to GetError returns the session error.</p>
+<p>Comments:</p>
+<p>Use NextEntry in conjunction with FirstEntry to step through and retrieve the list of entries from a search result chain.</p>
+<p>Examples:</p>
+<p>s Status=##Class(%SYS.LDAP).SearchExts(LD,BaseDN,$$$LDAPSCOPESUBTREE,Filter,Attributes,0,&quot;&quot;,&quot;&quot;,2,ServerTimeout,.SearchResult)<br>
+i Status&#x27;=$$$LDAPSUCCESS q Status<br>
+s Entry=##Class(%SYS.LDAP).FirstEntry(LD,SearchResult)<br>
+s Status=##Class(%SYS.LDAP).GetError(LD)<br>
+i Status&#x27;=$$$LDAPSUCCESS q Status<br>
+s Entry=##Class(%SYS.LDAP).NextEntry(LD,Entry)<br>
+s Status=##Class(%SYS.LDAP).GetError(LD)<br>
+i Status&#x27;=$$$LDAPSUCCESS q Status<br>
+s Entry=##Class(%SYS.LDAP).NextEntry(LD,Entry)<br>
+s Status=##Class(%SYS.LDAP).GetError(LD)<br>
+i Status&#x27;=$$$LDAPSUCCESS q Status</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="renameexts">RenameExts<a href="#renameexts" class="hash-link" aria-label="Direct link to RenameExts" title="Direct link to RenameExts">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod RenameExts(LD As %Integer, DN As %String, NewRDN As %String, NewParent As %String = &quot;&quot;, DeleteOldRdn As %Boolean = 1, ServerControls As %String = &quot;&quot;, ClientControls As %String = &quot;&quot;) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Rename the distinguished name of an entry in the directory.</p>
+<p>Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>DN - String that contains the distinguished name of the entry to rename.</p>
+<p>NewRDN - String that contains the new relative distinguished name.</p>
+<p>NewParent - String that contains the distinguished name of the new parent for this entry or &quot;&quot;. This parameter enables you to move the entry to a new parent container.</p>
+<p>DeleteOldRdn - 1 if the old relative distinguished name should be deleted; 0 if the old relative distinguished name should be retained.</p>
+<p>ServerControls - Ignored, pass as &quot;&quot;.</p>
+<p>ClientControls - Ignored, pass as &quot;&quot;.</p>
+<p>Return Values:</p>
+<p>If the function succeeds, $$$LDAPSUCCESS is returned.<br>
+If the function fails, an error code is returned.</p>
+<p>Examples:</p>
+<p>s Status=##Class(%SYS.LDAP).RenameExts(LD,&quot;CN=Nilson,OU=Users,DC=iscinternal,DC=com&quot;,&quot;CN=Nelson&quot;,&quot;&quot;,1)</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="saslbinds">SASLBinds<a href="#saslbinds" class="hash-link" aria-label="Direct link to SASLBinds" title="Direct link to SASLBinds">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod SASLBinds(LD As %Integer, DN As %String, Mechanism As %String, ByRef ClientCredentials As %String, ServerControls As %String = &quot;&quot;, ClientControls As %String = &quot;&quot;, ByRef ServerCredentials As %String = &quot;&quot;) As %Integer [ Internal ]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Authenticate a client to a server, using a SASL mechanism.</p>
+<p>Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>DN - Full distinguished name of the user to authenticate. This is usually in some form similar to the following:</p>
+<p>&quot;CN=testuser,OU=Users,OU=Cambridge,DC=mydomain,DC=com&quot;</p>
+<p>Mechanism - Type of SASL authentication to perform. Currently only &quot;EXTERNAL&quot; is supported. Pass &quot;&quot; for the DN and ClientCredentials.<br>
+ClientCredentials - Credentials for the DN.<br>
+ServerControls - Ignored, pass as &quot;&quot;.</p>
+<p>ClientControls - Ignored, pass as &quot;&quot;.</p>
+<p>ServerCredentials - Server credentials.<br>
+Return Values:</p>
+<p>If the function succeeds, $$$LDAPSUCCESS is returned.<br>
+If the function fails, an error code is returned.</p>
+<p>Comments:</p>
+<p>This function should only be used on connections which has been encrypted with SSL/TLS.</p>
+<p>On a Unix client, use the SetOption calls with $$$LDAPOPTXTLSCERTFILE and $$$LDAPOPTXTLSKEYFILE to pass in the Public and Private key files. Examples:</p>
+<p>Initialize a connection to the default Windows domain LDAP server, start the TLS connection, and bind to the server.<br>
+s LD=##Class(%SYS.LDAP).Init()<br>
+s Status=##Class(%SYS.LDAP).StartTLSs(LD) s Status=##Class(%SYS.LDAP).SASLBinds(LD,&quot;&quot;,&quot;EXTERNAL&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,.ServerCredentials)</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="searchexts">SearchExts<a href="#searchexts" class="hash-link" aria-label="Direct link to SearchExts" title="Direct link to SearchExts">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod SearchExts(LD As %Integer, Base As %String, Scope As %Integer, Filter As %String, Attrs As %List, AttrsOnly As %Boolean = 0, ServerControls As %String = &quot;&quot;, ClientControls As %String = &quot;&quot;, Timeout As %Integer = 0, SizeLimit As %Integer = 0, ByRef SearchResult As %Integer) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Search the LDAP directory and return a requested set of attributes for each entry.</p>
+<p>Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>Base - String that contains the distinguished name of the entry at which to start the search.</p>
+<p>Scope - Specifies one of the following values to indicate the scope of the search.</p>
+<p>$$$LDAPSCOPEBASE -Search the base entry only.<br>
+$$$LDAPSCOPEONELEVEL - Search all entries in the first level below the base entry, excluding the base entry.<br>
+$$$LDAPSCOPESUBTREE - Search the base entry and all entries in the tree below the base.</p>
+<p>Filter - String that specifies the search filter. <strong>The search filter may need to be escaped for certain characters. On Unix clients, you may get a &quot;Bad Filter&quot; error. See the EscapeFilter() method.</strong></p>
+<p>Attrs - <a href="/csp/docbook/Doc.View.cls?FIND=OBJECTSCRIPT+$LIST+FUNCTION">$list</a> containing strings indicating which attributes to return for each matching entry. Pass &quot;&quot; to retrieve all available attributes.</p>
+<p>AttrsOnly - A boolean value that should be zero if both attribute types and values are to be returned, 1 if only types are wanted.</p>
+<p>ServerControls - Ignored, pass as &quot;&quot;.</p>
+<p>ClientControls - Ignored, pass as &quot;&quot;.</p>
+<p>Timeout - Specifies both the local search time-out value in seconds and the operation time limit that is sent to the server within the search request.</p>
+<p>SizeLimit - A limit on the number of entries to return from the search. A value of zero means no limit. If you set this to some value, and the number of results returned by the search is more than this, then the search may return a size limit exceeded error. Note that the number of entries able to be returned is also controlled by a parameter on the LDAP server. If the search returns more than this limit, then a size limit exceeded error will also be returned. Microsoft Active Directory servers by default can return up to 1,000 entries for a search. If your search exceeds this size, you can use the SearchInitPage() and GetNextPages() methods to use a paged search. See</p>
+<p><a href="https://support.microsoft.com/en-us/help/315071/how-to-view-and-set-ldap-policy-in-active-directory-by-using-ntdsutil" target="_blank" rel="noopener noreferrer">https://support.microsoft.com/en-us/help/315071/how-to-view-and-set-ldap-policy-in-active-directory-by-using-ntdsutil</a> for more info.</p>
+<p>SearchResult (byRef) - Contains the results of the search upon completion of the call.</p>
+<p>Return Values:</p>
+<p>If the function succeeds, $$$LDAPSUCCESS is returned.<br>
+If the function fails, an error code is returned.</p>
+<p>Comments:</p>
+<p><strong>When done with the search results you need to free the search results in one of the following ways:</strong></p>
+<p><strong>1) Call the MsgFree(SearchResult) method.</strong>
+<strong>2) Call SearchExts again, and pass the SearchResult parameter back in unchanged.</strong></p>
+<p><strong>Failure to do this before a call to UnBinds may cause your process to core on a future LDAP call.</strong></p>
+<p>Note that the caller can have several different searches &quot;open&quot; at the same time by using a different variable for the SearchResult parameter.</p>
+<p>Examples:</p>
+<p>Search for all users whose Windows login name starts with &quot;steve&quot;. Return their display name, e-mail and telephone number. Use a timeout of 10 seconds, and return at most 20 items.<br>
+s Status=##Class(%SYS.LDAP).SearchExts(LD,&quot;DC=mydomain,DC=com&quot;,<br>
+$$$LDAPSCOPESUBTREE,&quot;sAMAccountname=steve*&quot;,<br>
+$lb(&quot;displayName&quot;,&quot;mail&quot;,&quot;telephoneNumber&quot;),0,&quot;&quot;,&quot;&quot;,10,20,.SearchResult)</p>
+<p>After calling this method, the user should test for the success of the search before further examining the search result as follows:<br>
+s NumEntries=##Class(%SYS.LDAP).CountEntries(LD,SearchResult)<br>
+i NumEntries=-1 s Status=##Class(%SYS.LDAP).GetError(LD) q Status<br>
+i NumEntries=0 w !,&quot;No search entries found&quot; g SearchAgain<br>
+<strong>Note that the SearchResult buffer must be freed with MsgFree(SearchResult) even after a failed search.</strong></p>
+<p>See the documentation in SimpleBindS which shows how to handle errors and retry the operation.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="searchinitpage">SearchInitPage<a href="#searchinitpage" class="hash-link" aria-label="Direct link to SearchInitPage" title="Direct link to SearchInitPage">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod SearchInitPage(LD As %Integer, Base As %String, Scope As %Integer, Filter As %String, Attrs As %List, AttrsOnly As %Boolean = 0, ServerControls As %String = &quot;&quot;, ClientControls As %String = &quot;&quot;, Timeout As %Integer = 0, SizeLimit As %Integer = 0, SortKey As %String = &quot;&quot;) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Search the LDAP directory using a paged search and return a requested set of attributes for each entry.</p>
+<p>This is a Windows only method.<br>
+Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>Base - String that contains the distinguished name of the entry at which to start the search.</p>
+<p>Scope - Specifies one of the following values to indicate the scope of the search.</p>
+<p>$$$LDAPSCOPEBASE -Search the base entry only.<br>
+$$$LDAPSCOPEONELEVEL - Search all entries in the first level below the base entry, excluding the base entry.<br>
+$$$LDAPSCOPESUBTREE - Search the base entry and all entries in the tree below the base.</p>
+<p>Filter - String that specifies the search filter.</p>
+<p>Attrs - <a href="/csp/docbook/Doc.View.cls?FIND=OBJECTSCRIPT+$LIST+FUNCTION">$list</a> containing strings indicating which attributes to return for each matching entry. Pass &quot;&quot; to retrieve all available attributes.</p>
+<p>AttrsOnly - A boolean value that should be zero if both attribute types and values are to be returned, 1 if only types are wanted.</p>
+<p>ServerControls - Ignored, pass as &quot;&quot;.</p>
+<p>ClientControls - Ignored, pass as &quot;&quot;.</p>
+<p>Timeout - Specifies both the local search time-out value in seconds and the operation time limit that is sent to the server within the search request.</p>
+<p>SizeLimit - A limit on the number of entries to return from the search for each page. SortOrder - Ignored, pass as &quot;&quot;.</p>
+<p>Return Values:</p>
+<p>Page - Contains a pointer to the initialized page of results which should be passed to the GetNextPages() method.</p>
+<p>Comments:</p>
+<p><strong>When done with the search results you need to free the search results and page the following way:</strong></p>
+<p><strong>1) First call the MsgFree(SearchResult) method.</strong>
+<strong>2) Then call the the SearchAbandonPage(LD,Page)() method.</strong>
+<strong>Failure to do this before a call to UnBinds may cause your process to core on a future LDAP call.</strong></p>
+<p>Note that the caller can have several different searches &quot;open&quot; at the same time by using a different variable for the Page parameter.</p>
+<p>This method allows the user to perform a single search on the LDAP directory which would enought records to exceed the MaxPageSize parameter (default 1,000) on the LDAP server. An example of this would be to build a phone list of all the employees in the LDAP database, where there are more than 1,000 employees.</p>
+<p>Examples:</p>
+<p>Search for all users in the LDAP database. Return their display name, e-mail and telephone number. Use a timeout of 5 seconds, and return at most 100 items for each call to the GetNextPages() method.<br>
+s Page=##Class(%SYS.LDAP).SearchInitPage(LD,&quot;DC=mydomain,DC=com&quot;,<br>
+$$$LDAPSCOPESUBTREE,&quot;sAMAccountname=*&quot;,<br>
+$lb(&quot;displayName&quot;,&quot;mail&quot;,&quot;telephoneNumber&quot;),0,&quot;&quot;,&quot;&quot;,5,100,&quot;&quot;)<br>
+; Lets limit each next page to 5 entries<br>
+s Status=##Class(%SYS.LDAP).GetNextPages(LD,Page,5,5,.TotalCount,.SearchResult)<br>
+While (Status=$$$LDAPSUCCESS) {<br>
+Set Result = ##Class(%SYS.LDAP).FirstEntry(LD, SearchResult)<br>
+Set DN = ##Class(%SYS.LDAP).GetDN(tLDAPSession, Result)<br>
+Write &quot;DN = &quot;,tDN,! ; only print the first DN in each set of 5<br>
+Set Status = ##Class(%SYS.LDAP).GetNextPages(LD,Page,5,5,.TotalCount,.SearchResult)<br>
+}<br>
+i Status=$$$LDAPNORESULTSRETURNED {w !,&quot;End of search&quot;} else { w !,&quot;Error &quot;_Status}<br>
+Set Status = ##Class(%SYS.LDAP).SearchAbandonPage(LD, Page)</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="searchabandonpage">SearchAbandonPage<a href="#searchabandonpage" class="hash-link" aria-label="Direct link to SearchAbandonPage" title="Direct link to SearchAbandonPage">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod SearchAbandonPage(LD As %Integer, Page As %Integer) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Free the page pointer returned by the SearchInitPage() method() This is a Windows only method.<br>
+Return Values:</p>
+<p>If the function succeeds, $$$LDAPSUCCESS is returned.<br>
+If the function fails, an error code is returned.</p>
+<p>Comments:</p>
+<p>When done with the search results you must free the search page by calling this method.</p>
+<p>Failure to do this before a call to UnBinds may cause your process to core on a future LDAP call.</p>
+<p>Examples:</p>
+<p>s Status=##Class(%SYS.LDAP).SearchAbandonPage(LD,Page)</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="setoption">SetOption<a href="#setoption" class="hash-link" aria-label="Direct link to SetOption" title="Direct link to SetOption">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod SetOption(LD As %Integer, Option As %Integer, InValue As %String) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Set options for an LDAP session.</p>
+<p>Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>Option - The name of the option to set. See valid options below.</p>
+<p>InValue - Value that the option is to be given. The actual value of this parameter depends on the setting of the option parameter. The constants $$$LDAP_OPT_ON and $$$LDAP_OPT_OFF can be given for options that have on or off settings.</p>
+<p>Return Values:</p>
+<p>If the function succeeds, the return value is $$$LDAPSUCCESS.<br>
+If the function fails, it returns an error code.</p>
+<p>$$$LDAPOPTXTLSNEWCTX - Clears the current SSL/TLS context for the process. If you have called SetOption with any of the LDAPOPTXTLS* parameters below, and then need to change that option, you need to first clear the previous SSL/TLS settings with this option.</p>
+<p>$$$LDAPOPTXTLSCACERTFILE - Directory and name of TLS certificate. The certificate needed is that of the certificate authority that signed the certificate of the LDAP server. It needs to be in .PEM format. Available on Unix only.</p>
+<p>$$$LDAPOPTXTLSCERTFILE - Directory and name of Client X.509 certificate. Available on Unix only.</p>
+<p>$$$LDAPOPTXTLSKEYFILE - Directory and name of the Client X.509 certificate private key. Notes: Private keys with passwords are not supported by openldap (see the man pages). Available on Unix only.</p>
+<p>$$$LDAPOPTNETWORKTIMEOUT - Sets the network timeout value after which poll/select following a connect returns in case of no activity. Specifying seconds set to 0 results in an infinite timeout, which is the default. Normally there is no need to change the default. This is available on Unix platforms only.</p>
+<p>$$$LDAPOPTTIMEOUT - Sets the timeout value for the synchronous API calls. Specifying seconds set to 0 results in an infinite timeout, which is the default. Normally there is no need to change the default. This is available on Unix platforms only.</p>
+<p>Examples:</p>
+<p>Set location of TLS certificate for TLS connection:<br>
+s Status=##Class(%SYS.LDAP).SetOption(LD,$$$LDAPOPTXTLSCACERTFILE,&quot;/usr/share/ssl/certs/ldapserver.pem&quot;)</p>
+<p>Note: Previous versions allowed the option $$$LDAPOPTPROTOCOLVERSION and $$$LDAPOPTREFERRALS to be specified. These options are deprecated. SetOption calls using this option will be ignored and always will return success. Version is now always set to 3, and referrals are always turned off.</p>
+<p>Note: If you set the TLS options on a Unix client, then issue a StartTLS call to an LDAP server then Unbind the connection, the previous TLS settings will remain active even if the SetOption call is subsequently made with a different certificate. Subsequent LDAP StartTLS calls will use the SetOption values from the first StartTLS call until the InterSystems IRIS process exits. To reset to a different certificate, You need to call:<br>
+s Status=##Class(%SYS.LDAP).SetOption(LD,$$$LDAPOPTXTLSNEWCTX,0) ; Clear prior certificate<br>
+s Status=##Class(%SYS.LDAP).SetOption(LD,$$$LDAPOPTXTLSCACERTFILE,&quot;/usr/share/ssl/certs/newcert.pem&quot;)</p>
+<p>Note that if you have not previously created a SSL connection, the $$$LDAPOPTXTLSNEWCTX option will return an error. Depending on the structure of your code, it might be better to call this immediately before you call UnBind().</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="simplebinds">SimpleBinds<a href="#simplebinds" class="hash-link" aria-label="Direct link to SimpleBinds" title="Direct link to SimpleBinds">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod SimpleBinds(LD As %Integer, DN As %String, Password As %String) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Authenticate a client to a server, using a plaintext password.</p>
+<p>Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>DN - Full distinguished name of the user to authenticate. This is usually in some form similar to the following:</p>
+<p>&quot;CN=testuser,OU=Users,OU=Cambridge,DC=mydomain,DC=com&quot;</p>
+<p>Password - Password for the DN.<br>
+NOTE: If the password used is a NULL string, then the SimpleBinds function will attempt to do an &quot;unauthenticated&quot; bind to the LDAP server. If unauthenticated binds are allowed by the server, then SimpleBinds will allways succeed when a NULL password is passed. If you are using this method to authenticate a user entered password, then before calling this function you must make sure that the password entered is not NULL.<br>
+if you wish to do an LDAP &quot;anonymous&quot; bind, pass a null username and password into this method.</p>
+<p>Return Values:</p>
+<p>If the function succeeds, $$$LDAPSUCCESS is returned.<br>
+If the function fails, an error code is returned.</p>
+<p>Comments:</p>
+<p>This function should only be used on connections which has been encrypted with SSL/TLS as it sends plaintext usernames and passwords across the channel.</p>
+<p>Examples:</p>
+<p>Initialize a connection to the default Windows domain LDAP server, start the TLS connection, and bind to the server.<br>
+s LD=##Class(%SYS.LDAP).Init()<br>
+s Status=##Class(%SYS.LDAP).StartTLSs(LD)<br>
+;If using for authentication of the user, make sure the password entered is not null.<br>
+i PW=&quot;&quot; w !,&quot;LDAP password cannot be null&quot; q<br>
+s Status=##Class(%SYS.LDAP).SimpleBinds(LD,DN,PW)</p>
+<p>Perform an Anonymous bind.<br>
+s Status=##Class(%SYS.LDAP).SimpleBinds(LD,&quot;&quot;,&quot;&quot;)</p>
+<p>Perform an Unauthenticated bind.<br>
+s Status=##Class(%SYS.LDAP).SimpleBinds(LD,DN,&quot;&quot;)</p>
+<p>Sometimes a Bind or other LDAP operation may fail with a &quot;Server Down&quot; error on Unix (-1). This is sometimes because one of the system calls is interrupted by a Unix signal or temporary network glitch. In cases like this, the operation can usually be retried:</p>
+<p>RetryInit  s LD=##Class(%SYS.LDAP).Init()  s Status=##Class(%SYS.LDAP).StartTLSs(LD)  s Status=##Class(%SYS.LDAP).SimpleBinds(LD,Username,Password)  i Status&#x27;=$$$LDAPSUCCESS { 	d CloseServer 	i Status=$$$XLDAPSERVERDOWN { 		i RetryCount&lt;5 { 			s RetryCount=RetryCount+1 			h .5 			g RetryInit 		} 	} 	s Status=$$$ERROR($$$LDAPInvalidPassword,Status,##Class(%SYS.LDAP).Err2String(Status)<em>&quot;:&quot;</em>$g(ErrString)) 	g LDAPError  } ..... CloseServer #;Make sure we free the search buffers here. If we don&#x27;t we may crash in the unbind on some #;unix boxes.  i $d(SearchResult) { 	 Try { 		 d ##Class(%SYS.LDAP).MsgFree(SearchResult) 		 k SearchResult 	 } catch {}  }  i $d(LD) { 	 Try { 		 s Status1=##Class(%SYS.LDAP).UnBinds(LD) 		 k LD 	 } catch {}  }  q</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="starttlss">StartTLSs<a href="#starttlss" class="hash-link" aria-label="Direct link to StartTLSs" title="Direct link to StartTLSs">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod StartTLSs(LD As %Integer) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Start using TLS encryption on an active LDAP session.</p>
+<p>Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>Return Values:</p>
+<p>If the function succeeds, $$$LDAPSUCCESS is returned.<br>
+If the function fails, an error code is returned.</p>
+<p>Comments:</p>
+<p>In order to use TLS, the client needs to have a certificate installed on it. For Windows systems, the certificate needs to be installed in the Windows certificate database.<br>
+Note for Unix, the certificate needs to be copied to the system, and the SetOption method must be called to load the certificate. The certificate must be in .PEM format.</p>
+<p>Examples:</p>
+<p>This example starts a TLS connection on a Unix machine.<br>
+s LD=##Class(%SYS.LDAP).Init(&quot;myldapserver.example.com&quot;)<br>
+s Status=##Class(%SYS.LDAP).SetOption(LD,$$$LDAPOPTXTLSCACERTFILE,&quot;/usr/share/ssl/certs/ldapserver.pem&quot;)<br>
+s Status=##Class(%SYS.LDAP).StartTLSs(LD)</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="stoptlss">StopTLSs<a href="#stoptlss" class="hash-link" aria-label="Direct link to StopTLSs" title="Direct link to StopTLSs">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod StopTLSs(LD As %Integer) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Stop using TLS encryption on an active LDAP session.</p>
+<p>Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>Return Values:</p>
+<p>If the function succeeds, $$$LDAPSUCCESS is returned.<br>
+If the function fails, an error code is returned.</p>
+<p>Comments:</p>
+<p>This is a Windows only method and is not supported under Unix.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="unbinds">UnBinds<a href="#unbinds" class="hash-link" aria-label="Direct link to UnBinds" title="Direct link to UnBinds">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod UnBinds(LD As %Integer) As %Integer</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>End an LDAP session and frees its resources.</p>
+<p>Parameters:</p>
+<p>LD - The session handle returned by the Init method.</p>
+<p>Return Values:</p>
+<p>If the function succeeds, $$$LDAPSUCCESS is returned.<br>
+If the function fails, an error code is returned.</p>
+<p>Comments:</p>
+<p>Call this method whenever you are finished with an LDAP session and have an LD handle to pass to it.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="get">Get<a href="#get" class="hash-link" aria-label="Direct link to Get" title="Direct link to Get">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod Get(Name As %String, ByRef Properties As %String) As %Status [ Internal ]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="listexecute">ListExecute<a href="#listexecute" class="hash-link" aria-label="Direct link to ListExecute" title="Direct link to ListExecute">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod ListExecute(ByRef %qHandle As %Binary, Names As %String = &quot;*&quot;, Flags As %Integer = 0) As %Status [ Internal ]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>List of LDAPConfigs.<br>
+Names - Comma separated list of LDAP names, &quot;*&quot; = All<br>
+Flags - 0 - Use &quot;Startswith&quot; as the selection on the name.<br>
+Flags - 1 - Use &quot;Contains&quot; as the selection on the name.<br>
+Note: This query may change in future versions</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="listfetch">ListFetch<a href="#listfetch" class="hash-link" aria-label="Direct link to ListFetch" title="Direct link to ListFetch">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod ListFetch(ByRef %qHandle As %Binary, ByRef Row As %List, ByRef AtEnd As %Integer = 0) As %Status [ Internal, PlaceAfter = ListExecute ]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="listclose">ListClose<a href="#listclose" class="hash-link" aria-label="Direct link to ListClose" title="Direct link to ListClose">​</a></h3>
+<div class="language-objectscript-class codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-objectscript-class codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ClassMethod ListClose(ByRef %qHandle As %Binary) As %Status [ Internal, PlaceAfter = ListExecute ]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div></section></div><footer class="tsd-footer"></footer></article></div></div></div></div></main></div></div></div></div></div>
+</body>
+</html>
