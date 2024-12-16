@@ -204,11 +204,17 @@ export function parseClassFile(classContent): ClassDefinition {
 
 //  fix some known issues with HTML
 function reshapeHTML(text) {
+  const nhm = new NodeHtmlMarkdown({
+    codeBlockStyle: 'fenced',
+  });
   if (Array.isArray(text)) {
     text = text.join(" ");
   }
+  text = text.replaceAll(/\<example[^\>]*>/gi, "<code>");
+  text = text.replaceAll(/\<\/example>/gi, "</code>");
+  // text = text.replaceAll(/\<\/?code\>/gi, "`");
   try {
-    const md = NodeHtmlMarkdown.translate(text);
+    const md = nhm.translate(text);
     return md;
   } catch (ex) {
     console.error(ex);
@@ -230,10 +236,7 @@ function reshapeHTML(text) {
   text = text.replaceAll(/\<\/?ul\>/gi, "");
   text = text.replaceAll(/\<li\>/gi, "\n* ");
   text = text.replaceAll(/\<\/li\>/gi, "");
-  text = text.replaceAll(/\<\/?code\>/gi, "`");
   text = text.replaceAll(/\<\/Description>/gi, "");
-  text = text.replaceAll(/\<example[^\>]*>/gi, "\n```\n");
-  text = text.replaceAll(/\<\/example>/gi, "\n```\n");
   for (const match of text.matchAll(/<class>([^<]*)<\/class>/gi)) {
     const [found, className] = match;
     let classNameFull = className;
