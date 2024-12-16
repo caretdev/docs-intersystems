@@ -203,15 +203,18 @@ function reshapeHTML(text) {
     text = text.join(" ");
   }
   text = text.replaceAll(/<[^>]*>/gi, "");
-  text = text.replaceAll(/({|}|\[|\])/g, "\\$1");
+  text = text.replaceAll("{", "&#123;");
+  text = text.replaceAll("}", "&#125;");
+  // text = text.replaceAll(/({|}|\[|\])/g, "\\$1");
 
-  text = text.replaceAll(/\<br\s*\/?\>/gi, "\n\n");
-  text = text.replaceAll(/\<\/?p\>/gi, "\n\n");
+  text = text.replaceAll(/\<br\s*\/?\>/gi, "<br />");
+  text = text.replaceAll(/<\/?p[^>]*>/gi, "\n\n");
+  text = text.replaceAll(/<\/?span[^>]*>/gi, "\n\n");
   text = text.replaceAll(/\<\/?pre\>/gi, "\n```\n");
   text = text.replaceAll(/\<\/?var\>/gi, "`");
   text = text.replaceAll(/\<\/?ul\>/gi, "");
   text = text.replaceAll(/\<li\>/gi, "\n* ");
-  text = text.replaceAll(/\<\/li\>/gi, "`");
+  text = text.replaceAll(/\<\/li\>/gi, "");
   text = text.replaceAll(/\<\/?code\>/gi, "`");
   text = text.replaceAll(/\<\/Description>/gi, "");
   text = text.replaceAll(/\<example[^\>]*>/gi, "\n```\n");
@@ -231,7 +234,8 @@ function reshapeHTML(text) {
     text = text.replace(found, classLink);
   }
 
-  let result = "```" + text + "```\n\n";
+  let result = `<div>${text}</div>\n\n`;
+  // let result = "```" + text + "```\n\n";
   // const htmlValidate = new HtmlValidate();
   // let report = htmlValidate.validateStringSync(text);
   // if (!report.valid) {
