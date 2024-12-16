@@ -2,6 +2,8 @@
 
 This InterSystems Class Reference generator is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
 
+![screenshot](https://raw.githubusercontent.com/caretdev/docs-intersystems/refs/heads/main/screenshot.png)
+
 ### Installation
 
 ```
