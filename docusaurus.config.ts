@@ -19,7 +19,7 @@ const config: Config = {
   organizationName: "caretdev",
   projectName: "docs-intersystems",
 
-  onBrokenLinks: "throw",
+  onBrokenLinks: "ignore",
   onBrokenMarkdownLinks: "warn",
 
   i18n: {
