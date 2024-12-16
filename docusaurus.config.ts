@@ -51,6 +51,7 @@ const config: Config = {
 		],
   ],
   markdown: {
+    format: 'md',
     parseFrontMatter: async (params) => {
       // Reuse the default parser
       const result = await params.defaultParseFrontMatter(params);

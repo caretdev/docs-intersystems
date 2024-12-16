@@ -2,6 +2,11 @@ import { readdir, readFile, writeFile, mkdir } from "fs/promises";
 import * as path from "path";
 import { ClassReflection } from "../types";
 
+import { htmlToJsx } from "html-to-jsx-transform";
+import convert from 'node-html-to-jsx';
+import { NodeHtmlMarkdown, NodeHtmlMarkdownOptions } from 'node-html-markdown'
+
+
 import { HtmlValidate } from "html-validate";
 
 enum ClassMemberType {
@@ -202,9 +207,19 @@ function reshapeHTML(text) {
   if (Array.isArray(text)) {
     text = text.join(" ");
   }
+  try {
+    const md = NodeHtmlMarkdown.translate(text);
+    return md;
+  } catch (ex) {
+    console.error(ex);
+  }
+  return text;
+  // return "```\n" + text + "\n```\n\n"
   text = text.replaceAll(/<[^>]*>/gi, "");
-  text = text.replaceAll("{", "&#123;");
-  text = text.replaceAll("}", "&#125;");
+  // text = text.replaceAll("{", "&#123;");
+  // text = text.replaceAll("}", "&#125;");
+  // text = text.replaceAll("{", "\\{");
+  // text = text.replaceAll("}", "\\}");
   // text = text.replaceAll(/({|}|\[|\])/g, "\\$1");
 
   text = text.replaceAll(/\<br\s*\/?\>/gi, "<br />");
@@ -316,7 +331,7 @@ ${reshapeHTML(classDef.Class.description.join(" "))}
 export async function generateDocFile(classFile, folder, mdFile) {
   await mkdir(folder, { recursive: true });
   const mdFileFull = path.join(folder, mdFile);
-  await writeFile(mdFileFull, await generateDoc(classFile, false));
+  await writeFile(mdFileFull, await generateDoc(classFile, true));
   return mdFileFull;
 }
 
