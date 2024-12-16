@@ -17,3 +17,4 @@ jobs:
           node-version: 20
       - run: yarn install --immutable
       - run: yarn run build
+      - run: yarn run deploy
