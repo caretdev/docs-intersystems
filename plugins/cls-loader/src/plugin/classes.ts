@@ -203,9 +203,8 @@ function reshapeHTML(text) {
     text = text.join(" ");
   }
   text = text.replaceAll(/<[^>]*>/gi, "");
-  text = text.replaceAll(/\[/gi, "[");
-  return text;
-  text = text.replaceAll(/\]/gi, "]");
+  text = text.replaceAll(/({|}|\[|\])/g, "\\$1");
+
   text = text.replaceAll(/\<br\s*\/?\>/gi, "\n\n");
   text = text.replaceAll(/\<\/?p\>/gi, "\n\n");
   text = text.replaceAll(/\<\/?pre\>/gi, "\n```\n");
@@ -259,10 +258,11 @@ function membersToMarkdown(
   entries.forEach(([key, member]) => {
     doc += `### ${member.name}\n\n`;
     doc += `${asCode(member.code)}\n\n`;
-    let description = member.description.join(" ");
-    // description = reshapeHTML(member.description);
-    // doc += description;
-    // doc += "\n\n";
+    if (member.description.length) {
+      let description = member.description.join(" ");
+      description = reshapeHTML(member.description);
+      doc += `${description}\n\n`;
+    }
   });
 
   return doc;
@@ -288,6 +288,9 @@ ${asCode(classContent)}
 ${asCode(classDef.Class.code)}
 
 ${noCode ? "" : originalCode}
+
+${reshapeHTML(classDef.Class.description.join(" "))}
+
 `;
   documentation += membersToMarkdown(
     classFile,

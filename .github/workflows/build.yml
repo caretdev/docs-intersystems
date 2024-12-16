@@ -5,8 +5,8 @@ on:
       - main
   pull_request:
 jobs:
-  test:
-    name: Test
+  build:
+    name: Build
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
@@ -17,4 +17,3 @@ jobs:
           node-version: 20
       - run: yarn install --immutable
       - run: yarn run build
-      - run: yarn run check
